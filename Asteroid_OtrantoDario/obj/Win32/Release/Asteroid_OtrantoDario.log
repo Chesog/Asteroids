@@ -1,0 +1,13 @@
+﻿  main.cpp
+C:\Vercionado\Asteroid_OtrantoDario\Asteroid_OtrantoDario\main.cpp(5,1): warning C4326: el tipo de valor devuelto de 'main' debe ser 'int' en lugar de 'void'
+  Generando código
+  Previous IPDB not found, fall back to full compilation.
+  All 1 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generación de código finalizada
+raylib.lib(rcore.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rcore.obj)' o en 'C:\Vercionado\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rglfw.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rglfw.obj)' o en 'C:\Vercionado\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rshapes.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rshapes.obj)' o en 'C:\Vercionado\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rtext.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtext.obj)' o en 'C:\Vercionado\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rtextures.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtextures.obj)' o en 'C:\Vercionado\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(utils.obj)' o en 'C:\Vercionado\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Asteroid_OtrantoDario.vcxproj -> C:\Vercionado\Asteroid_OtrantoDario\bin\Win32\Release\Asteroid_OtrantoDario.exe
