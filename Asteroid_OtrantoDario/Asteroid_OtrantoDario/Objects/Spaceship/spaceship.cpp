@@ -1,4 +1,6 @@
 #include "spaceship.h"
+#include <iostream>
+
 
 SpaceShip initSpaceShip() 
 {
@@ -6,42 +8,34 @@ SpaceShip initSpaceShip()
 	int screenHeight = GetScreenHeight();
 
 	SpaceShip aux;
-	aux.currentDirectionX = (int)Directions::Stop;
-	aux.currentDirectionY = (int)Directions::Stop;
-	aux.posX = screenWidth / 2;
-	aux.posY = screenHeight / 2;
+
 	aux.lives = 3;
 	aux.score = 0;
 	aux.rect.width = 35;
 	aux.rect.height = 35;
-	aux.rect.x = aux.posX - aux.rect.width / 2;
-	aux.rect.y = aux.posY - aux.rect.height / 2;
+	aux.rect.x = screenWidth / 2;
+	aux.rect.y = screenHeight / 2;
+	aux.piv.x = aux.rect.width / 2;
+	aux.piv.y = aux.rect.height / 2;
+	aux.rotation = 0.0f;
+	aux.acceleration.x = 0;
+	aux.acceleration.y = 0;
 	return aux;
 }
 
 void moveSpaceShip(SpaceShip& player) 
 {
-	Vector2 cursor = GetMousePosition();
-	Vector2 distanceDiff;
+	player.rect.x = player.rect.x + player.acceleration.x * GetFrameTime();
+	player.rect.y = player.rect.y + player.acceleration.y * GetFrameTime();
+}
 
-	distanceDiff.x = player.posX - cursor.x;
-	distanceDiff.y = player.posY - cursor.y;
+void drawPlayer(SpaceShip& player)
+{
+	Vector2 origin;
+	origin.x = player.rect.width / 2;
+	origin.y = player.rect.height / 2;
 
-	if (player.currentDirectionX == (int)Directions::Left || player.currentDirectionX == (int)Directions::Right)
-	{
-		player.posX -= distanceDiff.x * GetFrameTime();
-	}
-
-	if (player.currentDirectionY == (int)Directions::Up || player.currentDirectionY == (int)Directions::Down)
-	{
-		player.posY -= distanceDiff.y * GetFrameTime();
-	}
-
-	if (player.currentDirectionX == (int)Directions::Stop || player.currentDirectionY == (int)Directions::Stop)
-	{
-		player.posX;
-		player.posY;
-	}
+	DrawRectanglePro(player.rect,player.piv, player.rotation, GREEN);
 }
 
 void shoot() 

@@ -1,7 +1,8 @@
 #include "gameplay.h"
 
-void drawGameplay();
-void updateGameplay();
+void drawGameplay(SpaceShip player);
+void updateGameplay(SpaceShip player);
+void checkInput(SpaceShip& player);
 
 int gameplayLoop(bool& initGame) 
 {
@@ -12,21 +13,45 @@ int gameplayLoop(bool& initGame)
 		initGame = false;
 	}
 
-
-	drawGameplay();
-
+	checkInput(player);
+	updateGameplay(player);
+	drawGameplay(player);
 
 	return (int)MenuStates::Gameplay;
 }
-void drawGameplay() 
+void checkInput(SpaceShip& player)
+{
+	Vector2 distanceDiff;
+
+	distanceDiff.x = GetMouseX() - player.rect.x;
+	distanceDiff.y = GetMouseY() - player.rect.y;
+
+	float angle = atan(distanceDiff.y / distanceDiff.x);
+	angle = angle * 180 / PI;
+	
+	player.rotation = angle;
+
+	float normalizedDirectionX = distanceDiff.x / Vector2Length(distanceDiff);
+	float normalizedDirectionY = distanceDiff.y / Vector2Length(distanceDiff);
+
+	player.acceleration.x = 100;
+	player.acceleration.y = 100;
+
+	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+	{
+		moveSpaceShip(player);
+	}
+}
+void drawGameplay(SpaceShip player)
 {
 	BeginDrawing();
+
 	ClearBackground(BLACK);
-	//DrawRectanglePro():
+	drawPlayer(player);
 	
 	EndDrawing();
 }
-void updateGameplay() 
+void updateGameplay(SpaceShip player) 
 {
-
+	
 }
