@@ -1,7 +1,8 @@
 #include "gameplay.h"
+#include <iostream>
 
 void drawGameplay(SpaceShip player);
-void updateGameplay(SpaceShip player);
+void updateGameplay(SpaceShip& player);
 void checkInput(SpaceShip& player);
 
 int gameplayLoop(bool& initGame) 
@@ -31,15 +32,15 @@ void checkInput(SpaceShip& player)
 	
 	player.rotation = angle;
 
-	float normalizedDirectionX = distanceDiff.x / Vector2Length(distanceDiff);
-	float normalizedDirectionY = distanceDiff.y / Vector2Length(distanceDiff);
+	Vector2 normalizedDirection;
 
-	player.acceleration.x = 100;
-	player.acceleration.y = 100;
 
 	if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 	{
-		moveSpaceShip(player);
+		normalizedDirection = Vector2Normalize(distanceDiff);
+
+		player.acceleration.x += normalizedDirection.x;
+		player.acceleration.y += normalizedDirection.y;
 	}
 }
 void drawGameplay(SpaceShip player)
@@ -51,7 +52,7 @@ void drawGameplay(SpaceShip player)
 	
 	EndDrawing();
 }
-void updateGameplay(SpaceShip player) 
+void updateGameplay(SpaceShip& player) 
 {
-	
+	moveSpaceShip(player);
 }
