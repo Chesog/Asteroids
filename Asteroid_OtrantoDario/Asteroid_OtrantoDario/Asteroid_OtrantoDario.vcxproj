@@ -157,6 +157,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuStates\Gameplay\gameplay.cpp" />
+    <ClCompile Include="MenuStates\Game\game.cpp" />
+    <ClCompile Include="MenuStates\GlobalEnums\globalEnums.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MenuStates\Gameplay\gameplay.h" />
+    <ClInclude Include="MenuStates\Game\game.h" />
+    <ClInclude Include="MenuStates\GlobalEnums\globalEnums.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

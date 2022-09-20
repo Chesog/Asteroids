@@ -1,22 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Archivos de origen">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="MenuStates">
+      <UniqueIdentifier>{a38fc816-69a8-43b3-96ab-53ecf88f8888}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de encabezado">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Objets">
+      <UniqueIdentifier>{d839ae20-13e2-44df-92a5-f868c9702e14}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Archivos de recursos">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="MenuStates\Gameplay">
+      <UniqueIdentifier>{c1953a0f-7973-403b-9292-a9c0acb23d54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MenuStates\Global_Enums">
+      <UniqueIdentifier>{043993eb-e968-4912-a1ea-2a9945caba15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MenuStates\Game">
+      <UniqueIdentifier>{675b0fb0-8ec4-402e-ad20-d7efcb57f0b1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de origen</Filter>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuStates\Gameplay\gameplay.cpp">
+      <Filter>MenuStates\Gameplay</Filter>
     </ClCompile>
+    <ClCompile Include="MenuStates\GlobalEnums\globalEnums.cpp">
+      <Filter>MenuStates\Global_Enums</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuStates\Game\game.cpp">
+      <Filter>MenuStates\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="MenuStates\Gameplay\gameplay.h">
+      <Filter>MenuStates\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuStates\GlobalEnums\globalEnums.h">
+      <Filter>MenuStates\Global_Enums</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuStates\Game\game.h">
+      <Filter>MenuStates\Game</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
