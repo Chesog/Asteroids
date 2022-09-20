@@ -16,28 +16,37 @@
     <Filter Include="MenuStates\Game">
       <UniqueIdentifier>{675b0fb0-8ec4-402e-ad20-d7efcb57f0b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objets\SpaceShip">
+      <UniqueIdentifier>{f9a93a9c-a013-4199-9dc3-53124506a0b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuStates\Gameplay\gameplay.cpp">
       <Filter>MenuStates\Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="MenuStates\GlobalEnums\globalEnums.cpp">
-      <Filter>MenuStates\Global_Enums</Filter>
-    </ClCompile>
     <ClCompile Include="MenuStates\Game\game.cpp">
       <Filter>MenuStates\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Spaceship\spaceship.cpp">
+      <Filter>Objets\SpaceShip</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuStates\GlobalEnums\general_Func.cpp">
+      <Filter>MenuStates\Global_Enums</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuStates\Gameplay\gameplay.h">
       <Filter>MenuStates\Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="MenuStates\GlobalEnums\globalEnums.h">
-      <Filter>MenuStates\Global_Enums</Filter>
-    </ClInclude>
     <ClInclude Include="MenuStates\Game\game.h">
       <Filter>MenuStates\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Spaceship\spaceship.h">
+      <Filter>Objets\SpaceShip</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuStates\GlobalEnums\genera_func.h">
+      <Filter>MenuStates\Global_Enums</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

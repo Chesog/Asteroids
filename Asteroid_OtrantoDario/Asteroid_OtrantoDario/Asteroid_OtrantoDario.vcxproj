@@ -159,12 +159,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuStates\Gameplay\gameplay.cpp" />
     <ClCompile Include="MenuStates\Game\game.cpp" />
-    <ClCompile Include="MenuStates\GlobalEnums\globalEnums.cpp" />
+    <ClCompile Include="MenuStates\GlobalEnums\general_Func.cpp" />
+    <ClCompile Include="Objects\Spaceship\spaceship.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuStates\Gameplay\gameplay.h" />
     <ClInclude Include="MenuStates\Game\game.h" />
-    <ClInclude Include="MenuStates\GlobalEnums\globalEnums.h" />
+    <ClInclude Include="MenuStates\GlobalEnums\genera_func.h" />
+    <ClInclude Include="Objects\Spaceship\spaceship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

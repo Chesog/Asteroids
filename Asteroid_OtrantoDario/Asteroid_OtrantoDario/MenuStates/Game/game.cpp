@@ -9,6 +9,8 @@ void ejecuteGame()
 
     SetTargetFPS(60);
 
+    bool initGame = true;
+
     int menuAnsw = (int)MenuStates::Gameplay;
 
     while (!WindowShouldClose())
@@ -18,6 +20,7 @@ void ejecuteGame()
         case (int)MenuStates::MainMenu:
             break;
         case (int)MenuStates::Gameplay:
+            menuAnsw = gameplayLoop(initGame);
             break;
         case (int)MenuStates::Rules:
             break;
@@ -29,12 +32,4 @@ void ejecuteGame()
     }
 
     CloseWindow();
-}
-
-void drawGame() 
-{
-	BeginDrawing();
-    ClearBackground(BLACK);
-
-	EndDrawing();
 }
