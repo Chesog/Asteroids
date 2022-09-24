@@ -14,3 +14,4 @@ struct Bullet
 };
 
 void drawBullet(Bullet bullet);
+void moveBullet(Bullet& bullet);

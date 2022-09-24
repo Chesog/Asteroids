@@ -24,10 +24,10 @@ SpaceShip initSpaceShip()
 	{
 		aux.playerAmmo[i].position = { 0,0 };
 		aux.playerAmmo[i].trayectory = {0,0};
-		aux.playerAmmo[i].speed = {2.0f,2.0f};
-		aux.playerAmmo[i].rad = 3.5f;
+		aux.playerAmmo[i].speed = {200.0f,200.0f};
+		aux.playerAmmo[i].rad = 4.0f;
 		aux.playerAmmo[i].isActive = false;
-		aux.playerAmmo[i].color = WHITE;
+		aux.playerAmmo[i].color = RED;
 	}
 	return aux;
 }
@@ -43,11 +43,14 @@ void drawPlayer(SpaceShip& player)
 	DrawRectanglePro(player.rect, player.piv, player.rotation, GREEN);
 }
 
-void shoot(Bullet bullet, SpaceShip player, Vector2 normalizedDirection)
+void shoot(Bullet& bullet, SpaceShip player)
 {
-	bullet.position.x = player.rect.x;;
+	bullet.position.x = player.rect.x;
 	bullet.position.y = player.rect.y;
-	bullet.trayectory = normalizedDirection;
+	bullet.trayectory.x = GetMouseX() - bullet.position.x;
+	bullet.trayectory.y = GetMouseX() - bullet.position.y;
+	bullet.trayectory = Vector2Normalize(bullet.trayectory);
+
 	bullet.isActive = true;
 	bullet.rotation = player.rotation;
 }

@@ -20,4 +20,4 @@ struct SpaceShip
 SpaceShip initSpaceShip();
 void moveSpaceShip(SpaceShip& player);
 void drawPlayer(SpaceShip& player);
-void shoot(Bullet bullet, SpaceShip player, Vector2 normalizedDirection);
+void shoot(Bullet& bullet, SpaceShip player);

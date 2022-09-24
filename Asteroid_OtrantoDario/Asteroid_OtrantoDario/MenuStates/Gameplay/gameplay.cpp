@@ -4,7 +4,7 @@
 void drawGameplay(SpaceShip player);
 void updateGameplay(SpaceShip& player);
 void checkInput(SpaceShip& player);
-void checkOutOfBounds(SpaceShip& player);
+void checkOutOfBounds(SpaceShip& player, Bullet playerAmmo[playerMaxAmmo]);
 
 int gameplayLoop(bool& initGame) 
 {
@@ -34,7 +34,7 @@ void checkInput(SpaceShip& player)
 	player.rotation = angle;
 
 	Vector2 normalizedDirection;
-	normalizedDirection = Vector2Normalize(distanceDiff);
+	//normalizedDirection = Vector2Normalize(distanceDiff);
 
 	if (IsCursorOnScreen())
 	{
@@ -45,16 +45,17 @@ void checkInput(SpaceShip& player)
 			player.acceleration.x += normalizedDirection.x;
 			player.acceleration.y += normalizedDirection.y;
 		}
-		if (IsKeyPressed(KEY_SPACE))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			for (int i = 0; i < playerMaxAmmo; i++)
 			{
 				if (!player.playerAmmo[i].isActive)
 				{
-					shoot(player.playerAmmo[i],player,normalizedDirection);
+					shoot(player.playerAmmo[i],player);
 #if _DEBUG
-					std::cout << "Shoot" << std::endl;
+					std::cout << " Shoot " <<  i << std::endl;
 #endif // _DEBUG
+					break;
 				}
 			}
 		}
@@ -66,7 +67,6 @@ void drawGameplay(SpaceShip player)
 	BeginDrawing();
 
 	ClearBackground(BLACK);
-	drawPlayer(player);
 	for (int i = 0; i < playerMaxAmmo; i++)
 	{
 		if (player.playerAmmo[i].isActive)
@@ -74,13 +74,21 @@ void drawGameplay(SpaceShip player)
 			drawBullet(player.playerAmmo[i]);
 		}
 	}
+	drawPlayer(player);
 
 	EndDrawing();
 }
 void updateGameplay(SpaceShip& player) 
 {
 	moveSpaceShip(player);
-	checkOutOfBounds(player);
+	for (int i = 0; i < playerMaxAmmo; i++)
+	{
+		if (player.playerAmmo[i].isActive)
+		{
+			moveBullet(player.playerAmmo[i]);
+		}
+	}
+	checkOutOfBounds(player,player.playerAmmo);
 
 #if _DEBUG
 	//std::cout << player.acceleration.x << " --- " << player.acceleration.y << std::endl;
@@ -88,7 +96,7 @@ void updateGameplay(SpaceShip& player)
 
 	
 }
-void checkOutOfBounds(SpaceShip& player)
+void checkOutOfBounds(SpaceShip& player,Bullet playerAmmo[playerMaxAmmo])
 {
 	int screenWidth = GetScreenWidth();
 	int screenHeight = GetScreenHeight();
@@ -108,5 +116,33 @@ void checkOutOfBounds(SpaceShip& player)
 	if (player.rect.y > screenHeight)
 	{
 		player.rect.y = 0;
+	}
+	
+	for (int i = 0; i < playerMaxAmmo; i++)
+	{
+		if (player.playerAmmo[i].position.x < 0)
+		{
+			player.playerAmmo[i].position.x = player.rect.x;
+			player.playerAmmo[i].isActive = false;
+			player.playerAmmo[i].trayectory = {0,0};
+		}
+		if (player.playerAmmo[i].position.x > screenWidth)
+		{
+			player.playerAmmo[i].position.x = player.rect.x;
+			player.playerAmmo[i].isActive = false;
+			player.playerAmmo[i].trayectory = { 0,0 };
+		}
+		if (player.playerAmmo[i].position.y < 0)
+		{
+			player.playerAmmo[i].position.y = player.rect.y;
+			player.playerAmmo[i].isActive = false;
+			player.playerAmmo[i].trayectory = { 0,0 };
+		}
+		if (player.playerAmmo[i].position.y > screenHeight)
+		{
+			player.playerAmmo[i].position.y = player.rect.y;
+			player.playerAmmo[i].isActive = false;
+			player.playerAmmo[i].trayectory = { 0,0 };
+		}
 	}
 }
