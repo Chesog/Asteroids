@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-SpaceShip initSpaceShip() 
+SpaceShip initSpaceShip()
 {
 	int screenWidth = GetScreenWidth();
 	int screenHeight = GetScreenHeight();
@@ -20,25 +20,34 @@ SpaceShip initSpaceShip()
 	aux.rotation = 0.0f;
 	aux.acceleration.x = 0;
 	aux.acceleration.y = 0;
+	for (int i = 0; i < playerMaxAmmo; i++)
+	{
+		aux.playerAmmo[i].position = { 0,0 };
+		aux.playerAmmo[i].trayectory = {0,0};
+		aux.playerAmmo[i].speed = {2.0f,2.0f};
+		aux.playerAmmo[i].rad = 3.5f;
+		aux.playerAmmo[i].isActive = false;
+		aux.playerAmmo[i].color = WHITE;
+	}
 	return aux;
 }
 
-void moveSpaceShip(SpaceShip& player) 
+void moveSpaceShip(SpaceShip& player)
 {
-	player.rect.x = player.rect.x + player.acceleration.x * GetFrameTime();
-	player.rect.y = player.rect.y + player.acceleration.y * GetFrameTime();
+	player.rect.x = player.rect.x + player.acceleration.x * 6 * GetFrameTime();
+	player.rect.y = player.rect.y + player.acceleration.y * 6 * GetFrameTime();
 }
 
 void drawPlayer(SpaceShip& player)
 {
-	Vector2 origin;
-	origin.x = player.rect.width / 2;
-	origin.y = player.rect.height / 2;
-
-	DrawRectanglePro(player.rect,player.piv, player.rotation, GREEN);
+	DrawRectanglePro(player.rect, player.piv, player.rotation, GREEN);
 }
 
-void shoot() 
+void shoot(Bullet bullet, SpaceShip player, Vector2 normalizedDirection)
 {
-
+	bullet.position.x = player.rect.x;;
+	bullet.position.y = player.rect.y;
+	bullet.trayectory = normalizedDirection;
+	bullet.isActive = true;
+	bullet.rotation = player.rotation;
 }

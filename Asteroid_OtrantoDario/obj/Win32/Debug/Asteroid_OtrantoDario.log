@@ -1,2 +1,4 @@
 ﻿  gameplay.cpp
-  Asteroid_OtrantoDario.vcxproj -> C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\Asteroid_OtrantoDario.exe
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(119,19): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(127,19): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+  Asteroid_OtrantoDario.vcxproj -> C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\Asteroid_OtrantoDario.exe
