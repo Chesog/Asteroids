@@ -16,12 +16,12 @@ Asteroid initAsteroid(int size)
 	if (aux.size == (int)AsteroidSize::Small)
 	{
 		aux.speed = { 100.0f,100.0f };
-		aux.radius = 20;
+		aux.radius = 40;
 	}
 	else if (aux.size == (int)AsteroidSize::Medium)
 	{
 		aux.speed = { 150.0f,150.0f };
-		aux.radius = 15;
+		aux.radius = 20;
 	}
 	else
 	{
@@ -32,7 +32,7 @@ Asteroid initAsteroid(int size)
 	return aux;
 }
 
-void moveAsteroid(Asteroid currenAsteroid)
+void moveAsteroid(Asteroid& currenAsteroid)
 {
 	if (currenAsteroid.direction.x == (int)Directions::Left)
 	{

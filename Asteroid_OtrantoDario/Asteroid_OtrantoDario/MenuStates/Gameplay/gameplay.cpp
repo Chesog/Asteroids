@@ -1,6 +1,11 @@
 #include "gameplay.h"
 #include <iostream>
 
+static SpaceShip player;
+static Asteroid largeAsteroids[maxLargeAsteroids];
+static Asteroid medimunAsteroids[maxMediumndAsteroids];
+static Asteroid smallAsteroids[maxSmallAsteroids];
+
 void drawGameplay(SpaceShip player, Asteroid largeAsteroids[maxLargeAsteroids], Asteroid medimunAsteroids[maxMediumndAsteroids], Asteroid smallAsteroids[maxSmallAsteroids]);
 void updateGameplay(SpaceShip& player);
 void checkInput(SpaceShip& player);
@@ -10,11 +15,7 @@ void checkOutOfBounds(SpaceShip& player, Bullet playerAmmo[playerMaxAmmo]);
 
 int gameplayLoop(bool& initGame) 
 {
-	static SpaceShip player;
-	static Asteroid largeAsteroids[maxLargeAsteroids];
-	static Asteroid medimunAsteroids[maxMediumndAsteroids];
-	static Asteroid smallAsteroids[maxSmallAsteroids];
-
+	
 	if (initGame)
 	{
 		player = initSpaceShip();
@@ -115,6 +116,18 @@ void updateGameplay(SpaceShip& player)
 			moveBullet(player.playerAmmo[i]);
 		}
 	}
+	for (int i = 0; i < maxLargeAsteroids; i++)
+	{
+		moveAsteroid(largeAsteroids[i]);
+	}
+	for (int i = 0; i < maxMediumndAsteroids; i++)
+	{
+		moveAsteroid(medimunAsteroids[i]);
+	}
+	for (int i = 0; i < maxSmallAsteroids; i++)
+	{
+		moveAsteroid(smallAsteroids[i]);
+	}
 	checkOutOfBounds(player,player.playerAmmo);
 
 #if _DEBUG
@@ -170,6 +183,64 @@ void checkOutOfBounds(SpaceShip& player,Bullet playerAmmo[playerMaxAmmo])
 			player.playerAmmo[i].position.y = player.rect.y;
 			player.playerAmmo[i].isActive = false;
 			player.playerAmmo[i].trayectory = { 0,0 };
+		}
+	}
+
+	for (int i = 0; i < maxLargeAsteroids; i++)
+	{		
+		if (largeAsteroids[i].position.x < 0)
+		{
+			largeAsteroids[i].position.x = screenWidth;
+		}
+		if (largeAsteroids[i].position.x > screenWidth)
+		{
+			largeAsteroids[i].position.x = 0;
+		}
+		if (largeAsteroids[i].position.y < 0)
+		{
+			largeAsteroids[i].position.y = screenHeight;
+		}
+		if (largeAsteroids[i].position.y > screenHeight)
+		{
+			largeAsteroids[i].position.y = screenHeight;
+		}
+	}
+	for (int i = 0; i < maxMediumndAsteroids; i++)
+	{
+		if (medimunAsteroids[i].position.x < 0)
+		{
+			medimunAsteroids[i].position.x = screenWidth;
+		}
+		if (medimunAsteroids[i].position.x > screenWidth)
+		{
+			medimunAsteroids[i].position.x = 0;
+		}
+		if (medimunAsteroids[i].position.y < 0)
+		{
+			medimunAsteroids[i].position.y = screenHeight;
+		}
+		if (medimunAsteroids[i].position.y > screenHeight)
+		{
+			medimunAsteroids[i].position.y = screenHeight;
+		}
+	}
+	for (int i = 0; i < maxSmallAsteroids; i++)
+	{
+		if (smallAsteroids[i].position.x < 0)
+		{
+			smallAsteroids[i].position.x = screenWidth;
+		}
+		if (smallAsteroids[i].position.x > screenWidth)
+		{
+			smallAsteroids[i].position.x = 0;
+		}
+		if (smallAsteroids[i].position.y < 0)
+		{
+			smallAsteroids[i].position.y = screenHeight;
+		}
+		if (smallAsteroids[i].position.y > screenHeight)
+		{
+			smallAsteroids[i].position.y = screenHeight;
 		}
 	}
 }

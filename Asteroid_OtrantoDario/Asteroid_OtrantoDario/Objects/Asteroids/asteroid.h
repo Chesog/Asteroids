@@ -19,5 +19,5 @@ struct Asteroid
 };
 
 Asteroid initAsteroid(int size);
-void moveAsteroid(Asteroid currenAsteroid);
+void moveAsteroid(Asteroid& currenAsteroid);
 void drawAsteroid(Asteroid currenAsteroid);

@@ -1,10 +1,4 @@
-﻿  main.cpp
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\main.cpp(4,1): warning C4326: el tipo de valor devuelto de 'main' debe ser 'int' en lugar de 'void'
-  gameplay.cpp
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(133,19): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(141,19): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-  game.cpp
-  asteroid.cpp
+﻿  asteroid.cpp
 C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(9,33): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
 C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(10,33): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
 C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(11,34): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
@@ -12,7 +6,6 @@ C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Ast
 C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(14,13): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
 C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(56,63): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
 C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(56,36): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-  Generando código...
 LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
 raylib.lib(rcore.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rcore.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 raylib.lib(rglfw.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rglfw.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
