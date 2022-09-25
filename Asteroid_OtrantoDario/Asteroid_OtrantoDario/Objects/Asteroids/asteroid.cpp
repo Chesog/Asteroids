@@ -15,18 +15,21 @@ Asteroid initAsteroid(int size)
 
 	if (aux.size == (int)AsteroidSize::Small)
 	{
-		aux.speed = { 100.0f,100.0f };
-		aux.radius = 40;
+		aux.isActive = false;
+		aux.speed = { 200.0f,200.0f };
+		aux.radius = 10;
 	}
 	else if (aux.size == (int)AsteroidSize::Medium)
 	{
+		aux.isActive = false;
 		aux.speed = { 150.0f,150.0f };
 		aux.radius = 20;
 	}
 	else
 	{
-		aux.speed = { 200.0f,200.0f };
-		aux.radius = 10;
+		aux.isActive = true;
+		aux.speed = { 50.0f,50.0f };
+		aux.radius = 40;
 	}
 
 	return aux;
@@ -36,19 +39,19 @@ void moveAsteroid(Asteroid& currenAsteroid)
 {
 	if (currenAsteroid.direction.x == (int)Directions::Left)
 	{
-		currenAsteroid.position.x--;
+		currenAsteroid.position.x = currenAsteroid.position.x - currenAsteroid.speed.x * GetFrameTime();
 	}
 	if (currenAsteroid.direction.x == (int)Directions::Right)
 	{
-		currenAsteroid.position.x++;
+		currenAsteroid.position.x = currenAsteroid.position.x + currenAsteroid.speed.x * GetFrameTime();
 	}
 	if (currenAsteroid.direction.y == (int)Directions::Up)
 	{
-		currenAsteroid.position.y++;
+		currenAsteroid.position.y = currenAsteroid.position.y + currenAsteroid.speed.y * GetFrameTime();
 	}
 	if (currenAsteroid.direction.y == (int)Directions::Down)
 	{
-		currenAsteroid.position.y--;
+		currenAsteroid.position.y = currenAsteroid.position.y - currenAsteroid.speed.y * GetFrameTime();
 	}
 }
 void drawAsteroid(Asteroid currenAsteroid)

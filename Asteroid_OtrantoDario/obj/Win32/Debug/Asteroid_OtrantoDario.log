@@ -1,16 +1,13 @@
-﻿  asteroid.cpp
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(9,33): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(10,33): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(11,34): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(12,34): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(14,13): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(56,63): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(56,36): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-LINK : warning LNK4098: la biblioteca predeterminada'MSVCRT' entra en conflicto con otras bibliotecas; use la biblioteca /NODEFAULTLIB:biblioteca
-raylib.lib(rcore.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rcore.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-raylib.lib(rglfw.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rglfw.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-raylib.lib(rshapes.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rshapes.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-raylib.lib(rtext.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtext.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-raylib.lib(rtextures.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtextures.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(utils.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+﻿  gameplay.cpp
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(177,19): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(185,19): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(228,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(236,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(247,36): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(255,36): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(266,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(274,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(333,42): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(334,42): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(336,17): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
   Asteroid_OtrantoDario.vcxproj -> C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\Asteroid_OtrantoDario.exe

@@ -15,6 +15,7 @@ struct Asteroid
 	Vector2 direction;
 	float size;
 	float radius;
+	bool isActive;
 	Color color;
 };
 

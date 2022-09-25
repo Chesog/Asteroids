@@ -25,7 +25,7 @@ SpaceShip initSpaceShip()
 	{
 		aux.playerAmmo[i].position = { 0,0 };
 		aux.playerAmmo[i].trayectory = {0,0};
-		aux.playerAmmo[i].speed = {200.0f,200.0f};
+		aux.playerAmmo[i].speed = {500.0f,500.0f};
 		aux.playerAmmo[i].rad = 4.0f;
 		aux.playerAmmo[i].isActive = false;
 		aux.playerAmmo[i].color = RED;
