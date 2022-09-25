@@ -19,6 +19,12 @@
     <Filter Include="Objets\SpaceShip">
       <UniqueIdentifier>{f9a93a9c-a013-4199-9dc3-53124506a0b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objets\Bullets">
+      <UniqueIdentifier>{2f93ee2c-740a-4af0-98e1-c976b6757d8a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objets\Asteroids">
+      <UniqueIdentifier>{abfac4c0-1e31-430f-9501-bf05f3b36f2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -34,8 +40,10 @@
     <ClCompile Include="MenuStates\GlobalEnums\general_Func.cpp">
       <Filter>MenuStates\Global_Enums</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Bullet\bullet.cpp" />
-    <ClCompile Include="asteroid.cpp" />
+    <ClCompile Include="Objects\Bullet\bullet.cpp">
+      <Filter>Objets\Bullets</Filter>
+    </ClCompile>
+    <ClCompile Include="Objects\Asteroids\asteroid.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuStates\Gameplay\gameplay.h">
@@ -50,7 +58,9 @@
     <ClInclude Include="MenuStates\GlobalEnums\genera_func.h">
       <Filter>MenuStates\Global_Enums</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Bullet\bullet.h" />
-    <ClInclude Include="asteroid.h" />
+    <ClInclude Include="Objects\Bullet\bullet.h">
+      <Filter>Objets\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="Objects\Asteroids\asteroid.h" />
   </ItemGroup>
 </Project>

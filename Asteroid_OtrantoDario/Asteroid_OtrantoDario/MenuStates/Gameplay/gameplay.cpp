@@ -1,23 +1,42 @@
 #include "gameplay.h"
 #include <iostream>
 
-void drawGameplay(SpaceShip player);
+void drawGameplay(SpaceShip player, Asteroid largeAsteroids[maxLargeAsteroids], Asteroid medimunAsteroids[maxMediumndAsteroids], Asteroid smallAsteroids[maxSmallAsteroids]);
 void updateGameplay(SpaceShip& player);
 void checkInput(SpaceShip& player);
 void checkOutOfBounds(SpaceShip& player, Bullet playerAmmo[playerMaxAmmo]);
 
+
+
 int gameplayLoop(bool& initGame) 
 {
 	static SpaceShip player;
+	static Asteroid largeAsteroids[maxLargeAsteroids];
+	static Asteroid medimunAsteroids[maxMediumndAsteroids];
+	static Asteroid smallAsteroids[maxSmallAsteroids];
+
 	if (initGame)
 	{
 		player = initSpaceShip();
+
+		for (int i = 0; i < maxLargeAsteroids; i++)
+		{
+			largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large);
+		}
+		for (int i = 0; i < maxMediumndAsteroids; i++)
+		{
+			medimunAsteroids[i] = initAsteroid((int)AsteroidSize::Medium);
+		}
+		for (int i = 0; i < maxSmallAsteroids; i++)
+		{
+			smallAsteroids[i] = initAsteroid((int)AsteroidSize::Small);
+		}
 		initGame = false;
 	}
 
 	checkInput(player);
 	updateGameplay(player);
-	drawGameplay(player);
+	drawGameplay(player,largeAsteroids,medimunAsteroids,smallAsteroids);
 
 	return (int)MenuStates::Gameplay;
 }
@@ -33,17 +52,14 @@ void checkInput(SpaceShip& player)
 	
 	player.rotation = angle;
 
-	Vector2 normalizedDirection;
-	//normalizedDirection = Vector2Normalize(distanceDiff);
+	player.normalizedDirection = Vector2Normalize(distanceDiff);
 
 	if (IsCursorOnScreen())
 	{
 		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 		{
-			normalizedDirection = Vector2Normalize(distanceDiff);
-
-			player.acceleration.x += normalizedDirection.x;
-			player.acceleration.y += normalizedDirection.y;
+			player.acceleration.x += player.normalizedDirection.x;
+			player.acceleration.y += player.normalizedDirection.y;
 		}
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
@@ -62,7 +78,7 @@ void checkInput(SpaceShip& player)
 	}
 
 }
-void drawGameplay(SpaceShip player)
+void drawGameplay(SpaceShip player, Asteroid largeAsteroids[maxLargeAsteroids],Asteroid medimunAsteroids[maxMediumndAsteroids],Asteroid smallAsteroids[maxSmallAsteroids])
 {
 	BeginDrawing();
 
@@ -75,7 +91,18 @@ void drawGameplay(SpaceShip player)
 		}
 	}
 	drawPlayer(player);
-
+	for (int i = 0; i < maxLargeAsteroids; i++)
+	{
+		drawAsteroid(medimunAsteroids[i]);
+	}
+	for (int i = 0; i < maxMediumndAsteroids; i++)
+	{
+		drawAsteroid(largeAsteroids[i]);
+	}
+	for (int i = 0; i < maxSmallAsteroids; i++)
+	{
+		drawAsteroid(smallAsteroids[i]);
+	}
 	EndDrawing();
 }
 void updateGameplay(SpaceShip& player) 

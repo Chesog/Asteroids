@@ -18,6 +18,7 @@ SpaceShip initSpaceShip()
 	aux.piv.x = aux.rect.width / 2;
 	aux.piv.y = aux.rect.height / 2;
 	aux.rotation = 0.0f;
+	aux.normalizedDirection = { 0,0 };
 	aux.acceleration.x = 0;
 	aux.acceleration.y = 0;
 	for (int i = 0; i < playerMaxAmmo; i++)
@@ -47,9 +48,7 @@ void shoot(Bullet& bullet, SpaceShip player)
 {
 	bullet.position.x = player.rect.x;
 	bullet.position.y = player.rect.y;
-	bullet.trayectory.x = GetMouseX() - bullet.position.x;
-	bullet.trayectory.y = GetMouseX() - bullet.position.y;
-	bullet.trayectory = Vector2Normalize(bullet.trayectory);
+	bullet.trayectory = player.normalizedDirection;
 
 	bullet.isActive = true;
 	bullet.rotation = player.rotation;
