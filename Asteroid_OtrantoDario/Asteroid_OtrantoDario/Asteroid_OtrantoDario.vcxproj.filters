@@ -44,6 +44,11 @@
       <Filter>Objets\Bullets</Filter>
     </ClCompile>
     <ClCompile Include="Objects\Asteroids\asteroid.cpp" />
+    <ClCompile Include="Objects\Button\button.cpp" />
+    <ClCompile Include="MenuStates\MainMenu\mainMenu.cpp" />
+    <ClCompile Include="MenuStates\Credits\credits.cpp" />
+    <ClCompile Include="MenuStates\Options\options.cpp" />
+    <ClCompile Include="MenuStates\Rules\rules.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuStates\Gameplay\gameplay.h">
@@ -62,5 +67,10 @@
       <Filter>Objets\Bullets</Filter>
     </ClInclude>
     <ClInclude Include="Objects\Asteroids\asteroid.h" />
+    <ClInclude Include="Objects\Button\button.h" />
+    <ClInclude Include="MenuStates\MainMenu\mainMenu.h" />
+    <ClInclude Include="MenuStates\Credits\credits.h" />
+    <ClInclude Include="MenuStates\Options\options.h" />
+    <ClInclude Include="MenuStates\Rules\rules.h" />
   </ItemGroup>
 </Project>

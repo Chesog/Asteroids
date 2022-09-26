@@ -157,19 +157,29 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuStates\Credits\credits.cpp" />
     <ClCompile Include="MenuStates\Gameplay\gameplay.cpp" />
     <ClCompile Include="MenuStates\Game\game.cpp" />
     <ClCompile Include="MenuStates\GlobalEnums\general_Func.cpp" />
+    <ClCompile Include="MenuStates\MainMenu\mainMenu.cpp" />
+    <ClCompile Include="MenuStates\Options\options.cpp" />
+    <ClCompile Include="MenuStates\Rules\rules.cpp" />
     <ClCompile Include="Objects\Asteroids\asteroid.cpp" />
     <ClCompile Include="Objects\Bullet\bullet.cpp" />
+    <ClCompile Include="Objects\Button\button.cpp" />
     <ClCompile Include="Objects\Spaceship\spaceship.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="MenuStates\Credits\credits.h" />
     <ClInclude Include="MenuStates\Gameplay\gameplay.h" />
     <ClInclude Include="MenuStates\Game\game.h" />
     <ClInclude Include="MenuStates\GlobalEnums\genera_func.h" />
+    <ClInclude Include="MenuStates\MainMenu\mainMenu.h" />
+    <ClInclude Include="MenuStates\Options\options.h" />
+    <ClInclude Include="MenuStates\Rules\rules.h" />
     <ClInclude Include="Objects\Asteroids\asteroid.h" />
     <ClInclude Include="Objects\Bullet\bullet.h" />
+    <ClInclude Include="Objects\Button\button.h" />
     <ClInclude Include="Objects\Spaceship\spaceship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
