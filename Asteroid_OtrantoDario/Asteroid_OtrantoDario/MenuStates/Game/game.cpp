@@ -1,5 +1,9 @@
 #include "game.h"
 
+static Texture2D spaceShip;
+static Texture2D bullet;
+static Texture2D LargeAsteroid;
+
 void ejecuteGame() 
 {
     //int screenHeight = 720;
@@ -19,9 +23,10 @@ void ejecuteGame()
 
     InitWindow(screenWidth, screenHeight, "Asteroids");
     //ToggleFullscreen();
-    SetExitKey(KEY_NULL);
 
-    SetTargetFPS(60);
+    loadTextures();
+
+    SetExitKey(KEY_NULL);
 
     bool initGame = true;
 
@@ -36,7 +41,7 @@ void ejecuteGame()
             menuAnsw = mainMenu(point);
             break;
         case (int)MenuStates::Gameplay:
-            menuAnsw = gameplayLoop(initGame);
+            menuAnsw = gameplayLoop(initGame,spaceShip, bullet, LargeAsteroid);
             break;
         case (int)MenuStates::Rules:
             menuAnsw = rulesLoop(backToMenu, colorPlayer1, colorPlayer2);
@@ -54,4 +59,15 @@ void ejecuteGame()
     }
 
     CloseWindow();
+}
+
+void loadTextures() 
+{
+    spaceShip = LoadTexture("res/nave 2.png");
+    bullet = LoadTexture("res/disparo-2.png");
+    LargeAsteroid = LoadTexture("res/metiorito lindo 2.png");
+}
+void unloadTextures() 
+{
+    UnloadTexture(spaceShip);
 }

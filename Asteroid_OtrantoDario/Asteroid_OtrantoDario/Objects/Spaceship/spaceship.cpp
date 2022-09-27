@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-SpaceShip initSpaceShip()
+SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 {
 	int screenWidth = GetScreenWidth();
 	int screenHeight = GetScreenHeight();
@@ -21,27 +21,31 @@ SpaceShip initSpaceShip()
 	aux.normalizedDirection = { 0,0 };
 	aux.acceleration.x = 0;
 	aux.acceleration.y = 0;
+	aux.spaceshipTexture = spaceshipTexture;
 	for (int i = 0; i < playerMaxAmmo; i++)
 	{
-		aux.playerAmmo[i].position = { 0,0 };
-		aux.playerAmmo[i].trayectory = {0,0};
-		aux.playerAmmo[i].speed = {500.0f,500.0f};
-		aux.playerAmmo[i].rad = 4.0f;
-		aux.playerAmmo[i].isActive = false;
-		aux.playerAmmo[i].color = RED;
+		initBullet(aux.playerAmmo[i],bulletTexture);
 	}
 	return aux;
 }
 
 void moveSpaceShip(SpaceShip& player)
 {
-	player.rect.x = player.rect.x + player.acceleration.x * 6 * GetFrameTime();
-	player.rect.y = player.rect.y + player.acceleration.y * 6 * GetFrameTime();
+	player.rect.x = player.rect.x + player.acceleration.x * 0.1f * GetFrameTime();
+	player.rect.y = player.rect.y + player.acceleration.y * 0.1f * GetFrameTime();
 }
 
 void drawPlayer(SpaceShip& player)
 {
+#if _DEBUG
 	DrawRectanglePro(player.rect, player.piv, player.rotation, GREEN);
+#endif // _DEBUG
+
+	Rectangle sourRect = {0,0,player.spaceshipTexture.width,player.spaceshipTexture.height};
+	Rectangle destRect = {player.rect.x,player.rect.y,sourRect.width,sourRect.height};
+	Vector2 texturePiv = { player.spaceshipTexture.width / 2, player.spaceshipTexture.height / 2 };
+
+	DrawTexturePro(player.spaceshipTexture,sourRect,destRect, texturePiv,player.rotation + 90,WHITE);
 }
 
 void shoot(Bullet& bullet, SpaceShip player)

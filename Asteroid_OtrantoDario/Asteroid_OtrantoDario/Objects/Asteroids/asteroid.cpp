@@ -1,6 +1,6 @@
 #include "asteroid.h"
 
-Asteroid initAsteroid(int size)
+Asteroid initAsteroid(int size,Texture2D asteroidTexture)
 {
 	Asteroid aux;
 	int screenWidth = GetScreenWidth();
@@ -12,6 +12,7 @@ Asteroid initAsteroid(int size)
 	aux.direction.y = GetRandomValue((int)Directions::Up, (int)Directions::Down);
 	aux.color = DARKGREEN;
 	aux.size = size;
+	aux.asteroidTexture = asteroidTexture;
 
 	if (aux.size == (int)AsteroidSize::Small)
 	{
@@ -56,5 +57,13 @@ void moveAsteroid(Asteroid& currenAsteroid)
 }
 void drawAsteroid(Asteroid currenAsteroid)
 {
+#if _DEBUG
 	DrawCircle(currenAsteroid.position.x, currenAsteroid.position.y, currenAsteroid.radius, currenAsteroid.color);
+#endif // _DEBUG
+
+	Rectangle sourRect = { 0,0,currenAsteroid.asteroidTexture.width,currenAsteroid.asteroidTexture.height};
+	Rectangle destRect = {currenAsteroid.position.x,currenAsteroid.position.y,sourRect.width,sourRect.height};
+	Vector2 texturePiv = {currenAsteroid.asteroidTexture.width / 2,currenAsteroid.asteroidTexture.height / 2};
+
+	DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv,0 + 90, WHITE);
 }

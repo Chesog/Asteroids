@@ -16,9 +16,10 @@ struct SpaceShip
 	Rectangle rect;
 	float rotation;
 	Bullet playerAmmo[playerMaxAmmo];
+	Texture2D spaceshipTexture;
 };
 
-SpaceShip initSpaceShip();
+SpaceShip initSpaceShip(Texture2D spaceshipTexture, Texture2D bulletTexture);
 void moveSpaceShip(SpaceShip& player);
 void drawPlayer(SpaceShip& player);
 void shoot(Bullet& bullet, SpaceShip player);

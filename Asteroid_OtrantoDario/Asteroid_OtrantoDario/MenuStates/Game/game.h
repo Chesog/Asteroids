@@ -8,3 +8,5 @@
 #include "../Asteroid_OtrantoDario/MenuStates/Credits/credits.h"
 
 void ejecuteGame();
+void loadTextures();
+void unloadTextures();

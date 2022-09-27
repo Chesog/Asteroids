@@ -17,8 +17,9 @@ struct Asteroid
 	float radius;
 	bool isActive;
 	Color color;
+	Texture2D asteroidTexture;
 };
 
-Asteroid initAsteroid(int size);
+Asteroid initAsteroid(int size,Texture2D asteroidTexture);
 void moveAsteroid(Asteroid& currenAsteroid);
 void drawAsteroid(Asteroid currenAsteroid);

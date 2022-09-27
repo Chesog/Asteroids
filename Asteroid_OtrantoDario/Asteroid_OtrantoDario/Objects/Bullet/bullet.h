@@ -11,7 +11,8 @@ struct Bullet
 	float rotation;
 	bool isActive;
 	Color color;
+	Texture2D bulletTexture;
 };
-
+void initBullet(Bullet& currentBullet, Texture2D bulletTexture);
 void drawBullet(Bullet bullet);
 void moveBullet(Bullet& bullet);

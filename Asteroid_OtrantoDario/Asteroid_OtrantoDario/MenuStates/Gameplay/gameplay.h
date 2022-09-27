@@ -5,4 +5,4 @@
 #include "../GlobalEnums/genera_func.h"
 #include "../Asteroid_OtrantoDario/Objects/Asteroids/asteroid.h"
 
-int gameplayLoop(bool& initGame);
+int gameplayLoop(bool& initGame, Texture2D spaceshipTexture, Texture2D bulletTexture, Texture2D largeAsteroidTexture);

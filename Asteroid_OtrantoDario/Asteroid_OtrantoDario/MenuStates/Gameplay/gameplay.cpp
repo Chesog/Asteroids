@@ -10,7 +10,7 @@ static int largeAsteroidCount;
 static int mediumAsteroidCount;
 static int smallAsteroidCount;
 
-void initGameplay(bool& initGame);
+void initGameplay(bool& initGame, Texture2D spaceshipTexture, Texture2D bulletTexture, Texture2D largeAsteroidTexture);
 void drawGameplay();
 void updateGameplay();
 void checkInput();
@@ -22,12 +22,12 @@ void checkColitions();
 void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid);
 
 
-int gameplayLoop(bool& initGame)
+int gameplayLoop(bool& initGame,Texture2D spaceshipTexture, Texture2D bulletTexture, Texture2D largeAsteroidTexture)
 {
 
 	if (initGame)
 	{
-		initGameplay(initGame);
+		initGameplay(initGame ,spaceshipTexture,bulletTexture,largeAsteroidTexture);
 	}
 
 	checkInput();
@@ -36,21 +36,21 @@ int gameplayLoop(bool& initGame)
 
 	return (int)MenuStates::Gameplay;
 }
-void initGameplay(bool& initGame)
+void initGameplay(bool& initGame, Texture2D spaceshipTexture,Texture2D bulletTexture, Texture2D largeAsteroidTexture)
 {
-	player = initSpaceShip();
+	player = initSpaceShip(spaceshipTexture,bulletTexture);
 
 	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
-		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large);
+		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large,largeAsteroidTexture);
 	}
 	for (int i = 0; i < maxMediumndAsteroids; i++)
 	{
-		mediumAsteroids[i] = initAsteroid((int)AsteroidSize::Medium);
+		mediumAsteroids[i] = initAsteroid((int)AsteroidSize::Medium,largeAsteroidTexture);
 	}
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
-		smallAsteroids[i] = initAsteroid((int)AsteroidSize::Small);
+		smallAsteroids[i] = initAsteroid((int)AsteroidSize::Small,largeAsteroidTexture);
 	}
 	largeAsteroidCount = maxLargeAsteroids;
 	mediumAsteroidCount = 0;
@@ -66,6 +66,19 @@ void checkInput()
 	float maxSpeed = 200.0f;
 	float angle = atan(distanceDiff.y / distanceDiff.x);
 	angle = angle * 180 / PI;
+
+	if (GetMousePosition().x < player.rect.x && GetMousePosition().y < player.rect.y)
+	{
+		angle += 180;
+	}
+	if (GetMousePosition().x < player.rect.x && GetMousePosition().y > player.rect.y)
+	{
+		angle += 180;
+	}
+	if (GetMousePosition().x > player.rect.x && GetMousePosition().y > player.rect.y)
+	{
+		angle += 360;
+	}
 
 	player.rotation = angle;
 
@@ -347,7 +360,7 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 
 			if (mediumAsteroidCount < maxMediumndAsteroids)
 			{
-				mediumAsteroids[mediumAsteroidCount].direction.x = (int)Directions::Left;
+				mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Left);
 				mediumAsteroids[mediumAsteroidCount].direction.y = (int)Directions::Up;
 				mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
 				mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
@@ -385,15 +398,12 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 				smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
 				smallAsteroids[smallAsteroidCount].isActive = true;
 				smallAsteroidCount++;
-
-				mediumAsteroidCount--;
 			}
 		}
 		if (currentAsteroid.size == (int)AsteroidSize::Small)
 		{
 			currentAsteroid.isActive = false;
 			currentBullet.isActive = false;
-			smallAsteroidCount--;
 		}
 		player.score++;
 #if _DEBUG
