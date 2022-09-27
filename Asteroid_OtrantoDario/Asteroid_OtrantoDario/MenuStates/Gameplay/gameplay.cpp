@@ -5,6 +5,7 @@ static SpaceShip player;
 static Asteroid largeAsteroids[maxLargeAsteroids];
 static Asteroid mediumAsteroids[maxMediumndAsteroids];
 static Asteroid smallAsteroids[maxSmallAsteroids];
+
 static int largeAsteroidCount;
 static int mediumAsteroidCount;
 static int smallAsteroidCount;
@@ -107,18 +108,19 @@ void drawGameplay()
 		}
 	}
 	drawPlayer(player);
+
 	for (int i = 0; i < maxLargeAsteroids; i++)
-	{
-		if (mediumAsteroids[i].isActive)
-		{
-			drawAsteroid(mediumAsteroids[i]);
-		}
-	}
-	for (int i = 0; i < maxMediumndAsteroids; i++)
 	{
 		if (largeAsteroids[i].isActive)
 		{
 			drawAsteroid(largeAsteroids[i]);
+		}
+	}
+	for (int i = 0; i < maxMediumndAsteroids; i++)
+	{
+		if (mediumAsteroids[i].isActive)
+		{
+			drawAsteroid(mediumAsteroids[i]);
 		}
 	}
 	for (int i = 0; i < maxSmallAsteroids; i++)
@@ -326,14 +328,14 @@ void checkColitions()
 }
 void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 {
-	int distanciaX = 0;
-	int distanciaY = 0;
+	int distanceX = 0;
+	int distanceY = 0;
 	int distance = 0;
 
-	distanciaX = currentAsteroid.position.x - currentBullet.position.x;
-	distanciaY = currentAsteroid.position.y - currentBullet.position.y;
+	distanceX = currentAsteroid.position.x - currentBullet.position.x;
+	distanceY = currentAsteroid.position.y - currentBullet.position.y;
 
-	distance = sqrt((distanciaX * distanciaX) + (distanciaY * distanciaY));
+	distance = sqrt((distanceX * distanceX) + (distanceY * distanceY));
 
 
 	if (distance < currentBullet.rad + currentAsteroid.radius)
@@ -361,15 +363,12 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 
 				largeAsteroidCount--;
 			}
-#if _DEBUG
-			std::cout << "Colition" << std::endl;
-#endif // _DEBUG
-
 		}
 		if (currentAsteroid.size == (int)AsteroidSize::Medium)
 		{
 			currentAsteroid.isActive = false;
 			currentBullet.isActive = false;
+
 			if (smallAsteroidCount < maxSmallAsteroids)
 			{
 
@@ -397,5 +396,10 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 			smallAsteroidCount--;
 		}
 		player.score++;
+#if _DEBUG
+		std::cout << "Meteoritos Grandes" << largeAsteroidCount << std::endl;
+		std::cout << "Meteoritos Medianos" << mediumAsteroidCount << std::endl;
+		std::cout << "Meteoritos Chicos" << smallAsteroidCount << std::endl;
+#endif // _DEBUG
 	}
 }
