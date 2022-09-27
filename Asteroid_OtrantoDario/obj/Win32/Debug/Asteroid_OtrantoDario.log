@@ -1,33 +1,14 @@
-﻿  game.cpp
-  gameplay.cpp
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(192,19): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(200,19): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(243,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(251,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(262,36): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(270,36): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(281,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(289,35): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(348,41): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(349,41): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\MenuStates\Gameplay\gameplay.cpp(351,17): warning C4244: '=': conversión de 'double' a 'int'; posible pérdida de datos
-  asteroid.cpp
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(9,33): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(10,33): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(11,34): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(12,34): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(14,13): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(61,63): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(61,36): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(64,59): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(64,59): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(64,96): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(64,96): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(66,61): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(66,61): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(66,103): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Asteroids\asteroid.cpp(66,103): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
-  main.cpp
-C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\main.cpp(4,1): warning C4326: el tipo de valor devuelto de 'main' debe ser 'int' en lugar de 'void'
-  Generando código...
+﻿  spaceship.cpp
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(17,27): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(18,28): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(42,38): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(42,24): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(46,51): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(46,51): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(46,81): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(46,81): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(48,55): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(48,55): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(48,91): warning C4838: la conversión de 'int' en 'float' requiere una conversión de restricción
+C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\Asteroid_OtrantoDario\Objects\Spaceship\spaceship.cpp(48,91): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
   Asteroid_OtrantoDario.vcxproj -> C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\Asteroid_OtrantoDario.exe

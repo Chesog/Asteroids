@@ -13,6 +13,7 @@ struct SpaceShip
 	Vector2 piv;
 	Vector2 acceleration;
 	Vector2 normalizedDirection;
+	float rad;
 	Rectangle rect;
 	float rotation;
 	Bullet playerAmmo[playerMaxAmmo];

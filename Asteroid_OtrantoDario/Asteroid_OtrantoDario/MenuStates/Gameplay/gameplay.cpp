@@ -46,7 +46,7 @@ void initGameplay(bool& initGame, Texture2D spaceshipTexture,Texture2D bulletTex
 	}
 	for (int i = 0; i < maxMediumndAsteroids; i++)
 	{
-		mediumAsteroids[i] = initAsteroid((int)AsteroidSize::Medium,largeAsteroidTexture);
+		mediumAsteroids[i] = initAsteroid((int)AsteroidSize::Medium, largeAsteroidTexture);
 	}
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{

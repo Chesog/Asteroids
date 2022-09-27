@@ -12,6 +12,7 @@ Asteroid initAsteroid(int size,Texture2D asteroidTexture)
 	aux.direction.y = GetRandomValue((int)Directions::Up, (int)Directions::Down);
 	aux.color = DARKGREEN;
 	aux.size = size;
+	aux.rotation = 0;
 	aux.asteroidTexture = asteroidTexture;
 
 	if (aux.size == (int)AsteroidSize::Small)
@@ -54,6 +55,7 @@ void moveAsteroid(Asteroid& currenAsteroid)
 	{
 		currenAsteroid.position.y = currenAsteroid.position.y - currenAsteroid.speed.y * GetFrameTime();
 	}
+	currenAsteroid.rotation += 0.1 * GetFrameTime();
 }
 void drawAsteroid(Asteroid currenAsteroid)
 {
@@ -65,5 +67,5 @@ void drawAsteroid(Asteroid currenAsteroid)
 	Rectangle destRect = {currenAsteroid.position.x,currenAsteroid.position.y,sourRect.width,sourRect.height};
 	Vector2 texturePiv = {currenAsteroid.asteroidTexture.width / 2,currenAsteroid.asteroidTexture.height / 2};
 
-	DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv,0 + 90, WHITE);
+	DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv,currenAsteroid.rotation, WHITE);
 }

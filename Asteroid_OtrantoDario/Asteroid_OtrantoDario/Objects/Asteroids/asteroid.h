@@ -15,6 +15,7 @@ struct Asteroid
 	Vector2 direction;
 	float size;
 	float radius;
+	float rotation;
 	bool isActive;
 	Color color;
 	Texture2D asteroidTexture;

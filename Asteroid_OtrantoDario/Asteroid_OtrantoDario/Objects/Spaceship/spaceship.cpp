@@ -11,8 +11,9 @@ SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 
 	aux.lives = 3;
 	aux.score = 0;
-	aux.rect.width = 35;
-	aux.rect.height = 35;
+	aux.rad = 35;
+	aux.rect.width = aux.rad;
+	aux.rect.height = aux.rad;
 	aux.rect.x = screenWidth / 2;
 	aux.rect.y = screenHeight / 2;
 	aux.piv.x = aux.rect.width / 2;
@@ -38,7 +39,8 @@ void moveSpaceShip(SpaceShip& player)
 void drawPlayer(SpaceShip& player)
 {
 #if _DEBUG
-	DrawRectanglePro(player.rect, player.piv, player.rotation, GREEN);
+	DrawCircle(player.rect.x,player.rect.y,player.rad,GREEN);
+	//DrawRectanglePro(player.rect, player.piv, player.rotation, GREEN);
 #endif // _DEBUG
 
 	Rectangle sourRect = {0,0,player.spaceshipTexture.width,player.spaceshipTexture.height};
