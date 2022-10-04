@@ -15,12 +15,12 @@ void initBullet(Bullet& currentBullet ,Texture2D bulletTexture)
 void drawBullet(Bullet bullet)
 {
 #if _DEBUG
-	DrawCircle(bullet.position.x, bullet.position.y, bullet.rad, bullet.color);
+	DrawCircle(static_cast<int>(bullet.position.x), static_cast<int>(bullet.position.y), bullet.rad, bullet.color);
 #endif // _DEBUG
 
-	Rectangle sourRect = { 0,0,bullet.bulletTexture.width,bullet.bulletTexture.height};
+	Rectangle sourRect = { 0.0f,0.0f,static_cast<float>(bullet.bulletTexture.width),static_cast<float>(bullet.bulletTexture.height)};
 	Rectangle destRect = {bullet.position.x,bullet.position.y,sourRect.width,sourRect.height};
-	Vector2 texturePiv = {bullet.bulletTexture.width / 2,bullet.bulletTexture.height / 2};
+	Vector2 texturePiv = {static_cast<float>(bullet.bulletTexture.width / 2),static_cast<float>(bullet.bulletTexture.height / 2)};
 
 	DrawTexturePro(bullet.bulletTexture, sourRect, destRect, texturePiv,bullet.rotation + 90, WHITE);
 }

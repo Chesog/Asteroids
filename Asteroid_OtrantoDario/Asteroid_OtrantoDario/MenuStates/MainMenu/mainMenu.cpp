@@ -88,63 +88,63 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 
 	DrawText("ASTEROIDS", (screenWidth / 2) - (textSizeTitle / 2), fontSize, fontSize, RED);
 
-	if (point == (int)MenuStates::Gameplay)
+	if (point == static_cast<int>(MenuStates::Gameplay))
 	{
-		DrawRectangle(button1.rect.x, button1.rect.y, button1.rect.width, button1.rect.height, button1.buttonColor);
+		DrawRectangle(static_cast<int>(button1.rect.x), static_cast<int>(button1.rect.y), static_cast<int>(button1.rect.width), static_cast<int>(button1.rect.height), button1.buttonColor);
 	}
-	else if (point != (int)MenuStates::Gameplay)
+	else if (point != static_cast<int>(MenuStates::Gameplay))
 	{
-		DrawRectangle(button1.rect.x, button1.rect.y, button1.rect.width, button1.rect.height, button1.selectionColor);
+		DrawRectangle(static_cast<int>(button1.rect.x), static_cast<int>(button1.rect.y), static_cast<int>(button1.rect.width), static_cast<int>(button1.rect.height), button1.selectionColor);
 	}
-	DrawText("JUGAR", ((screenWidth / 2) - (textSizeButton1 / 2)), (button1.rect.y + button1.rect.height / 6), button1.fontSize, BLACK);
+	DrawText("JUGAR", ((screenWidth / 2) - (textSizeButton1 / 2)), static_cast<int>((button1.rect.y + button1.rect.height / 6)), button1.fontSize, BLACK);
 
-	if (point == (int)MenuStates::Rules)
+	if (point == static_cast<int>(MenuStates::Rules))
 	{
-		DrawRectangle(button2.rect.x, button2.rect.y, button2.rect.width, button2.rect.height, button2.buttonColor);
+		DrawRectangle(static_cast<int>(button2.rect.x), static_cast<int>(button2.rect.y), static_cast<int>(button2.rect.width), static_cast<int>(button2.rect.height), button2.buttonColor);
 	}
-	else if (point != (int)MenuStates::Rules)
+	else if (point != static_cast<int>(MenuStates::Rules))
 	{
-		DrawRectangle(button2.rect.x, button2.rect.y, button2.rect.width, button2.rect.height, button2.selectionColor);
+		DrawRectangle(static_cast<int>(button2.rect.x), static_cast<int>(button2.rect.y), static_cast<int>(button2.rect.width), static_cast<int>(button2.rect.height), button2.selectionColor);
 	}
-	DrawText("REGLAS", ((screenWidth / 2) - (textSizeButton2 / 2)), (button2.rect.y + button2.rect.height / 6), button2.fontSize, BLACK);
+	DrawText("REGLAS", ((screenWidth / 2) - (textSizeButton2 / 2)), static_cast<int>((button2.rect.y + button2.rect.height / 6)), button2.fontSize, BLACK);
 
-	if (point == (int)MenuStates::Options)
+	if (point == static_cast<int>(MenuStates::Options))
 	{
-		DrawRectangle(button3.rect.x, button3.rect.y, button3.rect.width, button3.rect.height, button3.buttonColor);
+		DrawRectangle(static_cast<int>(button3.rect.x), static_cast<int>(button3.rect.y), static_cast<int>(button3.rect.width), static_cast<int>(button3.rect.height), button3.buttonColor);
 	}
-	else if (point != (int)MenuStates::Options)
+	else if (point != static_cast<int>(MenuStates::Options))
 	{
-		DrawRectangle(button3.rect.x, button3.rect.y, button3.rect.width, button3.rect.height, button3.selectionColor);
+		DrawRectangle(static_cast<int>(button3.rect.x), static_cast<int>(button3.rect.y), static_cast<int>(button3.rect.width), static_cast<int>(button3.rect.height), button3.selectionColor);
 	}
-	DrawText("OPCIONES", ((screenWidth / 2) - (textSizeButton3 / 2)), (button3.rect.y + button3.rect.height / 6), button3.fontSize, BLACK);
+	DrawText("OPCIONES", ((screenWidth / 2) - (textSizeButton3 / 2)), static_cast<int>((button3.rect.y + button3.rect.height / 6)), button3.fontSize, BLACK);
 
-	if (point == (int)MenuStates::Credits)
+	if (point == static_cast<int>(MenuStates::Credits))
 	{
-		DrawRectangle(button4.rect.x, button4.rect.y, button4.rect.width, button4.rect.height, button4.buttonColor);
+		DrawRectangle(static_cast<int>(button4.rect.x), static_cast<int>(button4.rect.y), static_cast<int>(button4.rect.width), static_cast<int>(button4.rect.height), button4.buttonColor);
 	}
-	else if (point != (int)MenuStates::Credits)
+	else if (point != static_cast<int>(MenuStates::Credits))
 	{
-		DrawRectangle(button4.rect.x, button4.rect.y, button4.rect.width, button4.rect.height, button4.selectionColor);
+		DrawRectangle(static_cast<int>(button4.rect.x), static_cast<int>(button4.rect.y), static_cast<int>(button4.rect.width), static_cast<int>(button4.rect.height), button4.selectionColor);
 	}
-	DrawText("CREDITOS", ((screenWidth / 2) - (textSizeButton4 / 2)), (button4.rect.y + button4.rect.height / 6), button4.fontSize, BLACK);
+	DrawText("CREDITOS", ((screenWidth / 2) - (textSizeButton4 / 2)), static_cast<int>((button4.rect.y + button4.rect.height / 6)), button4.fontSize, BLACK);
 
-	if (point == (int)MenuStates::Exit)
+	if (point == static_cast<int>(MenuStates::Exit))
 	{
-		DrawRectangle(button5.rect.x, button5.rect.y, button5.rect.width, button5.rect.height, button5.buttonColor);
+		DrawRectangle(static_cast<int>(button5.rect.x), static_cast<int>(button5.rect.y), static_cast<int>(button5.rect.width), static_cast<int>(button5.rect.height), button5.buttonColor);
 	}
-	else if (point != (int)MenuStates::Exit)
+	else if (point != static_cast<int>(MenuStates::Exit))
 	{
-		DrawRectangle(button5.rect.x, button5.rect.y, button5.rect.width, button5.rect.height, button5.selectionColor);
+		DrawRectangle(static_cast<int>(button5.rect.x), static_cast<int>(button5.rect.y), static_cast<int>(button5.rect.width), static_cast<int>(button5.rect.height), button5.selectionColor);
 	}
-	DrawText("SALIR", ((screenWidth / 2) - (textSizeButton5 / 2)), (button5.rect.y + button5.rect.height / 6), button5.fontSize, BLACK);
+	DrawText("SALIR", ((screenWidth / 2) - (textSizeButton5 / 2)), static_cast<int>((button5.rect.y + button5.rect.height / 6)), button5.fontSize, BLACK);
 
 #ifdef _DEBUG
 	DrawRectangle(0, screenHeight / 2, screenWidth, 1, DARKGREEN);
-	DrawRectangle(0, (button1.rect.y + button1.rect.height / 2), screenWidth, 1, BLUE);
-	DrawRectangle(0, (button2.rect.y + button2.rect.height / 2), screenWidth, 1, BLUE);
-	DrawRectangle(0, (button3.rect.y + button3.rect.height / 2), screenWidth, 1, BLUE);
-	DrawRectangle(0, (button4.rect.y + button4.rect.height / 2), screenWidth, 1, BLUE);
-	DrawRectangle(0, (button5.rect.y + button5.rect.height / 2), screenWidth, 1, BLUE);
+	DrawRectangle(0,static_cast<int>((button1.rect.y + button1.rect.height / 2)), screenWidth, 1, BLUE);
+	DrawRectangle(0,static_cast<int>((button2.rect.y + button2.rect.height / 2)), screenWidth, 1, BLUE);
+	DrawRectangle(0,static_cast<int>((button3.rect.y + button3.rect.height / 2)), screenWidth, 1, BLUE);
+	DrawRectangle(0,static_cast<int>((button4.rect.y + button4.rect.height / 2)), screenWidth, 1, BLUE);
+	DrawRectangle(0,static_cast<int>((button5.rect.y + button5.rect.height / 2)), screenWidth, 1, BLUE);
 	DrawRectangle(screenWidth / 2, 0, 1, screenHeight, DARKGREEN);
 #endif // DEBUG
 }

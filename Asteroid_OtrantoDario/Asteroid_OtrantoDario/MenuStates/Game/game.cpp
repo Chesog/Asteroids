@@ -15,7 +15,7 @@ void ejecuteGame()
     int menuAnsw = (int)MenuStates::MainMenu;
     int point = 1;
     bool backToMenu = false;
-    bool exitGame = false;
+    //bool exitGame = false;
     bool reset = true;
     Color colorPlayer1 = LIME;
     Color colorPlayer2 = BLUE;

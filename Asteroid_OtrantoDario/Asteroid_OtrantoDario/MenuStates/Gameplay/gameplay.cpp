@@ -63,7 +63,6 @@ void checkInput()
 
 	distanceDiff.x = GetMouseX() - player.rect.x;
 	distanceDiff.y = GetMouseY() - player.rect.y;
-	float maxSpeed = 200.0f;
 	float angle = atan(distanceDiff.y / distanceDiff.x);
 	angle = angle * 180 / PI;
 
@@ -189,17 +188,17 @@ void checkPlayerOutOfBounds(int screenWidth, int screenHeight)
 {
 	if (player.rect.x < 0)
 	{
-		player.rect.x = screenWidth;
+		player.rect.x = static_cast<float>(screenWidth);
 	}
-	if (player.rect.x > screenWidth)
+	if (player.rect.x > static_cast<float>(screenWidth))
 	{
 		player.rect.x = 0;
 	}
 	if (player.rect.y < 0)
 	{
-		player.rect.y = screenHeight;
+		player.rect.y = static_cast<float>(screenHeight);
 	}
-	if (player.rect.y > screenHeight)
+	if (player.rect.y > static_cast<float>(screenHeight))
 	{
 		player.rect.y = 0;
 	}
@@ -240,17 +239,17 @@ void checkAsteroidsOutOfBounds(int screenWidth, int screenHeight)
 	{
 		if (largeAsteroids[i].position.x < 0 - largeAsteroids[i].radius)
 		{
-			largeAsteroids[i].position.x = screenWidth;
+			largeAsteroids[i].position.x = static_cast<float>(screenWidth);
 		}
-		if (largeAsteroids[i].position.x > screenWidth + largeAsteroids[i].radius)
+		if (largeAsteroids[i].position.x > static_cast<float>(screenWidth) + largeAsteroids[i].radius)
 		{
 			largeAsteroids[i].position.x = 0;
 		}
 		if (largeAsteroids[i].position.y < 0 - largeAsteroids[i].radius)
 		{
-			largeAsteroids[i].position.y = screenHeight;
+			largeAsteroids[i].position.y = static_cast<float>(screenHeight);
 		}
-		if (largeAsteroids[i].position.y > screenHeight + largeAsteroids[i].radius)
+		if (largeAsteroids[i].position.y > static_cast<float>(screenHeight) + largeAsteroids[i].radius)
 		{
 			largeAsteroids[i].position.y = 0;
 		}
@@ -259,17 +258,17 @@ void checkAsteroidsOutOfBounds(int screenWidth, int screenHeight)
 	{
 		if (mediumAsteroids[i].position.x < 0 - mediumAsteroids[i].radius)
 		{
-			mediumAsteroids[i].position.x = screenWidth;
+			mediumAsteroids[i].position.x = static_cast<float>(screenWidth);
 		}
-		if (mediumAsteroids[i].position.x > screenWidth + mediumAsteroids[i].radius)
+		if (mediumAsteroids[i].position.x > static_cast<float>(screenWidth) + mediumAsteroids[i].radius)
 		{
 			mediumAsteroids[i].position.x = 0;
 		}
 		if (mediumAsteroids[i].position.y < 0 - mediumAsteroids[i].radius)
 		{
-			mediumAsteroids[i].position.y = screenHeight;
+			mediumAsteroids[i].position.y = static_cast<float>(screenHeight);
 		}
-		if (mediumAsteroids[i].position.y > screenHeight + mediumAsteroids[i].radius)
+		if (mediumAsteroids[i].position.y > static_cast<float>(screenHeight) + mediumAsteroids[i].radius)
 		{
 			mediumAsteroids[i].position.y = 0;
 		}
@@ -278,17 +277,17 @@ void checkAsteroidsOutOfBounds(int screenWidth, int screenHeight)
 	{
 		if (smallAsteroids[i].position.x < 0 - smallAsteroids[i].radius)
 		{
-			smallAsteroids[i].position.x = screenWidth;
+			smallAsteroids[i].position.x = static_cast<float>(screenWidth);
 		}
-		if (smallAsteroids[i].position.x > screenWidth + smallAsteroids[i].radius)
+		if (smallAsteroids[i].position.x > static_cast<float>(screenWidth) + smallAsteroids[i].radius)
 		{
 			smallAsteroids[i].position.x = 0;
 		}
 		if (smallAsteroids[i].position.y < 0 - smallAsteroids[i].radius)
 		{
-			smallAsteroids[i].position.y = screenHeight;
+			smallAsteroids[i].position.y = static_cast<float>(screenHeight);
 		}
-		if (smallAsteroids[i].position.y > screenHeight + smallAsteroids[i].radius)
+		if (smallAsteroids[i].position.y > static_cast<float>(screenHeight) + smallAsteroids[i].radius)
 		{
 			smallAsteroids[i].position.y = 0;
 		}
@@ -341,9 +340,9 @@ void checkColitions()
 }
 void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 {
-	int distanceX = 0;
-	int distanceY = 0;
-	int distance = 0;
+	float distanceX = 0;
+	float distanceY = 0;
+	float distance = 0;
 
 	distanceX = currentAsteroid.position.x - currentBullet.position.x;
 	distanceY = currentAsteroid.position.y - currentBullet.position.y;
@@ -360,15 +359,15 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 
 			if (mediumAsteroidCount < maxMediumndAsteroids)
 			{
-				mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Left);
-				mediumAsteroids[mediumAsteroidCount].direction.y = (int)Directions::Up;
+				mediumAsteroids[mediumAsteroidCount].direction.x = 0.0f;
+				mediumAsteroids[mediumAsteroidCount].direction.y = 2.0f;
 				mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
 				mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
 				mediumAsteroids[mediumAsteroidCount].isActive = true;
 				mediumAsteroidCount++;
 
-				mediumAsteroids[mediumAsteroidCount].direction.x = (int)Directions::Right;
-				mediumAsteroids[mediumAsteroidCount].direction.y = (int)Directions::Down;
+				mediumAsteroids[mediumAsteroidCount].direction.x = 1.0f;
+				mediumAsteroids[mediumAsteroidCount].direction.y = 3.0f;
 				mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
 				mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
 				mediumAsteroids[mediumAsteroidCount].isActive = true;
@@ -385,15 +384,15 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 			if (smallAsteroidCount < maxSmallAsteroids)
 			{
 
-				smallAsteroids[smallAsteroidCount].direction.x = (int)Directions::Left;
-				smallAsteroids[smallAsteroidCount].direction.y = (int)Directions::Up;
+				smallAsteroids[smallAsteroidCount].direction.x = 0.0f;
+				smallAsteroids[smallAsteroidCount].direction.y = 2.0f;
 				smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
 				smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
 				smallAsteroids[smallAsteroidCount].isActive = true;
 				smallAsteroidCount++;
 
-				smallAsteroids[smallAsteroidCount].direction.x = (int)Directions::Right;
-				smallAsteroids[smallAsteroidCount].direction.y = (int)Directions::Down;
+				smallAsteroids[smallAsteroidCount].direction.x = 1.0f;
+				smallAsteroids[smallAsteroidCount].direction.y = 3.0f;
 				smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
 				smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
 				smallAsteroids[smallAsteroidCount].isActive = true;

@@ -41,32 +41,34 @@ int optionsLoop(bool& backToMenu, int& screenWidth, int& screenHeight)
 }
 int checkInputOptions(bool& backToMenu, int& point)
 {
+	int defaultValue = 0;
+
 	if (IsKeyPressed(KEY_UP))
 	{
-		if (point <= (int)OptionsResolution::DefaultResolution)
+		if (point <= static_cast<int>(OptionsResolution::DefaultResolution))
 		{
-			point = (int)OptionsResolution::MaxResolution;
+			point = static_cast<int>(OptionsResolution::MaxResolution);
 		}
 		else
 		{
 			point--;
 		}
-		return 0;
+		return defaultValue;
 	}
-	else if (IsKeyPressed(KEY_DOWN))
+	if (IsKeyPressed(KEY_DOWN))
 	{
-		if (point >= (int)OptionsResolution::MaxResolution)
+		if (point >= static_cast<int>(OptionsResolution::MaxResolution))
 		{
-			point = (int)OptionsResolution::DefaultResolution;
+			point = static_cast<int>(OptionsResolution::DefaultResolution);
 		}
 		else
 		{
 			point++;
 		}
-		return 0;
+		return defaultValue;
 	}
 
-	else if (IsKeyPressed(KEY_ENTER))
+	if (IsKeyPressed(KEY_ENTER))
 	{
 		return point;
 	}
@@ -74,6 +76,12 @@ int checkInputOptions(bool& backToMenu, int& point)
 	if (IsKeyPressed(KEY_ESCAPE))
 	{
 		backToMenu = true;
+		return defaultValue;
+	}
+	else
+	{
+		backToMenu = false;
+		return defaultValue;
 	}
 }
 void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution)
@@ -101,7 +109,7 @@ void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution
 	{
 		DrawRectangleRec(maxResolution, RED);
 	}
-	DrawText("1920 X 1080", GetScreenWidth() / 2 - textSize1 / 2, GetScreenHeight() / 2 + 30, fontSize, BLACK);
+	DrawText("1920 X 1080", GetScreenWidth() / 2 - textSize2 / 2, GetScreenHeight() / 2 + 30, fontSize, BLACK);
 }
 void createOptionsButtons(Rectangle& defaultResolution, Rectangle& maxResolution)
 {

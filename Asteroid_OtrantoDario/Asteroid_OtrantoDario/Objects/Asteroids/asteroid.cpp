@@ -6,12 +6,12 @@ Asteroid initAsteroid(int size,Texture2D asteroidTexture)
 	int screenWidth = GetScreenWidth();
 	int screenHeight = GetScreenHeight();
 
-	aux.position.x = GetRandomValue(0, screenWidth);
-	aux.position.y = GetRandomValue(0, screenWidth);
-	aux.direction.x = GetRandomValue((int)Directions::Left, (int)Directions::Right);
-	aux.direction.y = GetRandomValue((int)Directions::Up, (int)Directions::Down);
+	aux.position.x =  static_cast<float>(GetRandomValue(0, screenWidth));
+	aux.position.y =  static_cast<float>(GetRandomValue(0, screenHeight));
+	aux.direction.x = static_cast<float>(GetRandomValue(static_cast<int>(Directions::Left), static_cast<int>(Directions::Right)));
+	aux.direction.y = static_cast<float>(GetRandomValue(static_cast<int>(Directions::Up), static_cast<int>(Directions::Down)));
 	aux.color = DARKGREEN;
-	aux.size = size;
+	aux.size = static_cast<float>(size);
 	aux.rotation = 0;
 	aux.asteroidTexture = asteroidTexture;
 
@@ -55,17 +55,17 @@ void moveAsteroid(Asteroid& currenAsteroid)
 	{
 		currenAsteroid.position.y = currenAsteroid.position.y - currenAsteroid.speed.y * GetFrameTime();
 	}
-	currenAsteroid.rotation += 0.1 * GetFrameTime();
+	currenAsteroid.rotation += 0.1f * GetFrameTime();
 }
 void drawAsteroid(Asteroid currenAsteroid)
 {
 #if _DEBUG
-	DrawCircle(currenAsteroid.position.x, currenAsteroid.position.y, currenAsteroid.radius, currenAsteroid.color);
+	DrawCircle(static_cast<int>(currenAsteroid.position.x), static_cast<int>(currenAsteroid.position.y), currenAsteroid.radius, currenAsteroid.color);
 #endif // _DEBUG
 
-	Rectangle sourRect = { 0,0,currenAsteroid.asteroidTexture.width,currenAsteroid.asteroidTexture.height};
+	Rectangle sourRect = { 0,0,static_cast<float>(currenAsteroid.asteroidTexture.width),static_cast<float>(currenAsteroid.asteroidTexture.height)};
 	Rectangle destRect = {currenAsteroid.position.x,currenAsteroid.position.y,sourRect.width,sourRect.height};
-	Vector2 texturePiv = {currenAsteroid.asteroidTexture.width / 2,currenAsteroid.asteroidTexture.height / 2};
+	Vector2 texturePiv = { static_cast<float>(currenAsteroid.asteroidTexture.width / 2),static_cast<float>(currenAsteroid.asteroidTexture.height / 2)};
 
 	DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv,currenAsteroid.rotation, WHITE);
 }

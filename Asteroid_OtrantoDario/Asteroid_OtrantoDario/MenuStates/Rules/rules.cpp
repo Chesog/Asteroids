@@ -34,7 +34,7 @@ void drawRules(Color colorPlayer1, Color colorPlayer2)
 	DrawText("Controles Player Izquierdo", (screeWidht / 2) - (textSize1 + font), font, font, colorPlayer2);
 	DrawText("W", (screeWidht / 2) - (textSize1 / 2), font * 2, font, colorPlayer2);
 	DrawText("S", (screeWidht / 2) - (textSize1 / 2), font * 3, font, colorPlayer2);
-	DrawText("Controles Player Derecho", (screeWidht / 2) + font, font, font, colorPlayer1);
+	DrawText("Controles Player Derecho", (screeWidht / 2) + (textSize2 + font), font, font, colorPlayer1);
 	DrawText("Arrow Up", (screeWidht / 2) + (textSize1 / 2), font * 2, font, colorPlayer1);
 	DrawText("Arrow Down", (screeWidht / 2) + (textSize1 / 2), font * 3, font, colorPlayer1);
 

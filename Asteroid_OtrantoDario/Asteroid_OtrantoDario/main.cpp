@@ -1,6 +1,8 @@
 #include "MenuStates/Game/game.h"
 
-void main()
+int main()
 {
     ejecuteGame();
+
+    return 0;
 }

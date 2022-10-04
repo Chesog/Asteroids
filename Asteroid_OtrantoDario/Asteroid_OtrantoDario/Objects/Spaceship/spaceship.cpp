@@ -11,17 +11,17 @@ SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 
 	aux.lives = 3;
 	aux.score = 0;
-	aux.rad = 35;
+	aux.rad = 35.0f;
 	aux.rect.width = aux.rad;
 	aux.rect.height = aux.rad;
-	aux.rect.x = screenWidth / 2;
-	aux.rect.y = screenHeight / 2;
+	aux.rect.x = static_cast<float>(screenWidth / 2);
+	aux.rect.y = static_cast<float>(screenHeight / 2);
 	aux.piv.x = aux.rect.width / 2;
 	aux.piv.y = aux.rect.height / 2;
 	aux.rotation = 0.0f;
 	aux.normalizedDirection = { 0,0 };
-	aux.acceleration.x = 0;
-	aux.acceleration.y = 0;
+	aux.acceleration.x = 0.0f;
+	aux.acceleration.y = 0.0f;
 	aux.spaceshipTexture = spaceshipTexture;
 	for (int i = 0; i < playerMaxAmmo; i++)
 	{
@@ -39,13 +39,13 @@ void moveSpaceShip(SpaceShip& player)
 void drawPlayer(SpaceShip& player)
 {
 #if _DEBUG
-	DrawCircle(player.rect.x,player.rect.y,player.rad,GREEN);
+	DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y),player.rad,GREEN);
 	//DrawRectanglePro(player.rect, player.piv, player.rotation, GREEN);
 #endif // _DEBUG
 
-	Rectangle sourRect = {0,0,player.spaceshipTexture.width,player.spaceshipTexture.height};
+	Rectangle sourRect = {0.0f,0.0f,static_cast<float>(player.spaceshipTexture.width),static_cast<float>(player.spaceshipTexture.height)};
 	Rectangle destRect = {player.rect.x,player.rect.y,sourRect.width,sourRect.height};
-	Vector2 texturePiv = { player.spaceshipTexture.width / 2, player.spaceshipTexture.height / 2 };
+	Vector2 texturePiv = { static_cast<float>(player.spaceshipTexture.width / 2),static_cast<float>(player.spaceshipTexture.height / 2)};
 
 	DrawTexturePro(player.spaceshipTexture,sourRect,destRect, texturePiv,player.rotation + 90,WHITE);
 }
