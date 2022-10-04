@@ -104,6 +104,10 @@
       <AdditionalLibraryDirectories>$(SolutionDir)\lib\raylib-4.0.0_win32_msvc16\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -118,6 +122,10 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -139,6 +147,12 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)lib\" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
+XCOPY "$(ProyectDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
+
+MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)"`</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -158,6 +172,12 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
+    <PostBuildEvent>
+      <Command>XCOPY "$(SolutionDir)lib\" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
+XCOPY "$(ProyectDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
+
+MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)"`</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

@@ -77,6 +77,7 @@ int checkInput(int& point)
 void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2, Button button3, Button button4, Button button5, int point)
 {
 	int fontSize = 80;
+	screenHeight = screenHeight;
 	int textSizeTitle = MeasureText(TextFormat("ASTEROIDS"), fontSize);
 	int textSizeButton1 = MeasureText(TextFormat("JUGAR"), button1.fontSize);
 	int textSizeButton2 = MeasureText(TextFormat("REGLAS"), button2.fontSize);

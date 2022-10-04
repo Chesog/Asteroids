@@ -1,8 +1,8 @@
 #include "game.h"
 
-static Texture2D spaceShip;
-static Texture2D bullet;
-static Texture2D LargeAsteroid;
+Texture2D spaceShipTexture;
+Texture2D bulletTexture;
+Texture2D largeAsteroidTexture;
 
 void ejecuteGame() 
 {
@@ -41,7 +41,7 @@ void ejecuteGame()
             menuAnsw = mainMenu(point);
             break;
         case (int)MenuStates::Gameplay:
-            menuAnsw = gameplayLoop(initGame,spaceShip, bullet, LargeAsteroid);
+            menuAnsw = gameplayLoop(initGame);
             break;
         case (int)MenuStates::Rules:
             menuAnsw = rulesLoop(backToMenu, colorPlayer1, colorPlayer2);
@@ -63,11 +63,11 @@ void ejecuteGame()
 
 void loadTextures() 
 {
-    spaceShip = LoadTexture("res/nave 2.png");
-    bullet = LoadTexture("res/disparo-2.png");
-    LargeAsteroid = LoadTexture("res/metiorito lindo 2.png");
+    spaceShipTexture = LoadTexture("res/nave 2.png");
+    bulletTexture = LoadTexture("res/disparo-2.png");
+    largeAsteroidTexture = LoadTexture("res/metiorito lindo 2.png");
 }
 void unloadTextures() 
 {
-    UnloadTexture(spaceShip);
+    UnloadTexture(spaceShipTexture);
 }
