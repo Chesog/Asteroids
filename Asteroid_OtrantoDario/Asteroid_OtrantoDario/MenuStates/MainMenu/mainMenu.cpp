@@ -1,5 +1,7 @@
 #include "mainMenu.h"
 
+extern Texture2D menu_Background;
+
 int mainMenu(int& point)
 {
 
@@ -84,8 +86,11 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 	int textSizeButton3 = MeasureText(TextFormat("OPCIONES"), button3.fontSize);
 	int textSizeButton4 = MeasureText(TextFormat("CREDITOS"), button4.fontSize);
 	int textSizeButton5 = MeasureText(TextFormat("SALIR"), button5.fontSize);
+	Vector2 backgroundPosition = {0.0f,0.0f};
 
 	ClearBackground(BLACK);
+
+	DrawTextureEx(menu_Background,backgroundPosition,0,1.5f,WHITE);
 
 	DrawText("ASTEROIDS", (screenWidth / 2) - (textSizeTitle / 2), fontSize, fontSize, RED);
 

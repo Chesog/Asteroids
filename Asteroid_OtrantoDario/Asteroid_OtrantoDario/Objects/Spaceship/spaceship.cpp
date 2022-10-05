@@ -11,7 +11,7 @@ SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 
 	aux.lives = 3;
 	aux.score = 0;
-	aux.rad = 35.0f;
+	aux.rad = 20.0f;
 	aux.rect.width = aux.rad;
 	aux.rect.height = aux.rad;
 	aux.rect.x = static_cast<float>(screenWidth / 2);
@@ -32,8 +32,8 @@ SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 
 void moveSpaceShip(SpaceShip& player)
 {
-	player.rect.x = player.rect.x + player.acceleration.x * 0.1f * GetFrameTime();
-	player.rect.y = player.rect.y + player.acceleration.y * 0.1f * GetFrameTime();
+	player.rect.x = player.rect.x + player.acceleration.x * 0.5f * GetFrameTime();
+	player.rect.y = player.rect.y + player.acceleration.y * 0.5f * GetFrameTime();
 }
 
 void drawPlayer(SpaceShip& player)

@@ -39,23 +39,30 @@ Asteroid initAsteroid(int size,Texture2D asteroidTexture)
 
 void moveAsteroid(Asteroid& currenAsteroid)
 {
-	if (currenAsteroid.direction.x == (int)Directions::Left)
+	if (currenAsteroid.direction.x == static_cast<int>(Directions::Left))
 	{
 		currenAsteroid.position.x = currenAsteroid.position.x - currenAsteroid.speed.x * GetFrameTime();
 	}
-	if (currenAsteroid.direction.x == (int)Directions::Right)
+	if (currenAsteroid.direction.x == static_cast<int>(Directions::Right))
 	{
 		currenAsteroid.position.x = currenAsteroid.position.x + currenAsteroid.speed.x * GetFrameTime();
 	}
-	if (currenAsteroid.direction.y == (int)Directions::Up)
+	if (currenAsteroid.direction.y == static_cast<int>(Directions::Up))
 	{
 		currenAsteroid.position.y = currenAsteroid.position.y + currenAsteroid.speed.y * GetFrameTime();
 	}
-	if (currenAsteroid.direction.y == (int)Directions::Down)
+	if (currenAsteroid.direction.y == static_cast<int>(Directions::Down))
 	{
 		currenAsteroid.position.y = currenAsteroid.position.y - currenAsteroid.speed.y * GetFrameTime();
 	}
-	currenAsteroid.rotation += 0.1f * GetFrameTime();
+	if (currenAsteroid.direction.x == static_cast<int>(Directions::Left))
+	{
+		currenAsteroid.rotation = currenAsteroid.rotation - 40.0f * GetFrameTime();
+	}
+	else
+	{
+		currenAsteroid.rotation = currenAsteroid.rotation + 40.0f * GetFrameTime();
+	}
 }
 void drawAsteroid(Asteroid currenAsteroid)
 {
@@ -67,5 +74,6 @@ void drawAsteroid(Asteroid currenAsteroid)
 	Rectangle destRect = {currenAsteroid.position.x,currenAsteroid.position.y,sourRect.width,sourRect.height};
 	Vector2 texturePiv = { static_cast<float>(currenAsteroid.asteroidTexture.width / 2),static_cast<float>(currenAsteroid.asteroidTexture.height / 2)};
 
+	//DrawTextureEx(currenAsteroid.asteroidTexture,currenAsteroid.position,currenAsteroid.rotation,2.0f,WHITE);
 	DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv,currenAsteroid.rotation, WHITE);
 }
