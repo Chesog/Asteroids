@@ -6,4 +6,4 @@
 #include "../Asteroid_OtrantoDario/Objects/Asteroids/asteroid.h"
 #include "../Asteroid_OtrantoDario/Objects/Button/button.h"
 
-int gameplayLoop(bool& initGame);
+int gameplayLoop(bool& initGame, bool& backToMenu);

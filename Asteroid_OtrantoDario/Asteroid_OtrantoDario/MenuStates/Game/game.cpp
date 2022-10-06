@@ -47,7 +47,7 @@ void ejecuteGame()
             menuAnsw = mainMenu(point);
             break;
         case (int)MenuStates::Gameplay:
-            menuAnsw = gameplayLoop(initGame);
+            menuAnsw = gameplayLoop(initGame,backToMenu);
             break;
         case (int)MenuStates::Rules:
             menuAnsw = rulesLoop(backToMenu, colorPlayer1, colorPlayer2);

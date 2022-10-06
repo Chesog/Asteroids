@@ -21,6 +21,9 @@ static int largeAsteroidCount;
 static int mediumAsteroidCount;
 static int smallAsteroidCount;
 
+static bool pauseGameplay;
+
+
 void initGameplay(bool& initGame);
 void drawGameplay();
 void updateGameplay();
@@ -31,10 +34,13 @@ void checkBulletOutOfBounds(int screenWidth, int screenHeight);
 void checkAsteroidsOutOfBounds(int screenWidth, int screenHeight);
 void checkColitions();
 void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid);
+void asteroidOnAsteroidColition(Asteroid& currentAsteroid, Asteroid& currentAsteroid1);
 void spaceshipAsteroidColition(Asteroid& currentAsteroid);
+void resetAsteroids();
+void mouseButtonColition();
 
 
-int gameplayLoop(bool& initGame)
+int gameplayLoop(bool& initGame,bool& backToMenu)
 {
 	//Button pauseButton;
 
@@ -44,8 +50,12 @@ int gameplayLoop(bool& initGame)
 	}
 
 	checkInput();
-	updateGameplay();
+	if (!pauseGameplay)
+	{
+		updateGameplay();
+	}
 	drawGameplay();
+	mouseButtonColition();
 
 	if (player.lives <= 0)
 	{
@@ -80,60 +90,74 @@ void initGameplay(bool& initGame)
 
 	int buttonWidth = 100;
 	int buttonHeight = 20;
-	pauseButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2),buttonHeight / 2,10,buttonWidth,buttonHeight,14,"Pause",GREEN,RED);
-
+	pauseButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2), buttonHeight / 2, 10, buttonWidth, buttonHeight, 14, "Pause", GREEN, RED);
+	pauseGameplay = true;
 	initGame = false;
-	
+
 }
 void checkInput()
 {
-	Vector2 distanceDiff;
-
-	distanceDiff.x = GetMouseX() - player.rect.x;
-	distanceDiff.y = GetMouseY() - player.rect.y;
-	float angle = atan(distanceDiff.y / distanceDiff.x);
-	angle = angle * 180 / PI;
-
-	if (GetMousePosition().x < player.rect.x && GetMousePosition().y < player.rect.y)
+	if (IsKeyPressed(KEY_ESCAPE))
 	{
-		angle += 180;
-	}
-	if (GetMousePosition().x < player.rect.x && GetMousePosition().y > player.rect.y)
-	{
-		angle += 180;
-	}
-	if (GetMousePosition().x > player.rect.x && GetMousePosition().y > player.rect.y)
-	{
-		angle += 360;
-	}
-
-	player.rotation = angle;
-
-	player.normalizedDirection = Vector2Normalize(distanceDiff);
-
-	if (IsCursorOnScreen())
-	{
-		if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
+		if (pauseGameplay)
 		{
-			player.acceleration.x += player.normalizedDirection.x;
-			player.acceleration.y += player.normalizedDirection.y;
+			pauseGameplay = false;
 		}
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		else
 		{
-			for (int i = 0; i < playerMaxAmmo; i++)
+			pauseGameplay = true;
+		}
+	}
+	if (!pauseGameplay)
+	{
+
+		Vector2 distanceDiff;
+
+		distanceDiff.x = GetMouseX() - player.rect.x;
+		distanceDiff.y = GetMouseY() - player.rect.y;
+		float angle = atan(distanceDiff.y / distanceDiff.x);
+		angle = angle * 180 / PI;
+
+		if (GetMousePosition().x < player.rect.x && GetMousePosition().y < player.rect.y)
+		{
+			angle += 180;
+		}
+		if (GetMousePosition().x < player.rect.x && GetMousePosition().y > player.rect.y)
+		{
+			angle += 180;
+		}
+		if (GetMousePosition().x > player.rect.x && GetMousePosition().y > player.rect.y)
+		{
+			angle += 360;
+		}
+
+		player.rotation = angle;
+
+		player.normalizedDirection = Vector2Normalize(distanceDiff);
+
+		if (IsCursorOnScreen())
+		{
+			if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 			{
-				if (!player.playerAmmo[i].isActive)
+				player.acceleration.x += player.normalizedDirection.x;
+				player.acceleration.y += player.normalizedDirection.y;
+			}
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+			{
+				for (int i = 0; i < playerMaxAmmo; i++)
 				{
-					shoot(player.playerAmmo[i], player);
+					if (!player.playerAmmo[i].isActive)
+					{
+						shoot(player.playerAmmo[i], player);
 #if _DEBUG
-					std::cout << " Shoot " << i << std::endl;
+						std::cout << " Shoot " << i << std::endl;
 #endif // _DEBUG
-					break;
+						break;
+					}
 				}
 			}
 		}
 	}
-
 }
 void drawGameplay()
 {
@@ -144,9 +168,9 @@ void drawGameplay()
 	DrawTextureEx(gameplay_Background, backgroundPosition, 0, 1.5f, WHITE);
 	if (player.lives == 3)
 	{
-		DrawTexture(spaceShipTexture,GetScreenWidth() - spaceShipTexture.width * 2, spaceShipTexture.height / 2,WHITE);
-		DrawTexture(spaceShipTexture,GetScreenWidth() - spaceShipTexture.width * 3, spaceShipTexture.height / 2,WHITE);
-		DrawTexture(spaceShipTexture,GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2,WHITE);
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 2, spaceShipTexture.height / 2, WHITE);
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 3, spaceShipTexture.height / 2, WHITE);
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
 	}
 	else if (player.lives == 2)
 	{
@@ -194,6 +218,10 @@ void drawGameplay()
 		}
 	}
 
+	if (pauseGameplay)
+	{
+		DrawRectangle((GetScreenWidth() / 2) - 200, (GetScreenHeight() / 2) - 100, 400, 200, BLACK);
+	}
 
 	EndDrawing();
 }
@@ -221,6 +249,7 @@ void updateGameplay()
 	}
 	checkOutOfBounds();
 	checkColitions();
+	resetAsteroids();
 
 #if _DEBUG
 	//std::cout << player.acceleration.x << " --- " << player.acceleration.y << std::endl;
@@ -392,6 +421,29 @@ void checkColitions()
 
 	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
+		for (int j = 0; j < maxMediumndAsteroids; j++)
+		{
+			for (int h = 0; h < maxSmallAsteroids; h++)
+			{
+				if (largeAsteroids[i].isActive && mediumAsteroids[j].isActive)
+				{
+					asteroidOnAsteroidColition(largeAsteroids[i], mediumAsteroids[j]);
+				}
+				if (mediumAsteroids[j].isActive && smallAsteroids[h].isActive)
+				{
+					asteroidOnAsteroidColition(mediumAsteroids[j], smallAsteroids[h]);
+				}
+				if (largeAsteroids[i].isActive && smallAsteroids[h].isActive)
+				{
+					asteroidOnAsteroidColition(largeAsteroids[i], smallAsteroids[h]);
+				}
+			}
+		}
+
+	}
+
+	for (int i = 0; i < maxLargeAsteroids; i++)
+	{
 		if (largeAsteroids[i].isActive)
 		{
 			spaceshipAsteroidColition(largeAsteroids[i]);
@@ -516,7 +568,57 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 #endif // _DEBUG
 	}
 }
-void spaceshipAsteroidColition(Asteroid& currentAsteroid) 
+void asteroidOnAsteroidColition(Asteroid& currentAsteroid, Asteroid& currentAsteroid1)
+{
+	float distanceX = 0;
+	float distanceY = 0;
+	float distance = 0;
+
+	distanceX = currentAsteroid.position.x - currentAsteroid1.position.x;
+	distanceY = currentAsteroid.position.y - currentAsteroid1.position.y;
+
+	distance = sqrt((distanceX * distanceX) + (distanceY * distanceY));
+
+	if (distance < currentAsteroid1.radius + currentAsteroid.radius)
+	{
+		if (currentAsteroid.direction.x == static_cast<int>(Directions::Left))
+		{
+			currentAsteroid.direction.x = static_cast<int>(Directions::Right);
+		}
+		else
+		{
+			currentAsteroid.direction.x = static_cast<int>(Directions::Left);
+		}
+
+		if (currentAsteroid.direction.y == static_cast<int>(Directions::Up))
+		{
+			currentAsteroid.direction.y = static_cast<int>(Directions::Down);
+		}
+		else
+		{
+			currentAsteroid.direction.y = static_cast<int>(Directions::Up);
+		}
+
+		if (currentAsteroid1.direction.x == static_cast<int>(Directions::Left))
+		{
+			currentAsteroid1.direction.x = static_cast<int>(Directions::Right);
+		}
+		else
+		{
+			currentAsteroid1.direction.x = static_cast<int>(Directions::Left);
+		}
+
+		if (currentAsteroid1.direction.y == static_cast<int>(Directions::Up))
+		{
+			currentAsteroid1.direction.y = static_cast<int>(Directions::Down);
+		}
+		else
+		{
+			currentAsteroid1.direction.y = static_cast<int>(Directions::Up);
+		}
+	}
+}
+void spaceshipAsteroidColition(Asteroid& currentAsteroid)
 {
 	float distanceX = 0;
 	float distanceY = 0;
@@ -531,8 +633,8 @@ void spaceshipAsteroidColition(Asteroid& currentAsteroid)
 	{
 		currentAsteroid.isActive = false;
 		player.lives--;
-		player.acceleration.y = player.acceleration.y * - 1.0f;
-		player.acceleration.x = player.acceleration.x * - 1.0f;
+		player.acceleration.y = player.acceleration.y * -1.0f;
+		player.acceleration.x = player.acceleration.x * -1.0f;
 
 		if (currentAsteroid.size == static_cast<int>(AsteroidSize::Large))
 		{
@@ -604,5 +706,41 @@ void spaceshipAsteroidColition(Asteroid& currentAsteroid)
 			}
 		}
 		player.score++;
+	}
+}
+void resetAsteroids()
+{
+	if (largeAsteroidCount == 0 && mediumAsteroidCount == maxMediumndAsteroids)
+	{
+		largeAsteroidCount = maxLargeAsteroids;
+		mediumAsteroidCount = 0;
+		for (int i = 0; i < maxLargeAsteroids; i++)
+		{
+			largeAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Large), largeAsteroidTexture);
+		}
+		for (int i = 0; i < maxMediumndAsteroids; i++)
+		{
+			mediumAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Medium), mediumAsteroidTexture);
+		}
+	}
+}
+void mouseButtonColition()
+{
+	Vector2 mousePosition = { static_cast<float>(GetMouseX()),static_cast<float>(GetMouseY()) };
+
+	if (CheckCollisionPointRec(mousePosition, pauseButton.rect))
+	{
+		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		{
+			if (pauseGameplay)
+			{
+				pauseGameplay = false;
+			}
+			else
+			{
+				pauseGameplay = true;
+			}
+		}
+
 	}
 }
