@@ -2,9 +2,12 @@
 #include <iostream>
 
 static SpaceShip player;
+
 static Asteroid largeAsteroids[maxLargeAsteroids];
 static Asteroid mediumAsteroids[maxMediumndAsteroids];
 static Asteroid smallAsteroids[maxSmallAsteroids];
+
+static Button pauseButton;
 
 extern Texture2D spaceShipTexture;
 extern Texture2D bulletTexture;
@@ -33,6 +36,7 @@ void spaceshipAsteroidColition(Asteroid& currentAsteroid);
 
 int gameplayLoop(bool& initGame)
 {
+	//Button pauseButton;
 
 	if (initGame)
 	{
@@ -73,7 +77,13 @@ void initGameplay(bool& initGame)
 	largeAsteroidCount = maxLargeAsteroids;
 	mediumAsteroidCount = 0;
 	smallAsteroidCount = 0;
+
+	int buttonWidth = 100;
+	int buttonHeight = 20;
+	pauseButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2),buttonHeight / 2,10,buttonWidth,buttonHeight,14,"Pause",GREEN,RED);
+
 	initGame = false;
+	
 }
 void checkInput()
 {
@@ -132,11 +142,25 @@ void drawGameplay()
 	BeginDrawing();
 
 	DrawTextureEx(gameplay_Background, backgroundPosition, 0, 1.5f, WHITE);
+	if (player.lives == 3)
+	{
+		DrawTexture(spaceShipTexture,GetScreenWidth() - spaceShipTexture.width * 2, spaceShipTexture.height / 2,WHITE);
+		DrawTexture(spaceShipTexture,GetScreenWidth() - spaceShipTexture.width * 3, spaceShipTexture.height / 2,WHITE);
+		DrawTexture(spaceShipTexture,GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2,WHITE);
+	}
+	else if (player.lives == 2)
+	{
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 3, spaceShipTexture.height / 2, WHITE);
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
+	}
+	else if (player.lives == 1)
+	{
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
+	}
 	DrawRectangle(2, 2, 200, 30, GREEN);
-	//int textSizeTitle = MeasureText(TextFormat("Player Score: %i"), 20);
+	drawButton(pauseButton);
 	DrawText(TextFormat("Player Score: %i", player.score), 6, 6, 20, RED);
 
-	//drawButton(pauseButton);
 
 	ClearBackground(BLACK);
 	for (int i = 0; i < playerMaxAmmo; i++)

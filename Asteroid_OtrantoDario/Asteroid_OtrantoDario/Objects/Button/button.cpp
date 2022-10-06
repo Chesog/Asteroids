@@ -14,3 +14,7 @@ Button initButton(int initialPosX, int initialPosY, int fontSize, int buttonWidt
 	aux.selectionColor = selectionColor;
 	return aux;
 }
+void drawButton(Button actualButton) 
+{
+	DrawRectangle(static_cast<int>(actualButton.rect.x), static_cast<int>(actualButton.rect.y), static_cast<int>(actualButton.rect.width), static_cast<int>(actualButton.rect.height),actualButton.buttonColor);
+}
