@@ -56,7 +56,7 @@ void drawRules()
 }
 void checkInputR(bool& backToMenu)
 {
-	if (IsKeyPressed(KEY_ESCAPE))
+	if (IsKeyReleased(KEY_ESCAPE))
 	{
 		backToMenu = true;
 	}

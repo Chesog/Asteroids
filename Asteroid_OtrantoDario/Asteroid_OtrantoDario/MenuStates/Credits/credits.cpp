@@ -32,7 +32,7 @@ void drawCredits()
 }
 void checkInput(bool& backToMenu)
 {
-	if (IsKeyPressed(KEY_ESCAPE))
+	if (IsKeyReleased(KEY_ESCAPE))
 	{
 		backToMenu = true;
 	}

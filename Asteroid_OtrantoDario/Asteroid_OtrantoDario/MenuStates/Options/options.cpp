@@ -43,7 +43,7 @@ int checkInputOptions(bool& backToMenu, int& point)
 {
 	int defaultValue = 0;
 
-	if (IsKeyPressed(KEY_UP))
+	if (IsKeyReleased(KEY_UP))
 	{
 		if (point <= static_cast<int>(OptionsResolution::DefaultResolution))
 		{
@@ -55,7 +55,7 @@ int checkInputOptions(bool& backToMenu, int& point)
 		}
 		return defaultValue;
 	}
-	if (IsKeyPressed(KEY_DOWN))
+	if (IsKeyReleased(KEY_DOWN))
 	{
 		if (point >= static_cast<int>(OptionsResolution::MaxResolution))
 		{
@@ -68,12 +68,12 @@ int checkInputOptions(bool& backToMenu, int& point)
 		return defaultValue;
 	}
 
-	if (IsKeyPressed(KEY_ENTER))
+	if (IsKeyReleased(KEY_ENTER))
 	{
 		return point;
 	}
 
-	if (IsKeyPressed(KEY_ESCAPE))
+	if (IsKeyReleased(KEY_ESCAPE))
 	{
 		backToMenu = true;
 		return defaultValue;

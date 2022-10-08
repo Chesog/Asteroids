@@ -765,15 +765,6 @@ void resetAsteroids()
 		for (int i = 0; i < maxLargeAsteroids; i++)
 		{
 			largeAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Large), largeAsteroidTexture,largeAsteroidTextureEvil);
-			int random  = GetRandomValue(0,2);
-			if (random == 0)
-			{
-				largeAsteroids[i].position.x = 0;
-			}
-			else 
-			{
-				largeAsteroids[i].position.x = static_cast<float>(GetScreenWidth());
-			}
 		}
 		for (int i = 0; i < maxMediumndAsteroids; i++)
 		{
