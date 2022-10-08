@@ -1,6 +1,6 @@
 #include "asteroid.h"
 
-Asteroid initAsteroid(int size,Texture2D asteroidTexture)
+Asteroid initAsteroid(int size,Texture2D asteroidTexture,Texture2D asteroidTextureEvil)
 {
 	Asteroid aux;
 	int screenWidth = GetScreenWidth();
@@ -14,6 +14,7 @@ Asteroid initAsteroid(int size,Texture2D asteroidTexture)
 	aux.size = static_cast<float>(size);
 	aux.rotation = 0;
 	aux.asteroidTexture = asteroidTexture;
+	aux.asteroidTextureEvil = asteroidTextureEvil;
 
 	if (aux.size == (int)AsteroidSize::Small)
 	{
@@ -64,7 +65,7 @@ void moveAsteroid(Asteroid& currenAsteroid)
 		currenAsteroid.rotation = currenAsteroid.rotation + 40.0f * GetFrameTime();
 	}
 }
-void drawAsteroid(Asteroid currenAsteroid)
+void drawAsteroid(Asteroid currenAsteroid,bool changeCondition)
 {
 #if _DEBUG
 	DrawCircle(static_cast<int>(currenAsteroid.position.x), static_cast<int>(currenAsteroid.position.y), currenAsteroid.radius, currenAsteroid.color);
@@ -74,6 +75,20 @@ void drawAsteroid(Asteroid currenAsteroid)
 	Rectangle destRect = {currenAsteroid.position.x,currenAsteroid.position.y,sourRect.width,sourRect.height};
 	Vector2 texturePiv = { static_cast<float>(currenAsteroid.asteroidTexture.width / 2),static_cast<float>(currenAsteroid.asteroidTexture.height / 2)};
 
-	//DrawTextureEx(currenAsteroid.asteroidTexture,currenAsteroid.position,currenAsteroid.rotation,2.0f,WHITE);
-	DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv,currenAsteroid.rotation, WHITE);
+	float scale = 1.5f;
+	Vector2 texturePos;
+	texturePos.x = currenAsteroid.position.x   - scale;
+	texturePos.y = currenAsteroid.position.y   - scale;
+	
+	//DrawTextureEx(currenAsteroid.asteroidTexture, texturePos, currenAsteroid.rotation, scale, WHITE);
+	if (changeCondition)
+	{
+		DrawTextureEx(currenAsteroid.asteroidTextureEvil, texturePos,currenAsteroid.rotation, scale,WHITE);
+		//DrawTexturePro(currenAsteroid.asteroidTextureEvil, sourRect, destRect, texturePiv, currenAsteroid.rotation, WHITE);
+	}
+	else
+	{
+		DrawTextureEx(currenAsteroid.asteroidTexture, texturePos, currenAsteroid.rotation, scale, WHITE);
+		//DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv, currenAsteroid.rotation, WHITE);
+	}
 }

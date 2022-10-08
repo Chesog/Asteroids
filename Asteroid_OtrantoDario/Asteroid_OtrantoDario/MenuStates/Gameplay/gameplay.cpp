@@ -11,21 +11,30 @@ static Button pauseButton;
 
 extern Texture2D spaceShipTexture;
 extern Texture2D bulletTexture;
+
 extern Texture2D largeAsteroidTexture;
+extern Texture2D largeAsteroidTextureEvil;
+
 extern Texture2D mediumAsteroidTexture;
+extern Texture2D mediumAsteroidTextureEvil;
+
 extern Texture2D smallAsteroidTexture;
+extern Texture2D smallAsteroidTextureEvil;
+
 
 extern Texture2D gameplay_Background;
+extern Texture2D gameplay_Background2;
 
 static int largeAsteroidCount;
 static int mediumAsteroidCount;
 static int smallAsteroidCount;
 
 static bool pauseGameplay;
+static bool change;
 
 
 void initGameplay(bool& initGame);
-void drawGameplay();
+void drawGameplay(int changeCondition);
 void updateGameplay();
 void checkInput();
 void checkOutOfBounds();
@@ -40,13 +49,15 @@ void resetAsteroids();
 void mouseButtonColition();
 
 
-int gameplayLoop(bool& initGame,bool& backToMenu)
+int gameplayLoop(bool& initGame, bool& backToMenu)
 {
 	//Button pauseButton;
+	const int changeCondition = 50;
 
 	if (initGame)
 	{
 		initGameplay(initGame);
+		backToMenu = false;
 	}
 
 	checkInput();
@@ -54,12 +65,27 @@ int gameplayLoop(bool& initGame,bool& backToMenu)
 	{
 		updateGameplay();
 	}
-	drawGameplay();
+	drawGameplay(changeCondition);
 	mouseButtonColition();
-
-	if (player.lives <= 0)
+	if (player.score >= changeCondition)
 	{
-		return static_cast<int>(MenuStates::MainMenu);
+		change = true;
+	}
+	else
+	{
+		change = false;
+	}
+
+	if (pauseGameplay)
+	{
+		if (IsKeyReleased(KEY_ESCAPE))
+		{
+			return static_cast<int>(MenuStates::MainMenu);
+		}
+		else
+		{
+			return static_cast<int>(MenuStates::Gameplay);
+		}
 	}
 	else
 	{
@@ -68,21 +94,19 @@ int gameplayLoop(bool& initGame,bool& backToMenu)
 }
 void initGameplay(bool& initGame)
 {
-
-
 	player = initSpaceShip(spaceShipTexture, bulletTexture);
 
 	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
-		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large, largeAsteroidTexture);
+		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large, largeAsteroidTexture,largeAsteroidTextureEvil);
 	}
 	for (int i = 0; i < maxMediumndAsteroids; i++)
 	{
-		mediumAsteroids[i] = initAsteroid((int)AsteroidSize::Medium, mediumAsteroidTexture);
+		mediumAsteroids[i] = initAsteroid((int)AsteroidSize::Medium, mediumAsteroidTexture,mediumAsteroidTextureEvil);
 	}
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
-		smallAsteroids[i] = initAsteroid((int)AsteroidSize::Small, smallAsteroidTexture);
+		smallAsteroids[i] = initAsteroid((int)AsteroidSize::Small, smallAsteroidTexture,smallAsteroidTextureEvil);
 	}
 	largeAsteroidCount = maxLargeAsteroids;
 	mediumAsteroidCount = 0;
@@ -97,7 +121,7 @@ void initGameplay(bool& initGame)
 }
 void checkInput()
 {
-	if (IsKeyPressed(KEY_ESCAPE))
+	if (IsKeyPressed(KEY_SPACE))
 	{
 		if (pauseGameplay)
 		{
@@ -159,13 +183,20 @@ void checkInput()
 		}
 	}
 }
-void drawGameplay()
+void drawGameplay(int changeCondition)
 {
 	Vector2 backgroundPosition = { 0.0f,0.0f };
 
 	BeginDrawing();
-
-	DrawTextureEx(gameplay_Background, backgroundPosition, 0, 1.5f, WHITE);
+	if (player.score < changeCondition)
+	{
+		DrawTextureEx(gameplay_Background, backgroundPosition, 0, 1.5f, WHITE);
+	}
+	else
+	{
+		DrawTextureEx(gameplay_Background2, backgroundPosition, 0, 1.5f, WHITE);
+	}
+	
 	if (player.lives == 3)
 	{
 		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 2, spaceShipTexture.height / 2, WHITE);
@@ -200,21 +231,21 @@ void drawGameplay()
 	{
 		if (largeAsteroids[i].isActive)
 		{
-			drawAsteroid(largeAsteroids[i]);
+			drawAsteroid(largeAsteroids[i],change);
 		}
 	}
 	for (int i = 0; i < maxMediumndAsteroids; i++)
 	{
 		if (mediumAsteroids[i].isActive)
 		{
-			drawAsteroid(mediumAsteroids[i]);
+			drawAsteroid(mediumAsteroids[i],change);
 		}
 	}
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
 		if (smallAsteroids[i].isActive)
 		{
-			drawAsteroid(smallAsteroids[i]);
+			drawAsteroid(smallAsteroids[i],change);
 		}
 	}
 
@@ -485,75 +516,69 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 			currentAsteroid.isActive = false;
 			currentBullet.isActive = false;
 
-			if (mediumAsteroidCount < maxMediumndAsteroids)
+			mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
+			mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
+			mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
+			mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
+			mediumAsteroids[mediumAsteroidCount].isActive = true;
+			mediumAsteroidCount++;
+
+			if (mediumAsteroids[mediumAsteroidCount - 1].direction.x == static_cast<int>(Directions::Left))
 			{
-				mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
-				mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
-				mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
-				mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
-				mediumAsteroids[mediumAsteroidCount].isActive = true;
-				mediumAsteroidCount++;
-
-				if (mediumAsteroids[mediumAsteroidCount - 1].direction.x == static_cast<int>(Directions::Left))
-				{
-					mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Right);
-				}
-				else
-				{
-					mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Left);
-				}
-				if (mediumAsteroids[mediumAsteroidCount - 1].direction.y == static_cast<int>(Directions::Up))
-				{
-					mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<int>(Directions::Down);
-				}
-				else
-				{
-					mediumAsteroids[mediumAsteroidCount - 1].direction.y = static_cast<int>(Directions::Up);
-				}
-				mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
-				mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
-				mediumAsteroids[mediumAsteroidCount].isActive = true;
-				mediumAsteroidCount++;
-
-				largeAsteroidCount--;
+				mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Right);
 			}
+			else
+			{
+				mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Left);
+			}
+			if (mediumAsteroids[mediumAsteroidCount - 1].direction.y == static_cast<int>(Directions::Up))
+			{
+				mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<int>(Directions::Down);
+			}
+			else
+			{
+				mediumAsteroids[mediumAsteroidCount - 1].direction.y = static_cast<int>(Directions::Up);
+			}
+			mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
+			mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
+			mediumAsteroids[mediumAsteroidCount].isActive = true;
+			mediumAsteroidCount++;
+
+			largeAsteroidCount--;
+
 		}
 		if (currentAsteroid.size == static_cast<int>(AsteroidSize::Medium))
 		{
 			currentAsteroid.isActive = false;
 			currentBullet.isActive = false;
 
-			if (smallAsteroidCount < maxSmallAsteroids)
+			smallAsteroids[smallAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
+			smallAsteroids[smallAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
+			smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
+			smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
+			smallAsteroids[smallAsteroidCount].isActive = true;
+			smallAsteroidCount++;
+
+			if (smallAsteroids[smallAsteroidCount - 1].direction.x == static_cast<int>(Directions::Left))
 			{
-
-				smallAsteroids[smallAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
-				smallAsteroids[smallAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
-				smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
-				smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
-				smallAsteroids[smallAsteroidCount].isActive = true;
-				smallAsteroidCount++;
-
-				if (smallAsteroids[smallAsteroidCount - 1].direction.x == static_cast<int>(Directions::Left))
-				{
-					smallAsteroids[smallAsteroidCount].direction.x = static_cast<int>(Directions::Right);
-				}
-				else
-				{
-					smallAsteroids[smallAsteroidCount].direction.x = static_cast<int>(Directions::Left);
-				}
-				if (smallAsteroids[smallAsteroidCount - 1].direction.y == static_cast<int>(Directions::Up))
-				{
-					smallAsteroids[smallAsteroidCount].direction.y = static_cast<int>(Directions::Down);
-				}
-				else
-				{
-					smallAsteroids[smallAsteroidCount - 1].direction.y = static_cast<int>(Directions::Up);
-				}
-				smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
-				smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
-				smallAsteroids[smallAsteroidCount].isActive = true;
-				smallAsteroidCount++;
+				smallAsteroids[smallAsteroidCount].direction.x = static_cast<int>(Directions::Right);
 			}
+			else
+			{
+				smallAsteroids[smallAsteroidCount].direction.x = static_cast<int>(Directions::Left);
+			}
+			if (smallAsteroids[smallAsteroidCount - 1].direction.y == static_cast<int>(Directions::Up))
+			{
+				smallAsteroids[smallAsteroidCount].direction.y = static_cast<int>(Directions::Down);
+			}
+			else
+			{
+				smallAsteroids[smallAsteroidCount - 1].direction.y = static_cast<int>(Directions::Up);
+			}
+			smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
+			smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
+			smallAsteroids[smallAsteroidCount].isActive = true;
+			smallAsteroidCount++;
 		}
 		if (currentAsteroid.size == static_cast<int>(AsteroidSize::Small))
 		{
@@ -632,7 +657,7 @@ void spaceshipAsteroidColition(Asteroid& currentAsteroid)
 	if (distance < player.rad + currentAsteroid.radius)
 	{
 		currentAsteroid.isActive = false;
-		player.lives--;
+		//player.lives--;
 		player.acceleration.y = player.acceleration.y * -1.0f;
 		player.acceleration.x = player.acceleration.x * -1.0f;
 
@@ -710,18 +735,57 @@ void spaceshipAsteroidColition(Asteroid& currentAsteroid)
 }
 void resetAsteroids()
 {
-	if (largeAsteroidCount == 0 && mediumAsteroidCount == maxMediumndAsteroids)
+	int activeAsteroids = 0;
+	int minAsteroidsOnScreen = 0;
+
+	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
-		largeAsteroidCount = maxLargeAsteroids;
-		mediumAsteroidCount = 0;
+		if (largeAsteroids[i].isActive)
+		{
+			activeAsteroids++;
+		}
+	}
+	for (int i = 0; i < maxMediumndAsteroids; i++)
+	{
+		if (mediumAsteroids[i].isActive)
+		{
+			activeAsteroids++;
+		}
+	}
+	for (int i = 0; i < maxSmallAsteroids; i++)
+	{
+		if (smallAsteroids[i].isActive)
+		{
+			activeAsteroids++;
+		}
+	}
+
+	if (activeAsteroids == minAsteroidsOnScreen)
+	{
 		for (int i = 0; i < maxLargeAsteroids; i++)
 		{
-			largeAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Large), largeAsteroidTexture);
+			largeAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Large), largeAsteroidTexture,largeAsteroidTextureEvil);
+			int random  = GetRandomValue(0,2);
+			if (random == 0)
+			{
+				largeAsteroids[i].position.x = 0;
+			}
+			else 
+			{
+				largeAsteroids[i].position.x = static_cast<float>(GetScreenWidth());
+			}
 		}
 		for (int i = 0; i < maxMediumndAsteroids; i++)
 		{
-			mediumAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Medium), mediumAsteroidTexture);
+			mediumAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Medium), mediumAsteroidTexture,mediumAsteroidTextureEvil);
 		}
+		for (int i = 0; i < maxSmallAsteroids; i++)
+		{
+			smallAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Small), smallAsteroidTexture,smallAsteroidTextureEvil);
+		}
+		largeAsteroidCount = maxLargeAsteroids;
+		mediumAsteroidCount = 0;
+		smallAsteroidCount = 0;
 	}
 }
 void mouseButtonColition()
@@ -730,7 +794,7 @@ void mouseButtonColition()
 
 	if (CheckCollisionPointRec(mousePosition, pauseButton.rect))
 	{
-		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			if (pauseGameplay)
 			{

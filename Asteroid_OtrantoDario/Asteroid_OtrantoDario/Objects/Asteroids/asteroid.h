@@ -19,8 +19,9 @@ struct Asteroid
 	bool isActive;
 	Color color;
 	Texture2D asteroidTexture;
+	Texture2D asteroidTextureEvil;
 };
 
-Asteroid initAsteroid(int size,Texture2D asteroidTexture);
+Asteroid initAsteroid(int size,Texture2D asteroidTexture, Texture2D asteroidTextureEvil);
 void moveAsteroid(Asteroid& currenAsteroid);
-void drawAsteroid(Asteroid currenAsteroid);
+void drawAsteroid(Asteroid currenAsteroid,bool changeCondition);

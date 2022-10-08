@@ -12,6 +12,7 @@ int mainMenu(int& point)
 	int selection2 = 0;
 	int screenWidth = GetScreenWidth();
 	int screenHeight = GetScreenHeight();
+
 	static Button button1 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) - buttonHeight * 4, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Gameplay, "Jugar", GREEN, RED);
 	static Button button2 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) - buttonHeight * 2, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Rules, "Reglas", GREEN, RED);
 	static Button button3 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2), fontSize, buttonWidth, buttonHeight, (int)MenuStates::Options, "Opciones", GREEN, RED);
@@ -38,7 +39,7 @@ int mainMenu(int& point)
 int checkInput(int& point)
 {
 	int defaultOption = 0;
-	if (IsKeyPressed(KeyboardKey(KEY_UP)))
+	if (IsKeyDown(KeyboardKey(KEY_UP)))
 	{
 		if (point <= (int)MenuStates::Gameplay)
 		{
@@ -50,7 +51,7 @@ int checkInput(int& point)
 		}
 		return defaultOption;
 	}
-	else if (IsKeyPressed(KeyboardKey(KEY_DOWN)))
+	else if (IsKeyDown(KeyboardKey(KEY_DOWN)))
 	{
 		if (point >= (int)MenuStates::Exit)
 		{
@@ -62,11 +63,11 @@ int checkInput(int& point)
 		}
 		return defaultOption;
 	}
-	else if (IsKeyPressed(KeyboardKey(KEY_ENTER)))
+	else if (IsKeyDown(KeyboardKey(KEY_ENTER)))
 	{
 		return point;
 	}
-	else if (IsKeyPressed(KEY_ESCAPE))
+	else if (IsKeyDown(KEY_ESCAPE))
 	{
 		return (int)MenuStates::Exit;
 	}

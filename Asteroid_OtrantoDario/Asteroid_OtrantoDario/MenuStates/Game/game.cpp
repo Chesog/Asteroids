@@ -2,17 +2,25 @@
 
 Texture2D spaceShipTexture;
 Texture2D bulletTexture;
+
 Texture2D largeAsteroidTexture;
+Texture2D largeAsteroidTextureEvil;
+
 Texture2D mediumAsteroidTexture;
+Texture2D mediumAsteroidTextureEvil;
+
 Texture2D smallAsteroidTexture;
+Texture2D smallAsteroidTextureEvil;
 
 Texture2D menu_Background;
 Texture2D gameplay_Background;
+Texture2D gameplay_Background2;
+
+Texture2D Controls1;
+Texture2D Controls2;
 
 void ejecuteGame() 
 {
-    //int screenHeight = 720;
-//int screenWidth = 1280;
 
     int screenWidth = 1280;
     int screenHeight = 720;
@@ -22,8 +30,6 @@ void ejecuteGame()
     bool backToMenu = false;
     //bool exitGame = false;
     bool reset = true;
-    Color colorPlayer1 = LIME;
-    Color colorPlayer2 = BLUE;
 
 
     InitWindow(screenWidth, screenHeight, "Asteroids");
@@ -50,7 +56,7 @@ void ejecuteGame()
             menuAnsw = gameplayLoop(initGame,backToMenu);
             break;
         case (int)MenuStates::Rules:
-            menuAnsw = rulesLoop(backToMenu, colorPlayer1, colorPlayer2);
+            menuAnsw = rulesLoop(backToMenu);
             break;
         case (int)MenuStates::Credits:
             menuAnsw = creditsLoop(backToMenu);
@@ -63,7 +69,7 @@ void ejecuteGame()
             break;
         }
     }
-
+    unloadTextures();
     CloseWindow();
 }
 
@@ -72,10 +78,21 @@ void loadTextures()
     spaceShipTexture = LoadTexture("res/nave_pixelada.png");
     bulletTexture = LoadTexture("res/disparo-2.png");
     largeAsteroidTexture = LoadTexture("res/asteroide_lindo.png");
-    mediumAsteroidTexture = LoadTexture("res/asteroide_lindo_mitad_2.png");
-    smallAsteroidTexture = LoadTexture("res/asteroide_lindo_mitad.png");
+    mediumAsteroidTexture = LoadTexture("res/asteroide_lindo_mitad.png");
+    smallAsteroidTexture = LoadTexture("res/asteroide_lindo_un_cuarto.png");
+
+
+    largeAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
+    mediumAsteroidTextureEvil = LoadTexture("evilAsteroids-1.png");
+    smallAsteroidTextureEvil = LoadTexture("res/evilAsroids-2.png");
+
+
     menu_Background = LoadTexture("res/fondo_turbio.png");
     gameplay_Background = LoadTexture("res/fondo_1.png");
+    gameplay_Background2 = LoadTexture("res/fondo_turbio.png");
+
+    Controls1 = LoadTexture("res/click_izquierdo.png");
+    Controls2 = LoadTexture("res/click_derecho.png");
 }
 void unloadTextures() 
 {
@@ -86,4 +103,10 @@ void unloadTextures()
     UnloadTexture(smallAsteroidTexture);
     UnloadTexture(menu_Background);
     UnloadTexture(gameplay_Background);
+    UnloadTexture(gameplay_Background2);
+    UnloadTexture(largeAsteroidTextureEvil);
+    UnloadTexture(mediumAsteroidTextureEvil);
+    UnloadTexture(smallAsteroidTextureEvil);
+    UnloadTexture(Controls1);
+    UnloadTexture(Controls2);
 }
