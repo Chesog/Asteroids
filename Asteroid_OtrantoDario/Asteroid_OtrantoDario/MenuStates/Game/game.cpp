@@ -19,16 +19,20 @@ Texture2D gameplay_Background2;
 Texture2D Controls1;
 Texture2D Controls2;
 
+float timer = 0;
+
 void ejecuteGame() 
 {
 
-    int screenWidth = 1280;
-    int screenHeight = 720;
+    //int screenWidth = 1280;
+    //int screenHeight = 720;
+
+    int screenWidth = 1024;
+    int screenHeight = 768;
 
     int menuAnsw = (int)MenuStates::MainMenu;
     int point = 1;
     bool backToMenu = false;
-    //bool exitGame = false;
     bool reset = true;
 
 

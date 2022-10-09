@@ -86,7 +86,20 @@ void drawAsteroid(Asteroid currenAsteroid, bool changeCondition)
 #if _DEBUG
 	DrawCircle(static_cast<int>(currenAsteroid.position.x), static_cast<int>(currenAsteroid.position.y), currenAsteroid.radius, currenAsteroid.color);
 #endif // _DEBUG
-	float scale = 1.5f;
+	float scale = 0;
+
+	if (currenAsteroid.size == static_cast<int>(AsteroidSize::Large))
+	{
+		scale = 2.0f;
+	}
+	else if (currenAsteroid.size == static_cast<int>(AsteroidSize::Medium))
+	{
+		scale = 1.5f;
+	}
+	else
+	{
+		scale = 1.0f;
+	}
 
 	Rectangle sourRect = { 0,0,static_cast<float>(currenAsteroid.asteroidTexture.width),static_cast<float>(currenAsteroid.asteroidTexture.height)};
 	Rectangle destRect = { currenAsteroid.position.x,currenAsteroid.position.y,static_cast<float>(currenAsteroid.asteroidTexture.width * scale),static_cast<float>(currenAsteroid.asteroidTexture.height * scale)};
@@ -100,12 +113,10 @@ void drawAsteroid(Asteroid currenAsteroid, bool changeCondition)
 
 	if (changeCondition)
 	{
-		//DrawTextureEx(currenAsteroid.asteroidTextureEvil, texturePiv, currenAsteroid.rotation, scale, WHITE);
 		DrawTexturePro(currenAsteroid.asteroidTextureEvil, sourRect, destRect, texturePiv, currenAsteroid.rotation, WHITE);
 	}
 	else
 	{
-		//DrawTextureEx(currenAsteroid.asteroidTexture, texturePiv, currenAsteroid.rotation, scale, WHITE);
 		DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv, currenAsteroid.rotation, WHITE);
 	}
 }

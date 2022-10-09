@@ -10,14 +10,24 @@ struct SpaceShip
 {
 	int lives;
 	int score;
+
+	float rad;
+	float rotation;
+
+	bool isHit;
+
 	Vector2 piv;
 	Vector2 acceleration;
 	Vector2 normalizedDirection;
-	float rad;
+
 	Rectangle rect;
-	float rotation;
+
 	Bullet playerAmmo[playerMaxAmmo];
+
+	Color spaceshipColor;
+
 	Texture2D spaceshipTexture;
+
 };
 
 SpaceShip initSpaceShip(Texture2D spaceshipTexture, Texture2D bulletTexture);

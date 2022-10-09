@@ -25,12 +25,15 @@ extern Texture2D smallAsteroidTextureEvil;
 extern Texture2D gameplay_Background;
 extern Texture2D gameplay_Background2;
 
+extern float timer;
+
 static int largeAsteroidCount;
 static int mediumAsteroidCount;
 static int smallAsteroidCount;
 
 static bool pauseGameplay;
 static bool change;
+
 
 
 void initGameplay(bool& initGame);
@@ -98,15 +101,15 @@ void initGameplay(bool& initGame)
 
 	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
-		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large, largeAsteroidTexture,largeAsteroidTextureEvil);
+		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large, largeAsteroidTexture, largeAsteroidTextureEvil);
 	}
 	for (int i = 0; i < maxMediumndAsteroids; i++)
 	{
-		mediumAsteroids[i] = initAsteroid((int)AsteroidSize::Medium, mediumAsteroidTexture,mediumAsteroidTextureEvil);
+		mediumAsteroids[i] = initAsteroid((int)AsteroidSize::Medium, mediumAsteroidTexture, mediumAsteroidTextureEvil);
 	}
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
-		smallAsteroids[i] = initAsteroid((int)AsteroidSize::Small, smallAsteroidTexture,smallAsteroidTextureEvil);
+		smallAsteroids[i] = initAsteroid((int)AsteroidSize::Small, smallAsteroidTexture, smallAsteroidTextureEvil);
 	}
 	largeAsteroidCount = maxLargeAsteroids;
 	mediumAsteroidCount = 0;
@@ -166,17 +169,20 @@ void checkInput()
 				player.acceleration.x += player.normalizedDirection.x;
 				player.acceleration.y += player.normalizedDirection.y;
 			}
-			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+			if (!player.isHit)
 			{
-				for (int i = 0; i < playerMaxAmmo; i++)
+				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 				{
-					if (!player.playerAmmo[i].isActive)
+					for (int i = 0; i < playerMaxAmmo; i++)
 					{
-						shoot(player.playerAmmo[i], player);
+						if (!player.playerAmmo[i].isActive)
+						{
+							shoot(player.playerAmmo[i], player);
 #if _DEBUG
-						std::cout << " Shoot " << i << std::endl;
+							std::cout << " Shoot " << i << std::endl;
 #endif // _DEBUG
-						break;
+							break;
+						}
 					}
 				}
 			}
@@ -196,7 +202,7 @@ void drawGameplay(int changeCondition)
 	{
 		DrawTextureEx(gameplay_Background2, backgroundPosition, 0, 1.5f, WHITE);
 	}
-	
+
 	if (player.lives == 3)
 	{
 		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 2, spaceShipTexture.height / 2, WHITE);
@@ -231,21 +237,21 @@ void drawGameplay(int changeCondition)
 	{
 		if (largeAsteroids[i].isActive)
 		{
-			drawAsteroid(largeAsteroids[i],change);
+			drawAsteroid(largeAsteroids[i], change);
 		}
 	}
 	for (int i = 0; i < maxMediumndAsteroids; i++)
 	{
 		if (mediumAsteroids[i].isActive)
 		{
-			drawAsteroid(mediumAsteroids[i],change);
+			drawAsteroid(mediumAsteroids[i], change);
 		}
 	}
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
 		if (smallAsteroids[i].isActive)
 		{
-			drawAsteroid(smallAsteroids[i],change);
+			drawAsteroid(smallAsteroids[i], change);
 		}
 	}
 
@@ -278,9 +284,27 @@ void updateGameplay()
 	{
 		moveAsteroid(smallAsteroids[i]);
 	}
+
+	if (player.isHit)
+	{
+		timer += GetFrameTime();
+		if (timer >= 3)
+		{
+			player.isHit = false;
+			timer = 0;
+		}
+	}
+
 	checkOutOfBounds();
 	checkColitions();
 	resetAsteroids();
+
+	if (player.lives <= 0)
+	{
+		pauseGameplay = true;
+	}
+
+	std::cout << "Timer : " << timer << endl;
 
 #if _DEBUG
 	//std::cout << player.acceleration.x << " --- " << player.acceleration.y << std::endl;
@@ -656,81 +680,85 @@ void spaceshipAsteroidColition(Asteroid& currentAsteroid)
 
 	if (distance < player.rad + currentAsteroid.radius)
 	{
-		currentAsteroid.isActive = false;
-		//player.lives--;
-		player.acceleration.y = player.acceleration.y * -1.0f;
-		player.acceleration.x = player.acceleration.x * -1.0f;
-
-		if (currentAsteroid.size == static_cast<int>(AsteroidSize::Large))
+		if (!player.isHit)
 		{
-			if (mediumAsteroidCount < maxMediumndAsteroids)
+			currentAsteroid.isActive = false;
+			player.lives--;
+			player.acceleration.y = player.acceleration.y * -1.0f;
+			player.acceleration.x = player.acceleration.x * -1.0f;
+
+			if (currentAsteroid.size == static_cast<int>(AsteroidSize::Large))
 			{
-				mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
-				mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
-				mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
-				mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
-				mediumAsteroids[mediumAsteroidCount].isActive = true;
-				mediumAsteroidCount++;
+				if (mediumAsteroidCount < maxMediumndAsteroids)
+				{
+					mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
+					mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
+					mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
+					mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
+					mediumAsteroids[mediumAsteroidCount].isActive = true;
+					mediumAsteroidCount++;
 
-				if (mediumAsteroids[mediumAsteroidCount - 1].direction.x == static_cast<int>(Directions::Left))
-				{
-					mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Right);
-				}
-				else
-				{
-					mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Left);
-				}
-				if (mediumAsteroids[mediumAsteroidCount - 1].direction.y == static_cast<int>(Directions::Up))
-				{
-					mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<int>(Directions::Down);
-				}
-				else
-				{
-					mediumAsteroids[mediumAsteroidCount - 1].direction.y = static_cast<int>(Directions::Up);
-				}
-				mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
-				mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
-				mediumAsteroids[mediumAsteroidCount].isActive = true;
-				mediumAsteroidCount++;
+					if (mediumAsteroids[mediumAsteroidCount - 1].direction.x == static_cast<int>(Directions::Left))
+					{
+						mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Right);
+					}
+					else
+					{
+						mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<int>(Directions::Left);
+					}
+					if (mediumAsteroids[mediumAsteroidCount - 1].direction.y == static_cast<int>(Directions::Up))
+					{
+						mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<int>(Directions::Down);
+					}
+					else
+					{
+						mediumAsteroids[mediumAsteroidCount - 1].direction.y = static_cast<int>(Directions::Up);
+					}
+					mediumAsteroids[mediumAsteroidCount].position.x = currentAsteroid.position.x;
+					mediumAsteroids[mediumAsteroidCount].position.y = currentAsteroid.position.y;
+					mediumAsteroids[mediumAsteroidCount].isActive = true;
+					mediumAsteroidCount++;
 
-				largeAsteroidCount--;
+					largeAsteroidCount--;
+				}
 			}
-		}
-		else if (currentAsteroid.size == static_cast<int>(AsteroidSize::Medium))
-		{
-			if (smallAsteroidCount < maxSmallAsteroids)
+			else if (currentAsteroid.size == static_cast<int>(AsteroidSize::Medium))
 			{
+				if (smallAsteroidCount < maxSmallAsteroids)
+				{
 
-				smallAsteroids[smallAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
-				smallAsteroids[smallAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
-				smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
-				smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
-				smallAsteroids[smallAsteroidCount].isActive = true;
-				smallAsteroidCount++;
+					smallAsteroids[smallAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
+					smallAsteroids[smallAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
+					smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
+					smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
+					smallAsteroids[smallAsteroidCount].isActive = true;
+					smallAsteroidCount++;
 
-				if (smallAsteroids[smallAsteroidCount - 1].direction.x == static_cast<int>(Directions::Left))
-				{
-					smallAsteroids[smallAsteroidCount].direction.x = static_cast<int>(Directions::Right);
+					if (smallAsteroids[smallAsteroidCount - 1].direction.x == static_cast<int>(Directions::Left))
+					{
+						smallAsteroids[smallAsteroidCount].direction.x = static_cast<int>(Directions::Right);
+					}
+					else
+					{
+						smallAsteroids[smallAsteroidCount].direction.x = static_cast<int>(Directions::Left);
+					}
+					if (smallAsteroids[smallAsteroidCount - 1].direction.y == static_cast<int>(Directions::Up))
+					{
+						smallAsteroids[smallAsteroidCount].direction.y = static_cast<int>(Directions::Down);
+					}
+					else
+					{
+						smallAsteroids[smallAsteroidCount - 1].direction.y = static_cast<int>(Directions::Up);
+					}
+					smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
+					smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
+					smallAsteroids[smallAsteroidCount].isActive = true;
+					smallAsteroidCount++;
 				}
-				else
-				{
-					smallAsteroids[smallAsteroidCount].direction.x = static_cast<int>(Directions::Left);
-				}
-				if (smallAsteroids[smallAsteroidCount - 1].direction.y == static_cast<int>(Directions::Up))
-				{
-					smallAsteroids[smallAsteroidCount].direction.y = static_cast<int>(Directions::Down);
-				}
-				else
-				{
-					smallAsteroids[smallAsteroidCount - 1].direction.y = static_cast<int>(Directions::Up);
-				}
-				smallAsteroids[smallAsteroidCount].position.x = currentAsteroid.position.x;
-				smallAsteroids[smallAsteroidCount].position.y = currentAsteroid.position.y;
-				smallAsteroids[smallAsteroidCount].isActive = true;
-				smallAsteroidCount++;
 			}
+			player.score++;
+			player.isHit = true;
 		}
-		player.score++;
 	}
 }
 void resetAsteroids()
@@ -764,15 +792,15 @@ void resetAsteroids()
 	{
 		for (int i = 0; i < maxLargeAsteroids; i++)
 		{
-			largeAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Large), largeAsteroidTexture,largeAsteroidTextureEvil);
+			largeAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Large), largeAsteroidTexture, largeAsteroidTextureEvil);
 		}
 		for (int i = 0; i < maxMediumndAsteroids; i++)
 		{
-			mediumAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Medium), mediumAsteroidTexture,mediumAsteroidTextureEvil);
+			mediumAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Medium), mediumAsteroidTexture, mediumAsteroidTextureEvil);
 		}
 		for (int i = 0; i < maxSmallAsteroids; i++)
 		{
-			smallAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Small), smallAsteroidTexture,smallAsteroidTextureEvil);
+			smallAsteroids[i] = initAsteroid(static_cast<int>(AsteroidSize::Small), smallAsteroidTexture, smallAsteroidTextureEvil);
 		}
 		largeAsteroidCount = maxLargeAsteroids;
 		mediumAsteroidCount = 0;

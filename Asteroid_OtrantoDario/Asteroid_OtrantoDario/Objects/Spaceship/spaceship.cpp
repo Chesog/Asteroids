@@ -23,6 +23,8 @@ SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 	aux.acceleration.x = 0.0f;
 	aux.acceleration.y = 0.0f;
 	aux.spaceshipTexture = spaceshipTexture;
+	aux.isHit = false;
+	aux.spaceshipColor = WHITE;
 	for (int i = 0; i < playerMaxAmmo; i++)
 	{
 		initBullet(aux.playerAmmo[i],bulletTexture);
@@ -40,14 +42,30 @@ void drawPlayer(SpaceShip& player)
 {
 #if _DEBUG
 	DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y),player.rad,GREEN);
-	//DrawRectanglePro(player.rect, player.piv, player.rotation, GREEN);
 #endif // _DEBUG
+
+	if (player.isHit)
+	{
+		int rand = GetRandomValue(0,2);
+		if (rand == 0)
+		{
+			player.spaceshipColor.a = 100;
+		}
+		else
+		{
+			player.spaceshipColor.a = 250;
+		}
+	}
+	if (!player.isHit)
+	{
+		player.spaceshipColor.a = 250;
+	}
 
 	Rectangle sourRect = {0.0f,0.0f,static_cast<float>(player.spaceshipTexture.width),static_cast<float>(player.spaceshipTexture.height)};
 	Rectangle destRect = {player.rect.x,player.rect.y,sourRect.width,sourRect.height};
 	Vector2 texturePiv = { static_cast<float>(player.spaceshipTexture.width / 2),static_cast<float>(player.spaceshipTexture.height / 2)};
 
-	DrawTexturePro(player.spaceshipTexture,sourRect,destRect, texturePiv,player.rotation + 90,WHITE);
+	DrawTexturePro(player.spaceshipTexture,sourRect,destRect, texturePiv,player.rotation + 90,player.spaceshipColor);
 }
 
 void shoot(Bullet& bullet, SpaceShip player)
