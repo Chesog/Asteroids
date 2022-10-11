@@ -95,7 +95,7 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 
 	int fontSize = 80;
 	screenHeight = screenHeight;
-	int textSizeTitle = MeasureText(TextFormat("Deep Purple"), fontSize);
+	//int textSizeTitle = MeasureText(TextFormat("Deep Purple"), fontSize);
 	//int textSizeButton1 = MeasureText(TextFormat("JUGAR"), button1.fontSize);
 	//int textSizeButton2 = MeasureText(TextFormat("REGLAS"), button2.fontSize);
 	//int textSizeButton3 = MeasureText(TextFormat("OPCIONES"), button3.fontSize);
@@ -113,29 +113,29 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 
 	DrawTexturePro(menu_Background1, sourRect, destRect, texturePiv, 0.0f, WHITE);
 
-	//Rectangle sourRect1 = { 0,0,static_cast<float>(menu_Background.width),static_cast<float>(menu_Background.height) };
-	//Rectangle destRect1 = { backgroundPosition.x,backgroundPosition.y,static_cast<float>(menu_Background.width * 1.5f * scale),static_cast<float>(menu_Background.height * scale) };
-	//Vector2 texturePiv1 = { static_cast<float>((menu_Background.width * scale) / 2),static_cast<float>((menu_Background.height * scale) / 2) };
-	//
-	//DrawTexturePro(menu_Background, sourRect1, destRect1, texturePiv1, 0.0f, WHITE);
 
-	DrawText("Deep Purple", (screenWidth / 2) - (textSizeTitle / 2), fontSize, fontSize, RED);
+	float scale1 = 0.3f;
+	Vector2 logoPosition = { 0.0f,0.0f };
+	logoPosition.x = static_cast<float>(GetScreenWidth() / 2) - (menuLogo.width / 4) * scale1;
+	logoPosition.y = static_cast<float>(fontSize);
+
+	Rectangle sourRect1 = { 0,0,static_cast<float>(menuLogo.width),static_cast<float>(menuLogo.height) };
+	Rectangle destRect1 = { logoPosition.x,logoPosition.y,static_cast<float>(menuLogo.width * 1.5f * scale1),static_cast<float>(menuLogo.height * scale1) };
+	Vector2 texturePiv1 = { static_cast<float>((menuLogo.width * scale1) / 2),static_cast<float>((menuLogo.height * scale1) / 2) };
+	
+	DrawTexturePro(menuLogo, sourRect1, destRect1, texturePiv1, 0.0f, WHITE);
+
+	//DrawText("Deep Purple", (screenWidth / 2) - (textSizeTitle / 2), fontSize, fontSize, RED);
 
 	drawButtonTexture(button1, playTexture, playTexture);
-	//drawButton(button1);
-	//DrawText("JUGAR", ((screenWidth / 2) - (textSizeButton1 / 2)), static_cast<int>((button1.rect.y + button1.rect.height / 6)), button1.fontSize, BLACK);
 
 	drawButtonTexture(button2, rulesTexture, rulesTexture);
-	//DrawText("REGLAS", ((screenWidth / 2) - (textSizeButton2 / 2)), static_cast<int>((button2.rect.y + button2.rect.height / 6)), button2.fontSize, BLACK);
 
 	drawButtonTexture(button3, optionsTexture, optionsTexture);
-	//DrawText("OPCIONES", ((screenWidth / 2) - (textSizeButton3 / 2)), static_cast<int>((button3.rect.y + button3.rect.height / 6)), button3.fontSize, BLACK);
 	
 	drawButtonTexture(button4, creditsTexture, creditsTexture);
-	//DrawText("CREDITOS", ((screenWidth / 2) - (textSizeButton4 / 2)), static_cast<int>((button4.rect.y + button4.rect.height / 6)), button4.fontSize, BLACK);
 
 	drawButtonTexture(button5, exitTexture, exitTexture);
-	//DrawText("SALIR", ((screenWidth / 2) - (textSizeButton5 / 2)), static_cast<int>((button5.rect.y + button5.rect.height / 6)), button5.fontSize, BLACK);
 
 #ifdef _DEBUG
 	DrawRectangle(0, screenHeight / 2, screenWidth, 1, DARKGREEN);

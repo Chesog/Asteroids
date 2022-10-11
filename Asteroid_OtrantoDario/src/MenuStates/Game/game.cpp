@@ -29,6 +29,7 @@ extern Texture2D resetTexture;
 extern Texture2D returnTexture;
 extern Texture2D pauseButtonTexture;
 
+extern Texture2D menuLogo;
 
 extern Texture2D Controls1;
 extern Texture2D Controls2;
@@ -147,6 +148,8 @@ void loadTextures()
     gameplay_Background = LoadTexture("res/fondo_1.png");
     gameplay_Background2 = LoadTexture("res/fondo_turbio.png");
 
+    menuLogo = LoadTexture("res/logoDeepPurple.png");
+
     Controls1 = LoadTexture("res/click_izquierdo.png");
     Controls2 = LoadTexture("res/click_derecho.png");
 
@@ -190,6 +193,7 @@ void unloadTextures()
     UnloadTexture(gameplay_Background);
     UnloadTexture(gameplay_Background2);
 
+    UnloadTexture(menuLogo);
     UnloadTexture(Controls1);
     UnloadTexture(Controls2);
 

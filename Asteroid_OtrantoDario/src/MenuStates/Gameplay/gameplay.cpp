@@ -238,22 +238,6 @@ void drawGameplay(int changeCondition)
 		DrawTextureEx(gameplay_Background2, backgroundPosition, 0, scale, WHITE);
 	}
 
-	if (player.lives == 3)
-	{
-		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 2, spaceShipTexture.height / 2, WHITE);
-		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 3, spaceShipTexture.height / 2, WHITE);
-		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
-	}
-	else if (player.lives == 2)
-	{
-		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 3, spaceShipTexture.height / 2, WHITE);
-		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
-	}
-	else if (player.lives == 1)
-	{
-		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
-	}
-
 	ClearBackground(BLACK);
 	for (int i = 0; i < playerMaxAmmo; i++)
 	{
@@ -324,6 +308,23 @@ void drawGameplay(int changeCondition)
 
 	}
 	DrawText(TextFormat("Player Score: %i", player.score), 6, 6, 20, RED);
+
+	if (player.lives == 3)
+	{
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 2, spaceShipTexture.height / 2, WHITE);
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 3, spaceShipTexture.height / 2, WHITE);
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
+	}
+	else if (player.lives == 2)
+	{
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 3, spaceShipTexture.height / 2, WHITE);
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
+	}
+	else if (player.lives == 1)
+	{
+		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
+	}
+
 	EndDrawing();
 }
 void updateGameplay()
