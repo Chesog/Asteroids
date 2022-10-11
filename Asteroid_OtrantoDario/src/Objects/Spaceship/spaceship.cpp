@@ -1,6 +1,8 @@
 #include "spaceship.h"
 #include <iostream>
 
+Sound shotSound;
+Sound deadSpaceshipSound;
 
 SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 {
@@ -34,8 +36,8 @@ SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 
 void moveSpaceShip(SpaceShip& player)
 {
-	player.rect.x = player.rect.x + player.acceleration.x * 1.0f * GetFrameTime();
-	player.rect.y = player.rect.y + player.acceleration.y * 1.0f * GetFrameTime();
+	player.rect.x = player.rect.x + player.acceleration.x * 0.5f * GetFrameTime();
+	player.rect.y = player.rect.y + player.acceleration.y * 0.5f * GetFrameTime();
 }
 
 void drawPlayer(SpaceShip& player)
@@ -70,6 +72,8 @@ void drawPlayer(SpaceShip& player)
 
 void shoot(Bullet& bullet, SpaceShip player)
 {
+	PlaySound(shotSound);
+
 	bullet.position.x = player.rect.x;
 	bullet.position.y = player.rect.y;
 	bullet.trayectory = player.normalizedDirection;

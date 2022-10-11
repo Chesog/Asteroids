@@ -27,3 +27,23 @@ void drawButton(Button actualButton)
 		DrawRectangle(static_cast<int>(actualButton.rect.x), static_cast<int>(actualButton.rect.y), static_cast<int>(actualButton.rect.width), static_cast<int>(actualButton.rect.height), actualButton.buttonColor);
 	}
 }
+void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D selectionTexture)
+{
+	float scale = 0.8f;
+
+	Vector2 mousePosition = GetMousePosition();
+
+	Rectangle sourRect = { 0,0,static_cast<float>(buttonTexture.width),static_cast<float>(buttonTexture.height) };
+	Rectangle destRect = { actualButton.rect.x + actualButton.rect.width / 2  + buttonTexture.width / 8,actualButton.rect.y + actualButton.rect.height / 2,static_cast<float>(buttonTexture.width * scale),static_cast<float>(buttonTexture.height * scale) };
+	Vector2 texturePiv = { static_cast<float>((buttonTexture.width) / 2),static_cast<float>((buttonTexture.height) / 2) };
+
+	if (CheckCollisionPointRec(mousePosition, actualButton.rect))
+	{
+		DrawTexturePro(selectionTexture, sourRect, destRect, texturePiv,5.0f, WHITE);
+	}
+	else
+	{
+		DrawTexturePro(buttonTexture, sourRect, destRect, texturePiv, 0, WHITE);
+	}
+
+}

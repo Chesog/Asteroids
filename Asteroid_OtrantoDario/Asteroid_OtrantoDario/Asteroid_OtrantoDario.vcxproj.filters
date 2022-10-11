@@ -40,6 +40,9 @@
     <Filter Include="MenuStates\Options">
       <UniqueIdentifier>{3676bb32-d43d-4bad-a516-de18f42ac153}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objets\Monster">
+      <UniqueIdentifier>{ee7543da-ea6c-498a-b85f-6613356f8023}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -76,7 +79,9 @@
     <ClCompile Include="..\src\Objects\Spaceship\spaceship.cpp">
       <Filter>Objets\SpaceShip</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\Objects\Monster\monster.cpp" />
+    <ClCompile Include="..\src\Objects\Monster\monster.cpp">
+      <Filter>Objets\Monster</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\MenuStates\Game\game.h">
@@ -112,6 +117,8 @@
     <ClInclude Include="..\src\Objects\Spaceship\spaceship.h">
       <Filter>Objets\SpaceShip</Filter>
     </ClInclude>
-    <ClInclude Include="..\src\Objects\Monster\monster.h" />
+    <ClInclude Include="..\src\Objects\Monster\monster.h">
+      <Filter>Objets\Monster</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

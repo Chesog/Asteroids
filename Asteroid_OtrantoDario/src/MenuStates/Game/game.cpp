@@ -1,35 +1,54 @@
 #include "game.h"
 
-Texture2D spaceShipTexture;
-Texture2D bulletTexture;
-Texture2D monsterTexture;
+extern Texture2D spaceShipTexture;
+extern Texture2D bulletTexture;
+extern Texture2D monsterTexture;
 
-Texture2D largeAsteroidTexture;
-Texture2D largeAsteroidTextureEvil;
+extern Texture2D largeAsteroidTexture;
+extern Texture2D largeAsteroidTextureEvil;
 
-Texture2D mediumAsteroidTexture;
-Texture2D mediumAsteroidTextureEvil;
+extern Texture2D mediumAsteroidTexture;
+extern Texture2D mediumAsteroidTextureEvil;
 
-Texture2D smallAsteroidTexture;
-Texture2D smallAsteroidTextureEvil;
+extern Texture2D smallAsteroidTexture;
+extern Texture2D smallAsteroidTextureEvil;
 
-Texture2D menu_Background;
-Texture2D gameplay_Background;
-Texture2D gameplay_Background2;
+extern Texture2D menu_Background;
+extern Texture2D menu_Background1;
+extern Texture2D gameplay_Background;
+extern Texture2D gameplay_Background2;
 
-Texture2D Controls1;
-Texture2D Controls2;
+extern Texture2D playTexture;
+extern Texture2D rulesTexture;
+extern Texture2D optionsTexture;
+extern Texture2D creditsTexture;
+extern Texture2D exitTexture;
+
+extern Texture2D Controls1;
+extern Texture2D Controls2;
+
+extern Music menuMusic;
+extern Music gameplayMusic;
+
+extern Sound shotSound;
+extern Sound asteroidShotSound;
+extern Sound deadSpaceshipSound;
 
 float timer = 0;
+
+void loadTextures();
+void loadSounds();
+void unloadTextures();
+void unloadSounds();
 
 void ejecuteGame() 
 {
 
-    int screenWidth = 1280;
-    int screenHeight = 720;
+    //int screenWidth = 1280;
+    //int screenHeight = 720;
 
-    //int screenWidth = 1024;
-    //int screenHeight = 768;
+    int screenWidth = 1024;
+    int screenHeight = 768;
 
     int menuAnsw = (int)MenuStates::MainMenu;
     int point = 1;
@@ -38,9 +57,10 @@ void ejecuteGame()
 
 
     InitWindow(screenWidth, screenHeight, "Asteroids");
-    //ToggleFullscreen();
+    InitAudioDevice();
 
     loadTextures();
+    loadSounds();
 
     SetExitKey(KEY_NULL);
 
@@ -74,10 +94,12 @@ void ejecuteGame()
             break;
         }
     }
+
     unloadTextures();
+    unloadSounds();
+    CloseAudioDevice();
     CloseWindow();
 }
-
 void loadTextures() 
 {
     spaceShipTexture = LoadTexture("res/nave_pixelada.png");
@@ -93,13 +115,28 @@ void loadTextures()
     mediumAsteroidTextureEvil = LoadTexture("evilAsteroids-1.png");
     smallAsteroidTextureEvil = LoadTexture("res/evilAsroids-2.png");
 
+    playTexture = LoadTexture("res/jugar.png");
+    rulesTexture = LoadTexture("res/reglas.png");
+    optionsTexture = LoadTexture("res/opciones.png");
+    creditsTexture = LoadTexture("res/credits.png");
+    exitTexture = LoadTexture("res/salir.png");
 
-    menu_Background = LoadTexture("res/fondo_turbio.png");
+    menu_Background = LoadTexture("res/menu_light_sin_letras.png");
+    menu_Background1 = LoadTexture("res/fondo_1.png");
     gameplay_Background = LoadTexture("res/fondo_1.png");
     gameplay_Background2 = LoadTexture("res/fondo_turbio.png");
 
     Controls1 = LoadTexture("res/click_izquierdo.png");
     Controls2 = LoadTexture("res/click_derecho.png");
+}
+void loadSounds() 
+{
+    menuMusic = LoadMusicStream("res/Music/menu_song.wav");
+    gameplayMusic = LoadMusicStream("res/Music/juego_song.wav");
+
+    shotSound = LoadSound("res/Music/shot.wav");
+    asteroidShotSound = LoadSound("res/Music/dead_asteroid.wav");
+    deadSpaceshipSound = LoadSound("res/Music/dead_explotion.wav");
 }
 void unloadTextures() 
 {
@@ -115,9 +152,19 @@ void unloadTextures()
     UnloadTexture(smallAsteroidTextureEvil);
 
     UnloadTexture(menu_Background);
+    UnloadTexture(menu_Background1);
     UnloadTexture(gameplay_Background);
     UnloadTexture(gameplay_Background2);
 
     UnloadTexture(Controls1);
     UnloadTexture(Controls2);
+}
+void unloadSounds() 
+{
+    UnloadMusicStream(menuMusic);
+    UnloadMusicStream(gameplayMusic);
+
+    UnloadSound(shotSound);
+    UnloadSound(asteroidShotSound);
+    UnloadSound(deadSpaceshipSound);
 }

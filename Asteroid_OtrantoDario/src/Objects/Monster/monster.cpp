@@ -34,7 +34,7 @@ Monster initMonster(Texture2D monsterTexture)
 	aux.trayectory = { 0.0f,0.0f };
 	aux.attakTimer = 3.0f;
 	aux.lockTimer = 1.5f;
-	aux.respawnTimer = 3.0f;
+	aux.respawnTimer = 10.0f;
 	aux.monsterTexture = monsterTexture;
 	aux.isAlive = false;
 	aux.isHit = false;
@@ -47,7 +47,7 @@ void moveMonster(Monster& currentMonster, Vector2 target)
 	currentMonster.trayectory = target;
 	if (currentMonster.isAlive)
 	{
-		std::cout << "Lock on Timer : " << currentMonster.lockTimer << std::endl;
+		//std::cout << "Lock on Timer : " << currentMonster.lockTimer << std::endl;
 		currentMonster.lockTimer -= GetFrameTime();
 
 		currentMonster.rotation += 200.0f * GetFrameTime();
@@ -75,8 +75,7 @@ void reciveDamage(Monster& currentMonster)
 	if (currentMonster.lives <= 0)
 	{
 		currentMonster.isAlive = false;
-		currentMonster.lives = 3;
-		currentMonster.respawnTimer = 3.0f;
+		currentMonster.respawnTimer = 10.0f;
 	}
 }
 void drawMonster(Monster& currentMonster)

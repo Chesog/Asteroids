@@ -1,7 +1,7 @@
 #include "rules.h"
 
-extern Texture2D Controls1;
-extern Texture2D Controls2;
+Texture2D Controls1;
+Texture2D Controls2;
 
 int rulesLoop(bool& backToMenu)
 {

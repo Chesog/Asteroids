@@ -16,3 +16,4 @@ struct Button
 
 Button initButton(int initialPosX, int initialPosY, int fontSize, int buttonWidth, int buttonHeight, int optionNumber, string text, Color buttonColor, Color selectionColor);
 void drawButton(Button actualButton);
+void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D selectionTexture);

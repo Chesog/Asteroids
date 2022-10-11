@@ -8,5 +8,3 @@
 #include "MenuStates/Credits/credits.h"
 
 void ejecuteGame();
-void loadTextures();
-void unloadTextures();

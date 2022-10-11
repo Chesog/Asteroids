@@ -1,5 +1,6 @@
 #include "asteroid.h"
 
+
 Asteroid initAsteroid(int size, Texture2D asteroidTexture, Texture2D asteroidTextureEvil)
 {
 	Asteroid aux;

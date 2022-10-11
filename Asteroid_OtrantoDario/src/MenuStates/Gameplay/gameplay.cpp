@@ -13,22 +13,26 @@ static Button returnButton;
 static Button resetButton;
 
 
-extern Texture2D spaceShipTexture;
-extern Texture2D bulletTexture;
-extern Texture2D monsterTexture;
+Music gameplayMusic;
 
-extern Texture2D largeAsteroidTexture;
-extern Texture2D largeAsteroidTextureEvil;
+Sound asteroidShotSound;
 
-extern Texture2D mediumAsteroidTexture;
-extern Texture2D mediumAsteroidTextureEvil;
+Texture2D spaceShipTexture;
+Texture2D bulletTexture;
+Texture2D monsterTexture;
 
-extern Texture2D smallAsteroidTexture;
-extern Texture2D smallAsteroidTextureEvil;
+Texture2D largeAsteroidTexture;
+Texture2D largeAsteroidTextureEvil;
+
+Texture2D mediumAsteroidTexture;
+Texture2D mediumAsteroidTextureEvil;
+
+Texture2D smallAsteroidTexture;
+Texture2D smallAsteroidTextureEvil;
 
 
-extern Texture2D gameplay_Background;
-extern Texture2D gameplay_Background2;
+Texture2D gameplay_Background;
+Texture2D gameplay_Background2;
 
 extern float timer;
 
@@ -64,6 +68,8 @@ int gameplayLoop(bool& initGame, bool& backToMenu)
 {
 	const int changeCondition = 50;
 
+	PlayMusicStream(gameplayMusic);
+
 	if (initGame)
 	{
 		initGameplay(initGame);
@@ -97,6 +103,8 @@ int gameplayLoop(bool& initGame, bool& backToMenu)
 	if (backToMenu)
 	{
 		return static_cast<int>(MenuStates::MainMenu);
+
+		//StopMusicStream(gameplayMusic);
 	}
 	else
 	{
@@ -246,10 +254,12 @@ void drawGameplay(int changeCondition)
 		}
 	}
 	drawPlayer(player);
+
 	if (monster.isAlive)
 	{
 		drawMonster(monster);
 	}
+
 	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
 		if (largeAsteroids[i].isActive)
@@ -308,7 +318,12 @@ void updateGameplay()
 		std::cout << "Respawn Timer : " << monster.respawnTimer << endl;
 	}
 	moveSpaceShip(player);
-	moveMonster(monster, { player.rect.x,player.rect.y });
+
+	if (monster.isAlive)
+	{
+		moveMonster(monster, { player.rect.x,player.rect.y });
+	}
+
 	for (int i = 0; i < playerMaxAmmo; i++)
 	{
 		if (player.playerAmmo[i].isActive)
@@ -342,11 +357,12 @@ void updateGameplay()
 	if (monster.isHit)
 	{
 		monster.hitTimer -= GetFrameTime();
+
 		if (monster.hitTimer <= 0)
 		{
 			monster.isHit = false;
-			monster.hitTimer = 3.0f;
 		}
+		cout << "Hit Timer Monster : " << monster.hitTimer << endl;
 	}
 
 	checkOutOfBounds();
@@ -582,6 +598,7 @@ void checkColitions()
 			spaceshipAsteroidColition(smallAsteroids[i]);
 		}
 	}
+
 	if (monster.isAlive)
 	{
 		spaceshipMonsterColition();
@@ -601,6 +618,8 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 
 	if (distance < currentBullet.rad + currentAsteroid.radius)
 	{
+		PlaySound(asteroidShotSound);
+
 		if (currentAsteroid.size == static_cast<int>(AsteroidSize::Large))
 		{
 			currentAsteroid.isActive = false;
