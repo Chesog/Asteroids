@@ -81,3 +81,7 @@ void shoot(Bullet& bullet, SpaceShip player)
 	bullet.isActive = true;
 	bullet.rotation = player.rotation;
 }
+void playerDead() 
+{
+	PlaySound(deadSpaceshipSound);
+}

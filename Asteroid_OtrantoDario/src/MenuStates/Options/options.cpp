@@ -1,7 +1,11 @@
 #include "options.h"
 
+extern Music menuMusic;
+
 int optionsLoop(bool& backToMenu, int& screenWidth, int& screenHeight)
 {
+	UpdateMusicStream(menuMusic);
+
 	int mainMenu = 0;
 	int optionsMenu = 3;
 	static int point = 1;

@@ -34,7 +34,7 @@ Monster initMonster(Texture2D monsterTexture)
 	aux.trayectory = { 0.0f,0.0f };
 	aux.attakTimer = 3.0f;
 	aux.lockTimer = 1.5f;
-	aux.respawnTimer = 10.0f;
+	aux.respawnTimer = 20.0f;
 	aux.monsterTexture = monsterTexture;
 	aux.isAlive = false;
 	aux.isHit = false;
@@ -75,7 +75,7 @@ void reciveDamage(Monster& currentMonster)
 	if (currentMonster.lives <= 0)
 	{
 		currentMonster.isAlive = false;
-		currentMonster.respawnTimer = 10.0f;
+		currentMonster.respawnTimer = 20.0f;
 	}
 }
 void drawMonster(Monster& currentMonster)

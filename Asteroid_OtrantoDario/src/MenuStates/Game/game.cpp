@@ -24,8 +24,16 @@ extern Texture2D optionsTexture;
 extern Texture2D creditsTexture;
 extern Texture2D exitTexture;
 
+extern Texture2D continueTexture;
+extern Texture2D resetTexture;
+extern Texture2D returnTexture;
+extern Texture2D pauseButtonTexture;
+
+
 extern Texture2D Controls1;
 extern Texture2D Controls2;
+
+extern Texture2D pauseMenuTexture;
 
 extern Music menuMusic;
 extern Music gameplayMusic;
@@ -64,6 +72,10 @@ void ejecuteGame()
 
     SetExitKey(KEY_NULL);
 
+    SetMusicVolume(menuMusic,0.5f);
+    SetMusicVolume(gameplayMusic,0.1f);
+    SetSoundVolume(asteroidShotSound,0.3f);
+
     bool initGame = true;
 
 
@@ -75,9 +87,13 @@ void ejecuteGame()
             backToMenu = false;
             reset = true;
             initGame = true;
+            StopMusicStream(gameplayMusic);
+            PlayMusicStream(menuMusic);
             menuAnsw = mainMenu(point);
             break;
         case (int)MenuStates::Gameplay:
+            StopMusicStream(menuMusic);
+            PlayMusicStream(gameplayMusic);
             menuAnsw = gameplayLoop(initGame,backToMenu);
             break;
         case (int)MenuStates::Rules:
@@ -121,6 +137,11 @@ void loadTextures()
     creditsTexture = LoadTexture("res/credits.png");
     exitTexture = LoadTexture("res/salir.png");
 
+    continueTexture = LoadTexture("res/continuar.png");
+    resetTexture = LoadTexture("res/reiniciar.png");
+    returnTexture = LoadTexture("res/volver_al_menu.png");
+    pauseButtonTexture = LoadTexture("res/boton_blanco_pausa.png");
+
     menu_Background = LoadTexture("res/menu_light_sin_letras.png");
     menu_Background1 = LoadTexture("res/fondo_1.png");
     gameplay_Background = LoadTexture("res/fondo_1.png");
@@ -128,6 +149,8 @@ void loadTextures()
 
     Controls1 = LoadTexture("res/click_izquierdo.png");
     Controls2 = LoadTexture("res/click_derecho.png");
+
+    pauseMenuTexture = LoadTexture("res/menu_pausa_sin_letras.png");
 }
 void loadSounds() 
 {
@@ -151,6 +174,17 @@ void unloadTextures()
     UnloadTexture(mediumAsteroidTextureEvil);
     UnloadTexture(smallAsteroidTextureEvil);
 
+    UnloadTexture(playTexture);
+    UnloadTexture(rulesTexture);
+    UnloadTexture(optionsTexture);
+    UnloadTexture(creditsTexture);
+    UnloadTexture(exitTexture);
+
+    UnloadTexture(continueTexture);
+    UnloadTexture(resetTexture);
+    UnloadTexture(returnTexture);
+    UnloadTexture(pauseButtonTexture);
+
     UnloadTexture(menu_Background);
     UnloadTexture(menu_Background1);
     UnloadTexture(gameplay_Background);
@@ -158,6 +192,8 @@ void unloadTextures()
 
     UnloadTexture(Controls1);
     UnloadTexture(Controls2);
+
+    UnloadTexture(pauseMenuTexture);
 }
 void unloadSounds() 
 {

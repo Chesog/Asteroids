@@ -34,3 +34,4 @@ SpaceShip initSpaceShip(Texture2D spaceshipTexture, Texture2D bulletTexture);
 void moveSpaceShip(SpaceShip& player);
 void drawPlayer(SpaceShip& player);
 void shoot(Bullet& bullet, SpaceShip player);
+void playerDead();

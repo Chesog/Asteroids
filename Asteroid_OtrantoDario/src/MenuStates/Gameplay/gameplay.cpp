@@ -9,6 +9,7 @@ static Asteroid mediumAsteroids[maxMediumndAsteroids];
 static Asteroid smallAsteroids[maxSmallAsteroids];
 
 static Button pauseButton;
+static Button continueButton;
 static Button returnButton;
 static Button resetButton;
 
@@ -33,6 +34,14 @@ Texture2D smallAsteroidTextureEvil;
 
 Texture2D gameplay_Background;
 Texture2D gameplay_Background2;
+
+Texture2D pauseMenuTexture;
+
+Texture2D continueTexture;
+Texture2D resetTexture;
+Texture2D returnTexture;
+Texture2D pauseButtonTexture;
+
 
 extern float timer;
 
@@ -68,7 +77,7 @@ int gameplayLoop(bool& initGame, bool& backToMenu)
 {
 	const int changeCondition = 50;
 
-	PlayMusicStream(gameplayMusic);
+	UpdateMusicStream(gameplayMusic);
 
 	if (initGame)
 	{
@@ -134,14 +143,14 @@ void initGameplay(bool& initGame)
 
 	int buttonWidth = 150;
 	int buttonHeight = 40;
-	int pauseWidth = 600;
 	//int pauseHeight = 400;
 	int fontSize = 40;
-	int buttonPos = (GetScreenWidth() / 2) - pauseWidth / 2 + buttonWidth / 2;
+
 
 	pauseButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2), buttonHeight / 2, fontSize, buttonWidth, buttonHeight, 14, "Pause", GREEN, RED);
-	resetButton = initButton(buttonPos, ((GetScreenHeight() / 2) + (buttonHeight)), fontSize, buttonWidth, buttonHeight, 0, "Reset", GREEN, RED);
-	returnButton = initButton((GetScreenWidth() / 2) + buttonWidth / 2, ((GetScreenHeight() / 2) + (buttonHeight)), fontSize, buttonWidth, buttonHeight, 0, "Return", GREEN, RED);
+	continueButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2), static_cast<int>((GetScreenHeight() / 2) - (buttonHeight * 4.0f)), fontSize, buttonWidth, buttonHeight, 0, "Continue", GREEN, RED);
+	resetButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2), static_cast<int>((GetScreenHeight() / 2) - (buttonHeight * 2.1f)), fontSize, buttonWidth, buttonHeight, 0, "Reset", GREEN, RED);
+	returnButton = initButton((GetScreenWidth() / 2) - buttonWidth / 2, static_cast<int>((GetScreenHeight() / 2) + (buttonHeight * 3.5f)), fontSize, buttonWidth, buttonHeight, 0, "Return", GREEN, RED);
 
 	pauseGameplay = true;
 	initGame = false;
@@ -149,7 +158,7 @@ void initGameplay(bool& initGame)
 }
 void checkInput()
 {
-	if (IsKeyPressed(KEY_SPACE))
+	if (IsKeyPressed(KEY_ESCAPE))
 	{
 		if (pauseGameplay)
 		{
@@ -178,7 +187,7 @@ void checkInput()
 		{
 			angle += 180;
 		}
-		if (GetMousePosition().x > player.rect.x && GetMousePosition().y > player.rect.y)
+		if (GetMousePosition().x > player.rect.x&& GetMousePosition().y > player.rect.y)
 		{
 			angle += 360;
 		}
@@ -284,22 +293,34 @@ void drawGameplay(int changeCondition)
 
 	if (pauseGameplay)
 	{
-		DrawRectangle((GetScreenWidth() / 2) - 300, (GetScreenHeight() / 2) - 200, 600, 400, BLACK);
+		//DrawRectangle((GetScreenWidth() / 2) - 300, (GetScreenHeight() / 2) - 200, 600, 400, BLACK);
+
+		float scale1 = 1.0f;
+
+		Rectangle sourRect = { 0,0,static_cast<float>(pauseMenuTexture.width),static_cast<float>(pauseMenuTexture.height) };
+		Rectangle destRect = { static_cast<float>(GetScreenWidth() / 2),static_cast<float>(GetScreenHeight() / 2),static_cast<float>(pauseMenuTexture.width * scale1),static_cast<float>(pauseMenuTexture.height * scale1) };
+		Vector2 texturePiv = { static_cast<float>((pauseMenuTexture.width* scale1) / 2),static_cast<float>((pauseMenuTexture.height* scale1) / 2) };
+
+		DrawTexturePro(pauseMenuTexture, sourRect, destRect, texturePiv, 0.0f, WHITE);
+
+		drawButtonTexture(continueButton, continueTexture, continueTexture);
+
 		drawButton(resetButton);
-		DrawText("Reset", static_cast<int>(resetButton.rect.x), static_cast<int>(resetButton.rect.y), resetButton.fontSize, BLACK);
+		drawButtonTexture(resetButton, resetTexture, resetTexture);
+
 		drawButton(returnButton);
-		DrawText("Return To Menu", static_cast<int>(returnButton.rect.x), static_cast<int>(returnButton.rect.y), returnButton.fontSize / 2, BLACK);
+		drawButtonTexture(returnButton, returnTexture, returnTexture);
 	}
 
-	DrawRectangle(2, 2, 200, 30, GREEN);
-	drawButton(pauseButton);
 	if (!pauseGameplay)
 	{
-		DrawText("Pause", static_cast<int>(pauseButton.rect.x), static_cast<int>(pauseButton.rect.y), pauseButton.fontSize, BLACK);
+		//drawButton(pauseButton);
+		drawButtonTexture(pauseButton, pauseButtonTexture, pauseButtonTexture);
+		//DrawText("Pause", static_cast<int>(pauseButton.rect.x), static_cast<int>(pauseButton.rect.y), pauseButton.fontSize, BLACK);
 	}
 	else
 	{
-		DrawText("Continue", static_cast<int>(pauseButton.rect.x), static_cast<int>(pauseButton.rect.y), pauseButton.fontSize, BLACK);
+		//DrawText("Continue", static_cast<int>(pauseButton.rect.x), static_cast<int>(pauseButton.rect.y), pauseButton.fontSize, BLACK);
 
 	}
 	DrawText(TextFormat("Player Score: %i", player.score), 6, 6, 20, RED);
@@ -307,16 +328,22 @@ void drawGameplay(int changeCondition)
 }
 void updateGameplay()
 {
-	if (monster.respawnTimer <= 0)
+	if (!monster.isAlive)
 	{
-		monster.isAlive = true;
-		monster.respawnTimer = 0;
+		if (monster.respawnTimer <= 0)
+		{
+			monster.isAlive = true;
+			monster.lives = 3;
+			monster.respawnTimer = 0;
+
+		}
+		else
+		{
+			monster.respawnTimer -= GetFrameTime();
+			std::cout << "Respawn Timer : " << monster.respawnTimer << endl;
+		}
 	}
-	else
-	{
-		monster.respawnTimer -= GetFrameTime();
-		std::cout << "Respawn Timer : " << monster.respawnTimer << endl;
-	}
+
 	moveSpaceShip(player);
 
 	if (monster.isAlive)
@@ -354,15 +381,18 @@ void updateGameplay()
 		}
 	}
 
-	if (monster.isHit)
+	if (monster.isAlive)
 	{
-		monster.hitTimer -= GetFrameTime();
-
-		if (monster.hitTimer <= 0)
+		if (monster.isHit)
 		{
-			monster.isHit = false;
+			monster.hitTimer -= GetFrameTime();
+
+			if (monster.hitTimer <= 0)
+			{
+				monster.isHit = false;
+			}
+			cout << "Hit Timer Monster : " << monster.hitTimer << endl;
 		}
-		cout << "Hit Timer Monster : " << monster.hitTimer << endl;
 	}
 
 	checkOutOfBounds();
@@ -371,6 +401,7 @@ void updateGameplay()
 
 	if (player.lives <= 0)
 	{
+		playerDead();
 		pauseGameplay = true;
 	}
 
@@ -959,19 +990,19 @@ void mouseButtonColition(bool& initGame, bool& backToMenu)
 	{
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			if (pauseGameplay)
-			{
-				pauseGameplay = false;
-			}
-			else
-			{
-				pauseGameplay = true;
-			}
+			pauseGameplay = true;
 		}
 
 	}
 	if (pauseGameplay)
 	{
+		if (CheckCollisionPointRec(mousePosition, continueButton.rect))
+		{
+			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+			{
+				pauseGameplay = false;
+			}
+		}
 		if (CheckCollisionPointRec(mousePosition, resetButton.rect))
 		{
 			if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))

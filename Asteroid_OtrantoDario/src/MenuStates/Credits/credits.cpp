@@ -1,7 +1,11 @@
 #include "credits.h"
 
+extern Music menuMusic;
+
 int creditsLoop(bool& backToMenu)
 {
+	UpdateMusicStream(menuMusic);
+
 	static int frameCounter = 0;
 	static int lettersCount = 0;
 	checkInput(backToMenu);

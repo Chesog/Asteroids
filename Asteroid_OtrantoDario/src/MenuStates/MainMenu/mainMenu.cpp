@@ -9,10 +9,14 @@ Texture2D optionsTexture;
 Texture2D creditsTexture;
 Texture2D exitTexture;
 
+Texture2D menuLogo;
+
 Music menuMusic;
 
 int mainMenu(int& point)
 {
+
+	UpdateMusicStream(menuMusic);
 
 	int fontSize = 30;
 	int buttonWidth = 300;
