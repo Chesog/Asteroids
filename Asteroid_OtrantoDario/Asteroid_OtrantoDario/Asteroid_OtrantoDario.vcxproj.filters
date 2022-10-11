@@ -25,52 +25,93 @@
     <Filter Include="Objets\Asteroids">
       <UniqueIdentifier>{abfac4c0-1e31-430f-9501-bf05f3b36f2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Objets\Button">
+      <UniqueIdentifier>{4d39fafc-6e69-456d-8bc6-91099b3473e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MenuStates\Credits">
+      <UniqueIdentifier>{8aa1e2d4-6064-435c-b4f9-1c5050987bc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MenuStates\MainMenu">
+      <UniqueIdentifier>{222f97fb-5581-4779-aa35-0289fb284fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MenuStates\Rules">
+      <UniqueIdentifier>{72e7f195-b0bd-46c7-9a26-2e5ededfa0ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MenuStates\Options">
+      <UniqueIdentifier>{3676bb32-d43d-4bad-a516-de18f42ac153}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MenuStates\Gameplay\gameplay.cpp">
-      <Filter>MenuStates\Gameplay</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuStates\Game\game.cpp">
+    <ClCompile Include="..\src\MenuStates\Game\game.cpp">
       <Filter>MenuStates\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Spaceship\spaceship.cpp">
-      <Filter>Objets\SpaceShip</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuStates\GlobalEnums\general_Func.cpp">
+    <ClCompile Include="..\src\MenuStates\GlobalEnums\general_Func.cpp">
       <Filter>MenuStates\Global_Enums</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Bullet\bullet.cpp">
+    <ClCompile Include="..\src\MenuStates\Gameplay\gameplay.cpp">
+      <Filter>MenuStates\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MenuStates\Credits\credits.cpp">
+      <Filter>MenuStates\Credits</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MenuStates\MainMenu\mainMenu.cpp">
+      <Filter>MenuStates\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MenuStates\Options\options.cpp">
+      <Filter>MenuStates\Options</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\MenuStates\Rules\rules.cpp">
+      <Filter>MenuStates\Rules</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Asteroids\asteroid.cpp">
+      <Filter>Objets\Asteroids</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Bullet\bullet.cpp">
       <Filter>Objets\Bullets</Filter>
     </ClCompile>
-    <ClCompile Include="Objects\Asteroids\asteroid.cpp" />
-    <ClCompile Include="Objects\Button\button.cpp" />
-    <ClCompile Include="MenuStates\MainMenu\mainMenu.cpp" />
-    <ClCompile Include="MenuStates\Credits\credits.cpp" />
-    <ClCompile Include="MenuStates\Options\options.cpp" />
-    <ClCompile Include="MenuStates\Rules\rules.cpp" />
+    <ClCompile Include="..\src\Objects\Button\button.cpp">
+      <Filter>Objets\Button</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Spaceship\spaceship.cpp">
+      <Filter>Objets\SpaceShip</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Objects\Monster\monster.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MenuStates\Gameplay\gameplay.h">
-      <Filter>MenuStates\Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuStates\Game\game.h">
+    <ClInclude Include="..\src\MenuStates\Game\game.h">
       <Filter>MenuStates\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Spaceship\spaceship.h">
-      <Filter>Objets\SpaceShip</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuStates\GlobalEnums\genera_func.h">
+    <ClInclude Include="..\src\MenuStates\GlobalEnums\genera_func.h">
       <Filter>MenuStates\Global_Enums</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Bullet\bullet.h">
+    <ClInclude Include="..\src\MenuStates\Gameplay\gameplay.h">
+      <Filter>MenuStates\Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MenuStates\Credits\credits.h">
+      <Filter>MenuStates\Credits</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MenuStates\MainMenu\mainMenu.h">
+      <Filter>MenuStates\MainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MenuStates\Options\options.h">
+      <Filter>MenuStates\Options</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\MenuStates\Rules\rules.h">
+      <Filter>MenuStates\Rules</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Asteroids\asteroid.h">
+      <Filter>Objets\Asteroids</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Bullet\bullet.h">
       <Filter>Objets\Bullets</Filter>
     </ClInclude>
-    <ClInclude Include="Objects\Asteroids\asteroid.h" />
-    <ClInclude Include="Objects\Button\button.h" />
-    <ClInclude Include="MenuStates\MainMenu\mainMenu.h" />
-    <ClInclude Include="MenuStates\Credits\credits.h" />
-    <ClInclude Include="MenuStates\Options\options.h" />
-    <ClInclude Include="MenuStates\Rules\rules.h" />
+    <ClInclude Include="..\src\Objects\Button\button.h">
+      <Filter>Objets\Button</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Spaceship\spaceship.h">
+      <Filter>Objets\SpaceShip</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\Objects\Monster\monster.h" />
   </ItemGroup>
 </Project>

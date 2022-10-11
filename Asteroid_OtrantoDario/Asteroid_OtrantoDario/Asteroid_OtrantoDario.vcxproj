@@ -135,7 +135,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src;$(SolutionDir)\lib\raylib-4.0.0_win32_msvc16\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\src;$(SolutionDir)\src;$(SolutionDir)\lib\raylib-4.0.0_win32_msvc16\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -162,7 +162,7 @@ MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)"`</Command>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\src;$(SolutionDir)\lib\raylib-4.0.0_win32_msvc16\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\src;$(SolutionDir)\src;$(SolutionDir)\lib\raylib-4.0.0_win32_msvc16\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <TreatWarningAsError>true</TreatWarningAsError>
     </ClCompile>
     <Link>
@@ -180,31 +180,33 @@ MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)"`</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\src\MenuStates\Credits\credits.cpp" />
+    <ClCompile Include="..\src\MenuStates\Gameplay\gameplay.cpp" />
+    <ClCompile Include="..\src\MenuStates\Game\game.cpp" />
+    <ClCompile Include="..\src\MenuStates\GlobalEnums\general_Func.cpp" />
+    <ClCompile Include="..\src\MenuStates\MainMenu\mainMenu.cpp" />
+    <ClCompile Include="..\src\MenuStates\Options\options.cpp" />
+    <ClCompile Include="..\src\MenuStates\Rules\rules.cpp" />
+    <ClCompile Include="..\src\Objects\Asteroids\asteroid.cpp" />
+    <ClCompile Include="..\src\Objects\Bullet\bullet.cpp" />
+    <ClCompile Include="..\src\Objects\Button\button.cpp" />
+    <ClCompile Include="..\src\Objects\Monster\monster.cpp" />
+    <ClCompile Include="..\src\Objects\Spaceship\spaceship.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="MenuStates\Credits\credits.cpp" />
-    <ClCompile Include="MenuStates\Gameplay\gameplay.cpp" />
-    <ClCompile Include="MenuStates\Game\game.cpp" />
-    <ClCompile Include="MenuStates\GlobalEnums\general_Func.cpp" />
-    <ClCompile Include="MenuStates\MainMenu\mainMenu.cpp" />
-    <ClCompile Include="MenuStates\Options\options.cpp" />
-    <ClCompile Include="MenuStates\Rules\rules.cpp" />
-    <ClCompile Include="Objects\Asteroids\asteroid.cpp" />
-    <ClCompile Include="Objects\Bullet\bullet.cpp" />
-    <ClCompile Include="Objects\Button\button.cpp" />
-    <ClCompile Include="Objects\Spaceship\spaceship.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MenuStates\Credits\credits.h" />
-    <ClInclude Include="MenuStates\Gameplay\gameplay.h" />
-    <ClInclude Include="MenuStates\Game\game.h" />
-    <ClInclude Include="MenuStates\GlobalEnums\genera_func.h" />
-    <ClInclude Include="MenuStates\MainMenu\mainMenu.h" />
-    <ClInclude Include="MenuStates\Options\options.h" />
-    <ClInclude Include="MenuStates\Rules\rules.h" />
-    <ClInclude Include="Objects\Asteroids\asteroid.h" />
-    <ClInclude Include="Objects\Bullet\bullet.h" />
-    <ClInclude Include="Objects\Button\button.h" />
-    <ClInclude Include="Objects\Spaceship\spaceship.h" />
+    <ClInclude Include="..\src\MenuStates\Credits\credits.h" />
+    <ClInclude Include="..\src\MenuStates\Gameplay\gameplay.h" />
+    <ClInclude Include="..\src\MenuStates\Game\game.h" />
+    <ClInclude Include="..\src\MenuStates\GlobalEnums\genera_func.h" />
+    <ClInclude Include="..\src\MenuStates\MainMenu\mainMenu.h" />
+    <ClInclude Include="..\src\MenuStates\Options\options.h" />
+    <ClInclude Include="..\src\MenuStates\Rules\rules.h" />
+    <ClInclude Include="..\src\Objects\Asteroids\asteroid.h" />
+    <ClInclude Include="..\src\Objects\Bullet\bullet.h" />
+    <ClInclude Include="..\src\Objects\Button\button.h" />
+    <ClInclude Include="..\src\Objects\Monster\monster.h" />
+    <ClInclude Include="..\src\Objects\Spaceship\spaceship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
