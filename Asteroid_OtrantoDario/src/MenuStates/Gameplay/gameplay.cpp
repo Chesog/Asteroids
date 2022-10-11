@@ -148,9 +148,9 @@ void initGameplay(bool& initGame)
 
 
 	pauseButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2), buttonHeight / 2, fontSize, buttonWidth, buttonHeight, 14, "Pause", GREEN, RED);
-	continueButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2), static_cast<int>((GetScreenHeight() / 2) - (buttonHeight * 4.0f)), fontSize, buttonWidth, buttonHeight, 0, "Continue", GREEN, RED);
+	continueButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2), static_cast<int>((GetScreenHeight() / 2) - (buttonHeight * 4.5f)), fontSize, buttonWidth, buttonHeight, 0, "Continue", GREEN, RED);
 	resetButton = initButton((GetScreenWidth() / 2) - (buttonWidth / 2), static_cast<int>((GetScreenHeight() / 2) - (buttonHeight * 2.1f)), fontSize, buttonWidth, buttonHeight, 0, "Reset", GREEN, RED);
-	returnButton = initButton((GetScreenWidth() / 2) - buttonWidth / 2, static_cast<int>((GetScreenHeight() / 2) + (buttonHeight * 3.5f)), fontSize, buttonWidth, buttonHeight, 0, "Return", GREEN, RED);
+	returnButton = initButton((GetScreenWidth() / 2) - buttonWidth / 2, static_cast<int>((GetScreenHeight() / 2) + (buttonHeight * 3.6f)), fontSize, buttonWidth, buttonHeight, 0, "Return", GREEN, RED);
 
 	pauseGameplay = true;
 	initGame = false;
@@ -721,11 +721,13 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 			smallAsteroids[smallAsteroidCount].isActive = true;
 			smallAsteroidCount++;
 		}
+
 		if (currentAsteroid.size == static_cast<int>(AsteroidSize::Small))
 		{
 			currentAsteroid.isActive = false;
 			currentBullet.isActive = false;
 		}
+
 		player.score++;
 #if _DEBUG
 		std::cout << "Meteoritos Grandes" << largeAsteroidCount << std::endl;

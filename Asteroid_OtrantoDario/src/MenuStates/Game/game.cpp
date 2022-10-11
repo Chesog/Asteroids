@@ -115,6 +115,7 @@ void ejecuteGame()
     unloadTextures();
     unloadSounds();
     CloseAudioDevice();
+
     CloseWindow();
 }
 void loadTextures() 
