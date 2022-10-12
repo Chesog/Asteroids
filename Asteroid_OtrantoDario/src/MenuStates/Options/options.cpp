@@ -1,10 +1,17 @@
 #include "options.h"
 
+static Button returnButton;
+
+extern Texture2D returnTexture;
 extern Music menuMusic;
 
 int optionsLoop(bool& backToMenu, int& screenWidth, int& screenHeight)
 {
 	UpdateMusicStream(menuMusic);
+
+	int buttonWidth = 100;
+	int buttonHeight = 40;
+	returnButton = initButton(GetScreenWidth() - static_cast<int>(buttonWidth * 2.5f), buttonHeight, 10, buttonWidth, buttonHeight, 0, "Return", GREEN, RED);
 
 	int mainMenu = 0;
 	int optionsMenu = 3;
@@ -44,6 +51,15 @@ int optionsLoop(bool& backToMenu, int& screenWidth, int& screenHeight)
 int checkInputOptions(bool& backToMenu, int& point)
 {
 	int defaultValue = 0;
+	Vector2 mousePosition = { static_cast<float>(GetMouseX()),static_cast<float>(GetMouseY()) };
+
+	if (CheckCollisionPointRec(mousePosition, returnButton.rect))
+	{
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		{
+			backToMenu = true;
+		}
+	}
 
 	if (IsKeyReleased(KEY_UP))
 	{
@@ -82,9 +98,11 @@ int checkInputOptions(bool& backToMenu, int& point)
 	}
 	else
 	{
-		backToMenu = false;
 		return defaultValue;
 	}
+
+
+
 }
 void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution)
 {
@@ -112,6 +130,8 @@ void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution
 		DrawRectangleRec(maxResolution, RED);
 	}
 	DrawText("1920 X 1080", GetScreenWidth() / 2 - textSize2 / 2, GetScreenHeight() / 2 + 30, fontSize, BLACK);
+
+	drawButtonTexture(returnButton, returnTexture, returnTexture);
 }
 void createOptionsButtons(Rectangle& defaultResolution, Rectangle& maxResolution)
 {

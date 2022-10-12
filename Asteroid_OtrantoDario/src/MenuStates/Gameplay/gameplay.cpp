@@ -114,22 +114,9 @@ int gameplayLoop(bool& initGame, bool& backToMenu)
 
 	if (backToMenu)
 	{
-		if (player.score > highScore)
+		if (SaveStorageValue(0, highScore))
 		{
-			highScore = player.score;
-
-			if (SaveStorageValue(0, highScore))
-			{
-				std::cout << "Se guardo Correctamente";
-			}
-			
-		}
-		else
-		{
-			if (SaveStorageValue(0, highScore))
-			{
-				std::cout << "Se guardo Correctamente";
-			}
+			std::cout << "Se guardo Correctamente";
 		}
 		return static_cast<int>(MenuStates::MainMenu);
 	}
@@ -347,6 +334,11 @@ void drawGameplay(int changeCondition)
 }
 void updateGameplay()
 {
+	if (player.score > highScore)
+	{
+		highScore = player.score;
+	}
+
 	if (!monster.isAlive)
 	{
 		if (monster.respawnTimer <= 0)

@@ -28,11 +28,11 @@ int mainMenu(int& point)
 	int screenWidth = GetScreenWidth();
 	int screenHeight = GetScreenHeight();
 
-	static Button button1 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) - buttonHeight * 4, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Gameplay, "Jugar", GREEN, RED);
-	static Button button2 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) - buttonHeight * 2, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Rules, "Reglas", GREEN, RED);
-	static Button button3 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2), fontSize, buttonWidth, buttonHeight, (int)MenuStates::Options, "Opciones", GREEN, RED);
-	static Button button4 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 2, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Credits, "Creditos", GREEN, RED);
-	static Button button5 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 4, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Exit, "Salir", GREEN, RED);
+	static Button button1 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) , fontSize, buttonWidth, buttonHeight, (int)MenuStates::Gameplay, "Jugar", GREEN, RED);
+	static Button button2 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 2 , fontSize, buttonWidth, buttonHeight, (int)MenuStates::Rules, "Reglas", GREEN, RED);
+	static Button button3 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 4, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Options, "Opciones", GREEN, RED);
+	static Button button4 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 6, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Credits, "Creditos", GREEN, RED);
+	static Button button5 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 8, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Exit, "Salir", GREEN, RED);
 	Vector2 mousePosition = GetMousePosition();
 
 	selection = checkInput(point);
@@ -120,7 +120,7 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 	float scale1 = 0.3f;
 	Vector2 logoPosition = { 0.0f,0.0f };
 	logoPosition.x = static_cast<float>(GetScreenWidth() / 2) - (menuLogo.width / 4) * scale1;
-	logoPosition.y = static_cast<float>(fontSize);
+	logoPosition.y = static_cast<float>(fontSize * 2);
 
 	Rectangle sourRect1 = { 0,0,static_cast<float>(menuLogo.width),static_cast<float>(menuLogo.height) };
 	Rectangle destRect1 = { logoPosition.x,logoPosition.y,static_cast<float>(menuLogo.width * 1.5f * scale1),static_cast<float>(menuLogo.height * scale1) };
@@ -164,7 +164,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	if (CheckCollisionPointRec(mousePosition, button1.rect))
 	{
 		point = button1.optionNumber;
-		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			return button1.optionNumber;
 		}
@@ -176,7 +176,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	else if (CheckCollisionPointRec(mousePosition, button2.rect))
 	{
 		point = button2.optionNumber;
-		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			return button2.optionNumber;
 		}
@@ -188,7 +188,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	else if (CheckCollisionPointRec(mousePosition, button3.rect))
 	{
 		point = button3.optionNumber;
-		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			return button3.optionNumber;
 		}
@@ -200,7 +200,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	else if (CheckCollisionPointRec(mousePosition, button4.rect))
 	{
 		point = button4.optionNumber;
-		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			return button4.optionNumber;
 		}
@@ -212,7 +212,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	else if (CheckCollisionPointRec(mousePosition, button5.rect))
 	{
 		point = button5.optionNumber;
-		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			return button5.optionNumber;
 		}

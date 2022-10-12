@@ -3,6 +3,9 @@
 Texture2D Controls1;
 Texture2D Controls2;
 
+static Button returnButton;
+
+extern Texture2D returnTexture;
 extern Music menuMusic;
 
 int rulesLoop(bool& backToMenu)
@@ -11,6 +14,10 @@ int rulesLoop(bool& backToMenu)
 
 	int menu = 0;
 	int rules = 2;
+
+	int buttonWidth = 100;
+	int buttonHeight = 40;
+	returnButton = initButton(GetScreenWidth() - static_cast<int>(buttonWidth * 2.5f), buttonHeight, 10, buttonWidth, buttonHeight, 0, "Return", GREEN, RED);
 
 	checkInputR(backToMenu);
 	drawRules();
@@ -38,7 +45,7 @@ void drawRules()
 	BeginDrawing();
 	ClearBackground(BLACK);
 
-	DrawText("Reglas Deep Purple",(GetScreenWidth() / 2) - (titleLenght / 2),tileFont * 2, tileFont,GREEN);
+	DrawText("Reglas Deep Purple",(GetScreenWidth() / 2) - (titleLenght / 2),static_cast<int>(tileFont * 2.5f), tileFont,GREEN);
 
 	DrawTextureEx(Controls1, { static_cast<float>((GetScreenWidth() / 2) - Controls1.width / 3),static_cast<float>(Controls1.height / 4)},0.0f,0.2f,WHITE);
 	DrawTextureEx(Controls2, { static_cast<float>((GetScreenWidth() / 2) + Controls2.width / 8),static_cast<float>(Controls2.height / 4)}, 0.0f,0.2f, WHITE);
@@ -56,12 +63,23 @@ void drawRules()
 	DrawText("Superar tu propia puntuacion , eso si , despues de cierto puntaje", font2, (GetScreenHeight() / 2) + font2 * 11, font2, YELLOW);
 	DrawText("Hay una sorpresa, Haceptas el reto ?", font2, (GetScreenHeight() / 2) + font2 * 12, font2, YELLOW);
 
+	drawButtonTexture(returnButton, returnTexture, returnTexture);
+
 	EndDrawing();
 }
 void checkInputR(bool& backToMenu)
 {
+	Vector2 mousePosition = { static_cast<float>(GetMouseX()),static_cast<float>(GetMouseY()) };
+
 	if (IsKeyReleased(KEY_ESCAPE))
 	{
 		backToMenu = true;
+	}
+	if (CheckCollisionPointRec(mousePosition, returnButton.rect))
+	{
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		{
+			backToMenu = true;
+		}
 	}
 }

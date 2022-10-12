@@ -71,6 +71,7 @@ void ejecuteGame()
 
     InitWindow(screenWidth, screenHeight, "Asteroids");
 
+    //ToggleFullscreen();
     InitAudioDevice();
     highScore = LoadStorageValue(0);
     loadTextures();
@@ -135,7 +136,7 @@ void loadTextures()
 
 
     largeAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
-    mediumAsteroidTextureEvil = LoadTexture("evilAsteroids-1.png");
+    mediumAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
     smallAsteroidTextureEvil = LoadTexture("res/evilAsroids-2.png");
 
     playTexture = LoadTexture("res/jugar.png");
