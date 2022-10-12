@@ -1,5 +1,7 @@
 #include "options.h"
 
+Texture2D optionsBackground;
+
 static Button returnButton;
 
 extern Texture2D returnTexture;
@@ -52,6 +54,7 @@ int checkInputOptions(bool& backToMenu, int& point)
 {
 	int defaultValue = 0;
 	Vector2 mousePosition = { static_cast<float>(GetMouseX()),static_cast<float>(GetMouseY()) };
+
 
 	if (CheckCollisionPointRec(mousePosition, returnButton.rect))
 	{
@@ -106,6 +109,12 @@ int checkInputOptions(bool& backToMenu, int& point)
 }
 void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution)
 {
+
+	Vector2 backgroundPosition = { 0.0f,0.0f };
+	float scale = 1.0f;
+
+	DrawTextureEx(optionsBackground, backgroundPosition, 0, scale, WHITE);
+
 	int fontSize = 30;
 
 	ClearBackground(BLACK);
@@ -119,7 +128,7 @@ void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution
 	}
 	int textSize1 = MeasureText("1024 X 768", fontSize);
 	int textSize2 = MeasureText("1280 X 720", fontSize);
-	DrawText("1280 X 720", GetScreenWidth() / 2 - textSize1 / 2, GetScreenHeight() / 2 - 30, fontSize, BLACK);
+	DrawText("1024 X 768", GetScreenWidth() / 2 - textSize1 / 2, GetScreenHeight() / 2 - 30, fontSize, BLACK);
 
 	if (point == (int)OptionsResolution::MaxResolution)
 	{
@@ -129,7 +138,7 @@ void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution
 	{
 		DrawRectangleRec(maxResolution, RED);
 	}
-	DrawText("1920 X 1080", GetScreenWidth() / 2 - textSize2 / 2, GetScreenHeight() / 2 + 30, fontSize, BLACK);
+	DrawText("1280 X 720", GetScreenWidth() / 2 - textSize2 / 2, GetScreenHeight() / 2 + 30, fontSize, BLACK);
 
 	drawButtonTexture(returnButton, returnTexture, returnTexture);
 }

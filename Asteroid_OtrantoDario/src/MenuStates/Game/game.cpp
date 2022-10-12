@@ -18,6 +18,8 @@ extern Texture2D menu_Background1;
 extern Texture2D gameplay_Background;
 extern Texture2D gameplay_Background2;
 extern Texture2D CreditsBackground;
+extern Texture2D optionsBackground;
+extern Texture2D rulesBackground;
 
 extern Texture2D playTexture;
 extern Texture2D rulesTexture;
@@ -155,6 +157,8 @@ void loadTextures()
     gameplay_Background = LoadTexture("res/fondo_1.png");
     gameplay_Background2 = LoadTexture("res/fondo_turbio.png");
     CreditsBackground =  LoadTexture("res/pagina_creditos_1.png");
+    optionsBackground = LoadTexture("res/fondo_turbio.png");
+    rulesBackground = LoadTexture("res/fondo_turbio.png");
 
     menuLogo = LoadTexture("res/logoDeepPurple.png");
 
@@ -201,6 +205,8 @@ void unloadTextures()
     UnloadTexture(gameplay_Background);
     UnloadTexture(gameplay_Background2);
     UnloadTexture(CreditsBackground);
+    UnloadTexture(optionsBackground);
+    UnloadTexture(rulesBackground);
 
     UnloadTexture(menuLogo);
     UnloadTexture(Controls1);

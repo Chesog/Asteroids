@@ -2,6 +2,7 @@
 
 Texture2D Controls1;
 Texture2D Controls2;
+Texture2D rulesBackground;
 
 static Button returnButton;
 
@@ -33,6 +34,9 @@ int rulesLoop(bool& backToMenu)
 }
 void drawRules()
 {
+	Vector2 backgroundPosition = { 0.0f,0.0f };
+	float scale = 1.0f;
+
 	int tileFont = 40;
 	int font = 30;
 	int font2 = 20;
@@ -44,6 +48,8 @@ void drawRules()
 
 	BeginDrawing();
 	ClearBackground(BLACK);
+
+	DrawTextureEx(rulesBackground, backgroundPosition, 0, scale, WHITE);
 
 	DrawText("Reglas Deep Purple",(GetScreenWidth() / 2) - (titleLenght / 2),static_cast<int>(tileFont * 2.5f), tileFont,GREEN);
 

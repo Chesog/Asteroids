@@ -192,7 +192,7 @@ void checkInput()
 		{
 			angle += 180;
 		}
-		if (GetMousePosition().x > player.rect.x&& GetMousePosition().y > player.rect.y)
+		if (GetMousePosition().x > player.rect.x && GetMousePosition().y > player.rect.y)
 		{
 			angle += 360;
 		}
@@ -282,35 +282,37 @@ void drawGameplay(int changeCondition)
 
 	if (pauseGameplay)
 	{
-		//DrawRectangle((GetScreenWidth() / 2) - 300, (GetScreenHeight() / 2) - 200, 600, 400, BLACK);
+
+
 
 		float scale1 = 1.0f;
 
 		Rectangle sourRect = { 0,0,static_cast<float>(pauseMenuTexture.width),static_cast<float>(pauseMenuTexture.height) };
 		Rectangle destRect = { static_cast<float>(GetScreenWidth() / 2),static_cast<float>(GetScreenHeight() / 2),static_cast<float>(pauseMenuTexture.width * scale1),static_cast<float>(pauseMenuTexture.height * scale1) };
-		Vector2 texturePiv = { static_cast<float>((pauseMenuTexture.width* scale1) / 2),static_cast<float>((pauseMenuTexture.height* scale1) / 2) };
+		Vector2 texturePiv = { static_cast<float>((pauseMenuTexture.width * scale1) / 2),static_cast<float>((pauseMenuTexture.height * scale1) / 2) };
 
 		DrawTexturePro(pauseMenuTexture, sourRect, destRect, texturePiv, 0.0f, WHITE);
 
-		drawButtonTexture(continueButton, continueTexture, continueTexture);
-
-		drawButton(resetButton);
-		drawButtonTexture(resetButton, resetTexture, resetTexture);
-
+#if Debug
 		drawButton(returnButton);
+		drawButton(resetButton);
+#endif // Debug
+		if (player.lives <= 0)
+		{
+			int loseText = MeasureText("Perdiste", pauseButton.fontSize);
+			DrawRectangle(static_cast<int>(pauseButton.rect.x - pauseButton.rect.width / 2), static_cast<int>(pauseButton.rect.y), static_cast<int>(pauseButton.rect.width * 2), static_cast<int>(pauseButton.rect.height * 3), WHITE);
+			DrawText("Perdiste", static_cast<int>(GetScreenWidth() / 2 - loseText / 2), static_cast<int>(pauseButton.rect.y * 2.5f), pauseButton.fontSize, BLACK);
+		}
+		DrawText(TextFormat("High Score: %i",highScore),6,40,30, PURPLE);
+
+		drawButtonTexture(continueButton, continueTexture, continueTexture);
+		drawButtonTexture(resetButton, resetTexture, resetTexture);
 		drawButtonTexture(returnButton, returnTexture, returnTexture);
 	}
 
 	if (!pauseGameplay)
 	{
-		//drawButton(pauseButton);
 		drawButtonTexture(pauseButton, pauseButtonTexture, pauseButtonTexture);
-		//DrawText("Pause", static_cast<int>(pauseButton.rect.x), static_cast<int>(pauseButton.rect.y), pauseButton.fontSize, BLACK);
-	}
-	else
-	{
-		//DrawText("Continue", static_cast<int>(pauseButton.rect.x), static_cast<int>(pauseButton.rect.y), pauseButton.fontSize, BLACK);
-
 	}
 	DrawText(TextFormat("Player Score: %i", player.score), 6, 6, 30, RED);
 
