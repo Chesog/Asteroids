@@ -6,8 +6,11 @@ Texture2D rulesBackground;
 
 static Button returnButton;
 
+extern Texture2D mouseTexture;
 extern Texture2D returnTexture;
 extern Music menuMusic;
+
+
 
 int rulesLoop(bool& backToMenu)
 {
@@ -83,6 +86,8 @@ void drawRules()
 	DrawText("Hay una sorpresa, Haceptas el reto ?", font2, (GetScreenHeight() / 2) + font2 * 12, font2, YELLOW);
 
 	drawButtonTexture(returnButton, returnTexture, returnTexture);
+
+	DrawTextureEx(mouseTexture, GetMousePosition(), 0, 2.0f, WHITE);
 
 	EndDrawing();
 }

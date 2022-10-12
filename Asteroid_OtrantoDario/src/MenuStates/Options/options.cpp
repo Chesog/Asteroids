@@ -8,7 +8,9 @@ static Rectangle maxResolution;
 static Button returnButton;
 static Button togleFullScreen;
 
+extern Texture2D mouseTexture;
 extern Texture2D returnTexture;
+
 extern Music menuMusic;
 
 int optionsLoop(bool& backToMenu, int& screenWidth, int& screenHeight)
@@ -210,6 +212,8 @@ void drawOptions(int point)
 	DrawText("1280 X 720", GetScreenWidth() / 2 - textSize2 / 2, GetScreenHeight() / 2 + 45, fontSize, BLACK);
 
 	drawButtonTexture(returnButton, returnTexture, returnTexture);
+
+	DrawTextureEx(mouseTexture, GetMousePosition(), 0, 2.0f, WHITE);
 }
 void createOptionsButtons()
 {

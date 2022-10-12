@@ -3,6 +3,8 @@
 extern Music menuMusic;
 extern Texture2D returnTexture;
 
+extern Texture2D mouseTexture;
+
 static Button returnButton;
 static Button linkButtonDario;
 static Button linkButtonMartu;
@@ -12,6 +14,10 @@ static Button linkButtonEnzo;
 
 Texture2D CreditsBackground;
 Texture2D CreditsBackground2;
+Texture2D gitTexture;
+Texture2D gitTextureSelection;
+Texture2D instagramTexture;
+Texture2D instagramTextureSelection;
 
 
 int creditsLoop(bool& backToMenu)
@@ -80,11 +86,16 @@ void drawCredits()
 		DrawTextureEx(CreditsBackground, backgroundPosition, 0, scale, WHITE);
 	}
 	drawButtonTexture(returnButton, returnTexture, returnTexture);
-	drawButton(linkButtonDario);
-	drawButton(linkButtonMartu);
-	drawButton(linkButtonTofy);
-	drawButton(linkButtonSeba);
-	drawButton(linkButtonEnzo);
+
+	float scale1 = 2.5f;
+
+	drawButtonTexture(linkButtonDario,gitTexture,gitTextureSelection, scale1);
+	drawButtonTexture(linkButtonMartu, instagramTexture, instagramTextureSelection, scale1);
+	drawButtonTexture(linkButtonTofy, instagramTexture, instagramTextureSelection, scale1);
+	drawButtonTexture(linkButtonSeba, instagramTexture, instagramTextureSelection, scale1);
+	drawButtonTexture(linkButtonEnzo, gitTexture, gitTextureSelection, scale1);
+
+	DrawTextureEx(mouseTexture, GetMousePosition(), 0, 2.0f, WHITE);
 }
 void checkInput(bool& backToMenu)
 {

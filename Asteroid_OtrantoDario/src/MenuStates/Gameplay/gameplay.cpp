@@ -36,6 +36,8 @@ Music gameplayMusic;
 
 Sound asteroidShotSound;
 
+Texture2D mouseTextureGameplay;
+
 Texture2D spaceShipTexture;
 Texture2D bulletTexture;
 Texture2D monsterTexture;
@@ -140,6 +142,7 @@ void initGameplay(bool& initGame)
 	player = initSpaceShip(spaceShipTexture, bulletTexture);
 	monster = initMonster(monsterTexture);
 	animationCounter = 0.0f;
+	shootanimationCounter = 0.0f;
 	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
 		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large, largeAsteroidTexture, largeAsteroidTextureEvil);
@@ -373,6 +376,8 @@ void drawGameplay(int changeCondition)
 	{
 		DrawTexture(spaceShipTexture, GetScreenWidth() - spaceShipTexture.width * 4, spaceShipTexture.height / 2, WHITE);
 	}
+
+	DrawTextureEx(mouseTextureGameplay, GetMousePosition(), 0, 2.0f, WHITE);
 
 	EndDrawing();
 }

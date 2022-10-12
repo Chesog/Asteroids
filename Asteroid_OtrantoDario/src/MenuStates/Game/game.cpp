@@ -32,6 +32,11 @@ extern Texture2D optionsTexture;
 extern Texture2D creditsTexture;
 extern Texture2D exitTexture;
 
+extern Texture2D gitTexture;
+extern Texture2D gitTextureSelection;
+extern Texture2D instagramTexture;
+extern Texture2D instagramTextureSelection;
+
 extern Texture2D continueTexture;
 extern Texture2D resetTexture;
 extern Texture2D returnTexture;
@@ -43,6 +48,9 @@ extern Texture2D Controls1;
 extern Texture2D Controls2;
 
 extern Texture2D pauseMenuTexture;
+
+extern Texture2D mouseTexture;
+extern Texture2D mouseTextureGameplay;
 
 extern Music menuMusic;
 extern Music gameplayMusic;
@@ -60,179 +68,194 @@ void loadSounds();
 void unloadTextures();
 void unloadSounds();
 
-void ejecuteGame() 
+void ejecuteGame()
 {
 
-    //int screenWidth = 1280;
-    //int screenHeight = 720;
+	//int screenWidth = 1280;
+	//int screenHeight = 720;
 
-    int screenWidth = 1024;
-    int screenHeight = 768;
+	int screenWidth = 1024;
+	int screenHeight = 768;
 
-    int menuAnsw = (int)MenuStates::MainMenu;
-    int point = 1;
-    bool backToMenu = false;
-    bool reset = true;
-
-
-
-    InitWindow(screenWidth, screenHeight, "Asteroids");
-
-    //ToggleFullscreen();
-    InitAudioDevice();
-    highScore = LoadStorageValue(0);
-    loadTextures();
-    loadSounds();
-
-    SetExitKey(KEY_NULL);
-
-    SetMusicVolume(menuMusic,0.5f);
-    SetMusicVolume(gameplayMusic,0.1f);
-    SetSoundVolume(asteroidShotSound,0.3f);
-
-    bool initGame = true;
+	int menuAnsw = (int)MenuStates::MainMenu;
+	int point = 1;
+	bool backToMenu = false;
+	bool reset = true;
 
 
-    while (!WindowShouldClose())
-    {
-        switch (menuAnsw)
-        {
-        case (int)MenuStates::MainMenu:
-            backToMenu = false;
-            reset = true;
-            initGame = true;
-            StopMusicStream(gameplayMusic);
-            PlayMusicStream(menuMusic);
-            menuAnsw = mainMenu(point);
-            break;
-        case (int)MenuStates::Gameplay:
-            StopMusicStream(menuMusic);
-            PlayMusicStream(gameplayMusic);
-            menuAnsw = gameplayLoop(initGame,backToMenu);
-            break;
-        case (int)MenuStates::Rules:
-            menuAnsw = rulesLoop(backToMenu);
-            break;
-        case (int)MenuStates::Credits:
-            menuAnsw = creditsLoop(backToMenu);
-            break;
-        case (int)MenuStates::Options:
-            menuAnsw = optionsLoop(backToMenu, screenWidth, screenHeight);
-            break;
-        case (int)MenuStates::Exit:
-            return;
-            break;
-        }
-    }
 
-    unloadTextures();
-    unloadSounds();
-    CloseAudioDevice();
+	InitWindow(screenWidth, screenHeight, "Asteroids");
 
-    CloseWindow();
+	InitAudioDevice();
+	HideCursor();
+	highScore = LoadStorageValue(0);
+	loadTextures();
+	loadSounds();
+
+	SetExitKey(KEY_NULL);
+
+	SetMusicVolume(menuMusic, 0.5f);
+	SetMusicVolume(gameplayMusic, 0.1f);
+	SetSoundVolume(asteroidShotSound, 0.3f);
+
+	bool initGame = true;
+
+
+	while (!WindowShouldClose())
+	{
+		switch (menuAnsw)
+		{
+		case (int)MenuStates::MainMenu:
+			backToMenu = false;
+			reset = true;
+			initGame = true;
+			StopMusicStream(gameplayMusic);
+			PlayMusicStream(menuMusic);
+			menuAnsw = mainMenu(point);
+			break;
+		case (int)MenuStates::Gameplay:
+			StopMusicStream(menuMusic);
+			PlayMusicStream(gameplayMusic);
+			menuAnsw = gameplayLoop(initGame, backToMenu);
+			break;
+		case (int)MenuStates::Rules:
+			menuAnsw = rulesLoop(backToMenu);
+			break;
+		case (int)MenuStates::Credits:
+			menuAnsw = creditsLoop(backToMenu);
+			break;
+		case (int)MenuStates::Options:
+			menuAnsw = optionsLoop(backToMenu, screenWidth, screenHeight);
+			break;
+		case (int)MenuStates::Exit:
+			return;
+			break;
+		}
+	}
+
+	unloadTextures();
+	unloadSounds();
+	CloseAudioDevice();
+
+	CloseWindow();
 }
-void loadTextures() 
+void loadTextures()
 {
-    spaceShipTexture = LoadTexture("res/nave_pixelada.png");
-    spaceShipAcelerationAnim = LoadTexture("res/Aceleracion.png");
-    spaceshipShotAnim = LoadTexture("res/Fogueo.png");
-    bulletTexture = LoadTexture("res/disparo-2.png");
-    monsterTexture = LoadTexture("res/monster.png");
+	mouseTexture = LoadTexture("res/cursor_1.png");
+	mouseTextureGameplay = LoadTexture("res/cursor_2.png");
 
-    largeAsteroidTexture = LoadTexture("res/asteroide_lindo.png");
-    mediumAsteroidTexture = LoadTexture("res/asteroide_lindo_mitad.png");
-    smallAsteroidTexture = LoadTexture("res/asteroide_lindo_un_cuarto.png");
+	spaceShipTexture = LoadTexture("res/nave_pixelada.png");
+	spaceShipAcelerationAnim = LoadTexture("res/Aceleracion.png");
+	spaceshipShotAnim = LoadTexture("res/Fogueo.png");
+	bulletTexture = LoadTexture("res/disparo-2.png");
+	monsterTexture = LoadTexture("res/monster.png");
 
-    asteroidexplosionAnim = LoadTexture("res/Explosion.png");
+	largeAsteroidTexture = LoadTexture("res/asteroide_lindo.png");
+	mediumAsteroidTexture = LoadTexture("res/asteroide_lindo_mitad.png");
+	smallAsteroidTexture = LoadTexture("res/asteroide_lindo_un_cuarto.png");
 
-    largeAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
-    mediumAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
-    smallAsteroidTextureEvil = LoadTexture("res/evilAsroids-2.png");
+	asteroidexplosionAnim = LoadTexture("res/Explosion.png");
 
-    playTexture = LoadTexture("res/jugar.png");
-    rulesTexture = LoadTexture("res/reglas.png");
-    optionsTexture = LoadTexture("res/opciones.png");
-    creditsTexture = LoadTexture("res/credits.png");
-    exitTexture = LoadTexture("res/salir.png");
+	largeAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
+	mediumAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
+	smallAsteroidTextureEvil = LoadTexture("res/evilAsroids-2.png");
 
-    continueTexture = LoadTexture("res/continuar.png");
-    resetTexture = LoadTexture("res/reiniciar.png");
-    returnTexture = LoadTexture("res/volver_al_menu.png");
-    pauseButtonTexture = LoadTexture("res/boton_blanco_pausa.png");
+	playTexture = LoadTexture("res/jugar.png");
+	rulesTexture = LoadTexture("res/reglas.png");
+	optionsTexture = LoadTexture("res/opciones.png");
+	creditsTexture = LoadTexture("res/credits.png");
+	exitTexture = LoadTexture("res/salir.png");
 
-    menu_Background = LoadTexture("res/menu_light_sin_letras.png");
-    menu_Background1 = LoadTexture("res/fondo_1.png");
-    gameplay_Background = LoadTexture("res/fondo_1.png");
-    gameplay_Background2 = LoadTexture("res/fondo_turbio.png");
-    CreditsBackground =  LoadTexture("res/pagina_creditos_1.png");
-    CreditsBackground2 = LoadTexture("res/pagina_creditos_2.png");
-    optionsBackground = LoadTexture("res/fondo_turbio.png");
-    rulesBackground = LoadTexture("res/fondo_turbio.png");
+	continueTexture = LoadTexture("res/continuar.png");
+	resetTexture = LoadTexture("res/reiniciar.png");
+	returnTexture = LoadTexture("res/volver_al_menu.png");
+	pauseButtonTexture = LoadTexture("res/boton_blanco_pausa.png");
 
-    menuLogo = LoadTexture("res/logoDeepPurple.png");
+	gitTexture = LoadTexture("res/Github_1.png");
+	gitTextureSelection = LoadTexture("res/Github_2.png");
+	instagramTexture = LoadTexture("res/Instagram_1.png");
+	instagramTextureSelection = LoadTexture("res/Instagram_2.png");
 
-    Controls1 = LoadTexture("res/click_izquierdo.png");
-    Controls2 = LoadTexture("res/click_derecho.png");
+	menu_Background = LoadTexture("res/menu_light_sin_letras.png");
+	menu_Background1 = LoadTexture("res/fondo_1.png");
+	gameplay_Background = LoadTexture("res/fondo_1.png");
+	gameplay_Background2 = LoadTexture("res/fondo_turbio.png");
+	CreditsBackground = LoadTexture("res/pagina_creditos_1.png");
+	CreditsBackground2 = LoadTexture("res/pagina_creditos_2.png");
+	optionsBackground = LoadTexture("res/fondo_turbio.png");
+	rulesBackground = LoadTexture("res/fondo_turbio.png");
 
-    pauseMenuTexture = LoadTexture("res/menu_pausa_sin_letras.png");
+	menuLogo = LoadTexture("res/logoDeepPurple.png");
+
+	Controls1 = LoadTexture("res/click_izquierdo.png");
+	Controls2 = LoadTexture("res/click_derecho.png");
+
+	pauseMenuTexture = LoadTexture("res/menu_pausa_sin_letras.png");
 }
-void loadSounds() 
+void loadSounds()
 {
-    menuMusic = LoadMusicStream("res/Music/menu_song.wav");
-    gameplayMusic = LoadMusicStream("res/Music/juego_song.wav");
+	menuMusic = LoadMusicStream("res/Music/menu_song.wav");
+	gameplayMusic = LoadMusicStream("res/Music/juego_song.wav");
 
-    shotSound = LoadSound("res/Music/shot.wav");
-    asteroidShotSound = LoadSound("res/Music/dead_asteroid.wav");
-    deadSpaceshipSound = LoadSound("res/Music/dead_explotion.wav");
+	shotSound = LoadSound("res/Music/shot.wav");
+	asteroidShotSound = LoadSound("res/Music/dead_asteroid.wav");
+	deadSpaceshipSound = LoadSound("res/Music/dead_explotion.wav");
 }
-void unloadTextures() 
+void unloadTextures()
 {
-    UnloadTexture(spaceShipTexture);
-    UnloadTexture(spaceShipAcelerationAnim);
-    UnloadTexture(bulletTexture);
-    UnloadTexture(spaceshipShotAnim);
-    UnloadTexture(monsterTexture);
+	UnloadTexture(mouseTexture);
+	UnloadTexture(mouseTextureGameplay);
 
-    UnloadTexture(largeAsteroidTexture);
-    UnloadTexture(mediumAsteroidTexture);
-    UnloadTexture(smallAsteroidTexture);
-    UnloadTexture(largeAsteroidTextureEvil);
-    UnloadTexture(mediumAsteroidTextureEvil);
-    UnloadTexture(smallAsteroidTextureEvil);
-    UnloadTexture(asteroidexplosionAnim);
+	UnloadTexture(spaceShipTexture);
+	UnloadTexture(spaceShipAcelerationAnim);
+	UnloadTexture(bulletTexture);
+	UnloadTexture(spaceshipShotAnim);
+	UnloadTexture(monsterTexture);
 
-    UnloadTexture(playTexture);
-    UnloadTexture(rulesTexture);
-    UnloadTexture(optionsTexture);
-    UnloadTexture(creditsTexture);
-    UnloadTexture(exitTexture);
+	UnloadTexture(largeAsteroidTexture);
+	UnloadTexture(mediumAsteroidTexture);
+	UnloadTexture(smallAsteroidTexture);
+	UnloadTexture(largeAsteroidTextureEvil);
+	UnloadTexture(mediumAsteroidTextureEvil);
+	UnloadTexture(smallAsteroidTextureEvil);
+	UnloadTexture(asteroidexplosionAnim);
 
-    UnloadTexture(continueTexture);
-    UnloadTexture(resetTexture);
-    UnloadTexture(returnTexture);
-    UnloadTexture(pauseButtonTexture);
+	UnloadTexture(playTexture);
+	UnloadTexture(rulesTexture);
+	UnloadTexture(optionsTexture);
+	UnloadTexture(creditsTexture);
+	UnloadTexture(exitTexture);
 
-    UnloadTexture(menu_Background);
-    UnloadTexture(menu_Background1);
-    UnloadTexture(gameplay_Background);
-    UnloadTexture(gameplay_Background2);
-    UnloadTexture(CreditsBackground);
-    UnloadTexture(CreditsBackground2);
-    UnloadTexture(optionsBackground);
-    UnloadTexture(rulesBackground);
+	UnloadTexture(continueTexture);
+	UnloadTexture(resetTexture);
+	UnloadTexture(returnTexture);
+	UnloadTexture(pauseButtonTexture);
+	UnloadTexture(gitTexture);
+	UnloadTexture(gitTextureSelection);
+	UnloadTexture(instagramTexture);
+	UnloadTexture(instagramTextureSelection);
 
-    UnloadTexture(menuLogo);
-    UnloadTexture(Controls1);
-    UnloadTexture(Controls2);
+	UnloadTexture(menu_Background);
+	UnloadTexture(menu_Background1);
+	UnloadTexture(gameplay_Background);
+	UnloadTexture(gameplay_Background2);
+	UnloadTexture(CreditsBackground);
+	UnloadTexture(CreditsBackground2);
+	UnloadTexture(optionsBackground);
+	UnloadTexture(rulesBackground);
 
-    UnloadTexture(pauseMenuTexture);
+	UnloadTexture(menuLogo);
+	UnloadTexture(Controls1);
+	UnloadTexture(Controls2);
+
+	UnloadTexture(pauseMenuTexture);
 }
-void unloadSounds() 
+void unloadSounds()
 {
-    UnloadMusicStream(menuMusic);
-    UnloadMusicStream(gameplayMusic);
+	UnloadMusicStream(menuMusic);
+	UnloadMusicStream(gameplayMusic);
 
-    UnloadSound(shotSound);
-    UnloadSound(asteroidShotSound);
-    UnloadSound(deadSpaceshipSound);
+	UnloadSound(shotSound);
+	UnloadSound(asteroidShotSound);
+	UnloadSound(deadSpaceshipSound);
 }

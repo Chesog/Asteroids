@@ -31,33 +31,12 @@ void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D s
 {
 	float scale = 0.8f;
 
-	//float originalResWidth = 1024;
-	//float originalResHeight = 768;
-	//
-	//float currentResWidth = static_cast<float>(GetScreenWidth());
-	//float CurrentResHeight = static_cast<float>(GetScreenHeight());
-	
-	//float scaleResWidth = currentResWidth / originalResWidth;
-	//float scaleResHeight = CurrentResHeight / originalResHeight;
-
 	Vector2 mousePosition = GetMousePosition();
 
 	Rectangle sourRect = { 0,0,static_cast<float>(buttonTexture.width),static_cast<float>(buttonTexture.height) };
 	Rectangle destRect = { actualButton.rect.x + actualButton.rect.width / 2  + buttonTexture.width / 8,actualButton.rect.y + actualButton.rect.height / 2,static_cast<float>(buttonTexture.width * scale),static_cast<float>(buttonTexture.height * scale) };
 	Vector2 texturePiv = { static_cast<float>((buttonTexture.width) / 2),static_cast<float>((buttonTexture.height) / 2) };
 
-	//sourRect.x *= scaleResWidth;
-	//sourRect.y *= scaleResHeight;
-	//sourRect.width *= scaleResWidth;
-	//sourRect.height *= scaleResHeight;
-	//
-	//destRect.x *= scaleResWidth;
-	//destRect.y *= scaleResHeight;
-	//destRect.width *= scaleResWidth;
-	//destRect.height *= scaleResHeight;
-
-	//texturePiv.x *= scaleResWidth;
-	//texturePiv.y *= scaleResHeight;
 
 	if (CheckCollisionPointRec(mousePosition, actualButton.rect))
 	{
@@ -68,4 +47,22 @@ void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D s
 		DrawTexturePro(buttonTexture, sourRect, destRect, texturePiv, 0, WHITE);
 	}
 
+}
+void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D selectionTexture, float scale) 
+{
+	Vector2 mousePosition = GetMousePosition();
+
+	Rectangle sourRect = { 0,0,static_cast<float>(buttonTexture.width),static_cast<float>(buttonTexture.height) };
+	Rectangle destRect = { actualButton.rect.x + actualButton.rect.width / 2 + buttonTexture.width / 8,actualButton.rect.y + actualButton.rect.height / 2,static_cast<float>(buttonTexture.width * scale),static_cast<float>(buttonTexture.height * scale) };
+	Vector2 texturePiv = { static_cast<float>((buttonTexture.width) / 2),static_cast<float>((buttonTexture.height) / 2) };
+
+
+	if (CheckCollisionPointRec(mousePosition, actualButton.rect))
+	{
+		DrawTexturePro(selectionTexture, sourRect, destRect, texturePiv, 0, WHITE);
+	}
+	else
+	{
+		DrawTexturePro(buttonTexture, sourRect, destRect, texturePiv, 0, WHITE);
+	}
 }

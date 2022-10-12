@@ -9,6 +9,8 @@ Texture2D optionsTexture;
 Texture2D creditsTexture;
 Texture2D exitTexture;
 
+Texture2D mouseTexture;
+
 Texture2D menuLogo;
 
 Music menuMusic;
@@ -99,6 +101,8 @@ int checkInput(int& point)
 }
 void drawMenu(int screenWidth, int screenHeight)
 {
+	//DrawTexture(mouseTexture,static_cast<int>(GetMouseX()), static_cast<int>(GetMouseY()),WHITE);
+	
 	float scale = 1.0f;
 	int originalResWhidth = 1024;
 	int originalResHeight = 768;
@@ -173,6 +177,8 @@ void drawMenu(int screenWidth, int screenHeight)
 		int textSize = MeasureText(TextFormat("Max Score : %i", highScore), font);
 		DrawText(TextFormat("Max Score : %i", highScore),GetScreenWidth() / 2 + textSize / 2, font, font, PURPLE);
 	}
+
+	DrawTextureEx(mouseTexture, GetMousePosition(), 0, 2.0f, WHITE);
 }
 int checkMouseColition(Vector2 mousePosition, int& point)
 {
