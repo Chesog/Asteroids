@@ -78,7 +78,7 @@ void mouseButtonColition(bool& initGame, bool& backToMenu);
 
 int gameplayLoop(bool& initGame, bool& backToMenu)
 {
-	const int changeCondition = 50;
+	const int changeCondition = 666;
 
 	UpdateMusicStream(gameplayMusic);
 
@@ -303,7 +303,7 @@ void drawGameplay(int changeCondition)
 			DrawRectangle(static_cast<int>(pauseButton.rect.x - pauseButton.rect.width / 2), static_cast<int>(pauseButton.rect.y), static_cast<int>(pauseButton.rect.width * 2), static_cast<int>(pauseButton.rect.height * 3), WHITE);
 			DrawText("Perdiste", static_cast<int>(GetScreenWidth() / 2 - loseText / 2), static_cast<int>(pauseButton.rect.y * 2.5f), pauseButton.fontSize, BLACK);
 		}
-		DrawText(TextFormat("High Score: %i",highScore),6,40,30, PURPLE);
+		DrawText(TextFormat("High Score: %i", highScore), 6, 40, 30, PURPLE);
 
 		drawButtonTexture(continueButton, continueTexture, continueTexture);
 		drawButtonTexture(resetButton, resetTexture, resetTexture);
@@ -341,19 +341,22 @@ void updateGameplay()
 		highScore = player.score;
 	}
 
-	if (!monster.isAlive)
+	if (change)
 	{
-		if (monster.respawnTimer <= 0)
+		if (!monster.isAlive)
 		{
-			monster.isAlive = true;
-			monster.lives = 3;
-			monster.respawnTimer = 0;
+			if (monster.respawnTimer <= 0)
+			{
+				monster.isAlive = true;
+				monster.lives = 3;
+				monster.respawnTimer = 0;
 
-		}
-		else
-		{
-			monster.respawnTimer -= GetFrameTime();
-			std::cout << "Respawn Timer : " << monster.respawnTimer << endl;
+			}
+			else
+			{
+				monster.respawnTimer -= GetFrameTime();
+				std::cout << "Respawn Timer : " << monster.respawnTimer << endl;
+			}
 		}
 	}
 

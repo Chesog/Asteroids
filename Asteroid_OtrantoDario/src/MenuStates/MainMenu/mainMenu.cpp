@@ -13,6 +13,12 @@ Texture2D menuLogo;
 
 Music menuMusic;
 
+static Button button1;
+static Button button2;
+static Button button3;
+static Button button4;
+static Button button5;
+
 extern int highScore;
 
 int mainMenu(int& point)
@@ -28,18 +34,18 @@ int mainMenu(int& point)
 	int screenWidth = GetScreenWidth();
 	int screenHeight = GetScreenHeight();
 
-	static Button button1 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) , fontSize, buttonWidth, buttonHeight, (int)MenuStates::Gameplay, "Jugar", GREEN, RED);
-	static Button button2 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 2 , fontSize, buttonWidth, buttonHeight, (int)MenuStates::Rules, "Reglas", GREEN, RED);
-	static Button button3 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 4, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Options, "Opciones", GREEN, RED);
-	static Button button4 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 6, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Credits, "Creditos", GREEN, RED);
-	static Button button5 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 8, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Exit, "Salir", GREEN, RED);
+	button1 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) , fontSize, buttonWidth, buttonHeight, (int)MenuStates::Gameplay, "Jugar", GREEN, RED);
+	button2 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 2 , fontSize, buttonWidth, buttonHeight, (int)MenuStates::Rules, "Reglas", GREEN, RED);
+	button3 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 4, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Options, "Opciones", GREEN, RED);
+	button4 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 6, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Credits, "Creditos", GREEN, RED);
+	button5 = initButton(((screenWidth / 2) - (buttonWidth / 2)), (screenHeight / 2) + buttonHeight * 8, fontSize, buttonWidth, buttonHeight, (int)MenuStates::Exit, "Salir", GREEN, RED);
 	Vector2 mousePosition = GetMousePosition();
 
 	selection = checkInput(point);
-	selection2 = checkMouseColition(mousePosition, button1, button2, button3, button4, button5, point);
+	selection2 = checkMouseColition(mousePosition, point);
 
 	BeginDrawing();
-	drawMenu(screenWidth, screenHeight, button1, button2, button3, button4, button5);
+	drawMenu(screenWidth, screenHeight);
 	EndDrawing();
 
 	if (selection != 0)
@@ -91,33 +97,44 @@ int checkInput(int& point)
 		return defaultOption;
 	}
 }
-void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2, Button button3, Button button4, Button button5)
+void drawMenu(int screenWidth, int screenHeight)
 {
 	float scale = 1.0f;
+	int originalResWhidth = 1024;
+	int originalResHeight = 768;
+
+	Vector2 backgroundPosition = { 0.0f,0.0f };
+
+	ClearBackground(BLACK);
+
+	if (GetScreenWidth() != originalResWhidth && GetScreenHeight() != originalResHeight)
+	{
+		scale = 1.5f;
+	}
+	else
+	{
+		scale = 1.0f;
+	}
 
 	int fontSize = 80;
 	screenHeight = screenHeight;
 	screenWidth = screenWidth;
-	//int textSizeTitle = MeasureText(TextFormat("Deep Purple"), fontSize);
-	//int textSizeButton1 = MeasureText(TextFormat("JUGAR"), button1.fontSize);
-	//int textSizeButton2 = MeasureText(TextFormat("REGLAS"), button2.fontSize);
-	//int textSizeButton3 = MeasureText(TextFormat("OPCIONES"), button3.fontSize);
-	//int textSizeButton4 = MeasureText(TextFormat("CREDITOS"), button4.fontSize);
-	//int textSizeButton5 = MeasureText(TextFormat("SALIR"), button5.fontSize);
-	Vector2 backgroundPosition = { 0.0f,0.0f };
-	backgroundPosition.x = static_cast<float>(GetScreenWidth() / 2);
-	backgroundPosition.y = static_cast<float>(GetScreenHeight() / 2);
 
 	ClearBackground(BLACK);
 
-	Rectangle sourRect = { 0,0,static_cast<float>(menu_Background1.width),static_cast<float>(menu_Background1.height) };
-	Rectangle destRect = { backgroundPosition.x,backgroundPosition.y,static_cast<float>(menu_Background1.width * scale),static_cast<float>(menu_Background1.height * scale) };
-	Vector2 texturePiv = { static_cast<float>((menu_Background1.width * scale) / 2),static_cast<float>((menu_Background1.height * scale) / 2) };
+	DrawTextureEx(menu_Background1, backgroundPosition, 0, scale, WHITE);
 
-	DrawTexturePro(menu_Background1, sourRect, destRect, texturePiv, 0.0f, WHITE);
+	float scale1 = 0.0f;
 
+	if (GetScreenWidth() != originalResWhidth && GetScreenHeight() != originalResHeight)
+	{
+		scale1 = 0.5f;
+	}
+	else
+	{
+		scale1 = 0.3f;
+	}
 
-	float scale1 = 0.3f;
 	Vector2 logoPosition = { 0.0f,0.0f };
 	logoPosition.x = static_cast<float>(GetScreenWidth() / 2) - (menuLogo.width / 4) * scale1;
 	logoPosition.y = static_cast<float>(fontSize * 2);
@@ -127,8 +144,6 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 	Vector2 texturePiv1 = { static_cast<float>((menuLogo.width * scale1) / 2),static_cast<float>((menuLogo.height * scale1) / 2) };
 	
 	DrawTexturePro(menuLogo, sourRect1, destRect1, texturePiv1, 0.0f, WHITE);
-
-	//DrawText("Deep Purple", (screenWidth / 2) - (textSizeTitle / 2), fontSize, fontSize, RED);
 
 	drawButtonTexture(button1, playTexture, playTexture);
 
@@ -159,7 +174,7 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 		DrawText(TextFormat("Max Score : %i", highScore),GetScreenWidth() / 2 + textSize / 2, font, font, PURPLE);
 	}
 }
-int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Button button3, Button button4, Button button5, int& point)
+int checkMouseColition(Vector2 mousePosition, int& point)
 {
 	if (CheckCollisionPointRec(mousePosition, button1.rect))
 	{
