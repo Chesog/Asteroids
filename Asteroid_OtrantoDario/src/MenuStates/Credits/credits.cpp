@@ -6,6 +6,7 @@ extern Texture2D returnTexture;
 static Button returnButton;
 
 Texture2D CreditsBackground;
+Texture2D CreditsBackground2;
 
 
 int creditsLoop(bool& backToMenu)
@@ -37,9 +38,19 @@ void drawCredits()
 {
 	Vector2 backgroundPosition = { 0.0f,0.0f };
 	float scale = 1.0f;
+	int originalResWhidth = 1024;
+	int originalResHeight = 768;
 
 	ClearBackground(BLACK);
-	DrawTextureEx(CreditsBackground,backgroundPosition,0, scale,WHITE);
+
+	if (GetScreenWidth() != originalResWhidth && GetScreenHeight() != originalResHeight)
+	{
+		DrawTextureEx(CreditsBackground2, backgroundPosition, 0, scale, WHITE);
+	}
+	else
+	{
+		DrawTextureEx(CreditsBackground, backgroundPosition, 0, scale, WHITE);
+	}
 	drawButtonTexture(returnButton, returnTexture, returnTexture);
 }
 void checkInput(bool& backToMenu)

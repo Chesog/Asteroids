@@ -2,7 +2,11 @@
 
 Texture2D optionsBackground;
 
+static Rectangle defaultResolution;
+static Rectangle maxResolution;
+
 static Button returnButton;
+static Button togleFullScreen;
 
 extern Texture2D returnTexture;
 extern Music menuMusic;
@@ -14,15 +18,14 @@ int optionsLoop(bool& backToMenu, int& screenWidth, int& screenHeight)
 	int buttonWidth = 100;
 	int buttonHeight = 40;
 	returnButton = initButton(GetScreenWidth() - static_cast<int>(buttonWidth * 2.5f), buttonHeight, 10, buttonWidth, buttonHeight, 0, "Return", GREEN, RED);
-
+	togleFullScreen = initButton(GetScreenWidth() - static_cast<int>(GetScreenWidth() / 2 + buttonWidth * 1.5f), buttonHeight * 4, 10, buttonHeight, buttonHeight, 0, "Return", GREEN, RED);
 	int mainMenu = 0;
 	int optionsMenu = 3;
 	static int point = 1;
 	int resolutionSelection = checkInputOptions(backToMenu, point);
 
-	Rectangle defaultResolution;
-	Rectangle maxResolution;
-	createOptionsButtons(defaultResolution, maxResolution);
+
+	createOptionsButtons();
 
 	if (resolutionSelection == (int)OptionsResolution::DefaultResolution)
 	{
@@ -38,7 +41,7 @@ int optionsLoop(bool& backToMenu, int& screenWidth, int& screenHeight)
 	}
 
 	BeginDrawing();
-	drawOptions(point, defaultResolution, maxResolution);
+	drawOptions(point);
 	EndDrawing();
 
 	if (backToMenu)
@@ -63,6 +66,35 @@ int checkInputOptions(bool& backToMenu, int& point)
 			backToMenu = true;
 		}
 	}
+
+	if (CheckCollisionPointRec(mousePosition, defaultResolution))
+	{
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		{
+			point = static_cast<int>(OptionsResolution::DefaultResolution);
+			return point;
+		}
+	}
+
+
+	if (CheckCollisionPointRec(mousePosition, maxResolution))
+	{
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		{
+			point = static_cast<int>(OptionsResolution::MaxResolution);
+			return point;
+		}
+	}
+
+	if (CheckCollisionPointRec(mousePosition, togleFullScreen.rect))
+	{
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		{
+			ToggleFullscreen();
+		}
+	}
+
+
 
 	if (IsKeyReleased(KEY_UP))
 	{
@@ -107,17 +139,54 @@ int checkInputOptions(bool& backToMenu, int& point)
 
 
 }
-void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution)
+void drawOptions(int point)
 {
+	int originalResWhidth = 1024;
+	int originalResHeight = 768;
+
+	int buttonWidth = 100;
+	int buttonHeight = 40;
 
 	Vector2 backgroundPosition = { 0.0f,0.0f };
-	float scale = 1.0f;
-
-	DrawTextureEx(optionsBackground, backgroundPosition, 0, scale, WHITE);
-
+	float scale = 0.0f;
 	int fontSize = 30;
 
+	Vector2 mousePosition = { static_cast<float>(GetMouseX()),static_cast<float>(GetMouseY()) };
+
+	if (GetScreenWidth() != originalResWhidth && GetScreenHeight() != originalResHeight)
+	{
+		scale = 1.5f;
+	}
+	else
+	{
+		scale = 1.0f;
+	}
+
+	DrawTextureEx(optionsBackground, backgroundPosition, 0, scale, WHITE);
+	drawButton(togleFullScreen);
+
+	//int fullScreenText = MeasureText("Cambiar Pantalla Completa", fontSize);
+	DrawText("Cambiar Pantalla Completa", GetScreenWidth() - static_cast<int>(GetScreenWidth() / 2 + buttonWidth), buttonHeight * 4,fontSize,BLACK);
 	ClearBackground(BLACK);
+
+	if (CheckCollisionPointRec(mousePosition, defaultResolution))
+	{
+		DrawRectangleRec(defaultResolution, YELLOW);
+	}
+	else
+	{
+		DrawRectangleRec(defaultResolution, RED);
+	}
+
+	if (CheckCollisionPointRec(mousePosition, maxResolution))
+	{
+		DrawRectangleRec(maxResolution, YELLOW);
+	}
+	else
+	{
+		DrawRectangleRec(maxResolution, RED);
+	}
+
 	if (point == (int)OptionsResolution::DefaultResolution)
 	{
 		DrawRectangleRec(defaultResolution, GREEN);
@@ -138,11 +207,11 @@ void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution
 	{
 		DrawRectangleRec(maxResolution, RED);
 	}
-	DrawText("1280 X 720", GetScreenWidth() / 2 - textSize2 / 2, GetScreenHeight() / 2 + 30, fontSize, BLACK);
+	DrawText("1280 X 720", GetScreenWidth() / 2 - textSize2 / 2, GetScreenHeight() / 2 + 45, fontSize, BLACK);
 
 	drawButtonTexture(returnButton, returnTexture, returnTexture);
 }
-void createOptionsButtons(Rectangle& defaultResolution, Rectangle& maxResolution)
+void createOptionsButtons()
 {
 	int screenWidth = GetScreenWidth();
 	int screenHeight = GetScreenHeight();

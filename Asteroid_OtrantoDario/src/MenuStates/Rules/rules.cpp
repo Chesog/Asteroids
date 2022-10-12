@@ -35,7 +35,20 @@ int rulesLoop(bool& backToMenu)
 void drawRules()
 {
 	Vector2 backgroundPosition = { 0.0f,0.0f };
-	float scale = 1.0f;
+	int originalResWhidth = 1024;
+	int originalResHeight = 768;
+
+	float scale = 0.0f;
+
+	if (GetScreenWidth() != originalResWhidth && GetScreenHeight() != originalResHeight) 
+	{
+		scale = 1.5f;
+	}
+	else
+	{
+		scale = 1.0f;
+	}
+
 
 	int tileFont = 40;
 	int font = 30;
