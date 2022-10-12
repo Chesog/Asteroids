@@ -1,6 +1,7 @@
 #include "credits.h"
 
 extern Music menuMusic;
+Texture2D CreditsBackground;
 
 int creditsLoop(bool& backToMenu)
 {
@@ -25,14 +26,11 @@ int creditsLoop(bool& backToMenu)
 }
 void drawCredits()
 {
-	int font = 80;
-	int screenWidth = GetScreenWidth();
-	int screenHeight = GetScreenHeight();
-	int testSize = MeasureText("CREADO POR", font);
+	Vector2 backgroundPosition = { 0.0f,0.0f };
+	float scale = 1.0f;
 
 	ClearBackground(BLACK);
-	DrawText("CREADO POR", (screenWidth / 2) - (testSize / 2), (screenHeight / 2) - font, font, RED);
-	DrawText("CHESO", (screenWidth / 2) - (testSize / 2), (screenHeight / 2), font, LIME);
+	DrawTextureEx(CreditsBackground,backgroundPosition,0, scale,WHITE);
 }
 void checkInput(bool& backToMenu)
 {

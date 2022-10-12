@@ -17,6 +17,7 @@ extern Texture2D menu_Background;
 extern Texture2D menu_Background1;
 extern Texture2D gameplay_Background;
 extern Texture2D gameplay_Background2;
+extern Texture2D CreditsBackground;
 
 extern Texture2D playTexture;
 extern Texture2D rulesTexture;
@@ -43,6 +44,8 @@ extern Sound shotSound;
 extern Sound asteroidShotSound;
 extern Sound deadSpaceshipSound;
 
+extern int highScore;
+
 float timer = 0;
 
 void loadTextures();
@@ -65,9 +68,11 @@ void ejecuteGame()
     bool reset = true;
 
 
-    InitWindow(screenWidth, screenHeight, "Asteroids");
-    InitAudioDevice();
 
+    InitWindow(screenWidth, screenHeight, "Asteroids");
+
+    InitAudioDevice();
+    highScore = LoadStorageValue(0);
     loadTextures();
     loadSounds();
 
@@ -148,6 +153,7 @@ void loadTextures()
     menu_Background1 = LoadTexture("res/fondo_1.png");
     gameplay_Background = LoadTexture("res/fondo_1.png");
     gameplay_Background2 = LoadTexture("res/fondo_turbio.png");
+    CreditsBackground =  LoadTexture("res/pagina_creditos_1.png");
 
     menuLogo = LoadTexture("res/logoDeepPurple.png");
 
@@ -193,6 +199,7 @@ void unloadTextures()
     UnloadTexture(menu_Background1);
     UnloadTexture(gameplay_Background);
     UnloadTexture(gameplay_Background2);
+    UnloadTexture(CreditsBackground);
 
     UnloadTexture(menuLogo);
     UnloadTexture(Controls1);

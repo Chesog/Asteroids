@@ -1,19 +1,56 @@
-﻿  Asteroid_OtrantoDario.vcxproj -> C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\Asteroid_OtrantoDario.exe
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\LICENSE
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\README.md
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\include\raygui.h
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\include\raylib.h
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\include\raymath.h
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\include\rlgl.h
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\lib\raylib.dll
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\lib\raylib.lib
-  C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\lib\raylibdll.lib
+﻿  Generando código
+  Previous IPDB and IOBJ mismatch, fall back to full compilation.
+  All 179 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Generación de código finalizada
+raylib.lib(raudio.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(raudio.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rcore.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rcore.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rglfw.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rglfw.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rshapes.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rshapes.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rtext.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtext.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rtextures.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtextures.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(utils.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Asteroid_OtrantoDario.vcxproj -> C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\Asteroid_OtrantoDario.exe
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\LICENSE
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\README.md
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\include\raygui.h
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\include\raylib.h
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\include\raymath.h
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\include\rlgl.h
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\lib\raylib.dll
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\lib\raylib.lib
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\lib\raylibdll.lib
   9 archivo(s) copiado(s)
-  No se encuentra el archivo: res
-  0 archivo(s) copiado(s)
-  Ya existe el subdirectorio o el archivo C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release`.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(149,5): error MSB3073: El comando "XCOPY "C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\lib\" "C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release" /e /h /y /s
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(149,5): error MSB3073: XCOPY "res" "C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release" /e /h /y /s
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(149,5): error MSB3073: 
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(149,5): error MSB3073: MKDIR "C:\Users\Administrador\Desktop\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release"`
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(149,5): error MSB3073: :VCEnd" salió con el código 1.
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\asteroide_lindo.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\asteroide_lindo_mitad.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\asteroide_lindo_mitad_2.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\asteroide_lindo_un_cuarto.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\asteroide_malo.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\boton_blanco_pausa.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\click_derecho.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\click_izquierdo.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\continuar.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\credits.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\disparo-2.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\evilAsroids-2.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\evilAsteroids-1.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\fondo_1.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\fondo_turbio.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\jugar.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\logoDeepPurple.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\menu_light.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\menu_light_sin_letras.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\menu_pausa_sin_letras.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\monster.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\nave_pixelada.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\opciones.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\reglas.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\reiniciar.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\salir.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\volumen.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\volver_al_menu.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Music\dead_asteroid.wav
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Music\dead_explotion.wav
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Music\juego_song.wav
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Music\menu_song.wav
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Music\shot.wav
+  33 archivo(s) copiado(s)

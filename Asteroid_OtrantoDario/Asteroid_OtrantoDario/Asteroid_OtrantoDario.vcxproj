@@ -148,10 +148,10 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(SolutionDir)lib\" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
-XCOPY "$(ProyectDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
+      <Command>XCOPY "$(SolutionDir)lib" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
 
-MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)"`</Command>
+MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)\res"
+XCOPY "$(SolutionDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)\res" /e /h /y /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -173,10 +173,10 @@ MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)"`</Command>
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(SolutionDir)lib\" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
-XCOPY "$(ProyectDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
+      <Command>XCOPY "$(SolutionDir)lib" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
 
-MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)"`</Command>
+MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)\res"
+XCOPY "$(SolutionDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)\res" /e /h /y /s</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>

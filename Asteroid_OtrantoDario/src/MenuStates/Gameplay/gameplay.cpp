@@ -14,6 +14,17 @@ static Button returnButton;
 static Button resetButton;
 
 
+int highScore;
+
+static int largeAsteroidCount;
+static int mediumAsteroidCount;
+static int smallAsteroidCount;
+
+static bool pauseGameplay;
+static bool change;
+
+extern float timer;
+
 Music gameplayMusic;
 
 Sound asteroidShotSound;
@@ -43,14 +54,6 @@ Texture2D returnTexture;
 Texture2D pauseButtonTexture;
 
 
-extern float timer;
-
-static int largeAsteroidCount;
-static int mediumAsteroidCount;
-static int smallAsteroidCount;
-
-static bool pauseGameplay;
-static bool change;
 
 
 
@@ -111,9 +114,24 @@ int gameplayLoop(bool& initGame, bool& backToMenu)
 
 	if (backToMenu)
 	{
-		return static_cast<int>(MenuStates::MainMenu);
+		if (player.score > highScore)
+		{
+			highScore = player.score;
 
-		//StopMusicStream(gameplayMusic);
+			if (SaveStorageValue(0, highScore))
+			{
+				std::cout << "Se guardo Correctamente";
+			}
+			
+		}
+		else
+		{
+			if (SaveStorageValue(0, highScore))
+			{
+				std::cout << "Se guardo Correctamente";
+			}
+		}
+		return static_cast<int>(MenuStates::MainMenu);
 	}
 	else
 	{
@@ -307,7 +325,7 @@ void drawGameplay(int changeCondition)
 		//DrawText("Continue", static_cast<int>(pauseButton.rect.x), static_cast<int>(pauseButton.rect.y), pauseButton.fontSize, BLACK);
 
 	}
-	DrawText(TextFormat("Player Score: %i", player.score), 6, 6, 20, RED);
+	DrawText(TextFormat("Player Score: %i", player.score), 6, 6, 30, RED);
 
 	if (player.lives == 3)
 	{

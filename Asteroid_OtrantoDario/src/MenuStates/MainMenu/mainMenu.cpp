@@ -13,6 +13,8 @@ Texture2D menuLogo;
 
 Music menuMusic;
 
+extern int highScore;
+
 int mainMenu(int& point)
 {
 
@@ -95,6 +97,7 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 
 	int fontSize = 80;
 	screenHeight = screenHeight;
+	screenWidth = screenWidth;
 	//int textSizeTitle = MeasureText(TextFormat("Deep Purple"), fontSize);
 	//int textSizeButton1 = MeasureText(TextFormat("JUGAR"), button1.fontSize);
 	//int textSizeButton2 = MeasureText(TextFormat("REGLAS"), button2.fontSize);
@@ -137,6 +140,8 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 
 	drawButtonTexture(button5, exitTexture, exitTexture);
 
+
+
 #ifdef _DEBUG
 	DrawRectangle(0, screenHeight / 2, screenWidth, 1, DARKGREEN);
 	DrawRectangle(0, static_cast<int>((button1.rect.y + button1.rect.height / 2)), screenWidth, 1, BLUE);
@@ -146,13 +151,20 @@ void drawMenu(int screenWidth, int screenHeight, Button button1, Button button2,
 	DrawRectangle(0, static_cast<int>((button5.rect.y + button5.rect.height / 2)), screenWidth, 1, BLUE);
 	DrawRectangle(screenWidth / 2, 0, 1, screenHeight, DARKGREEN);
 #endif // DEBUG
+
+	if (highScore != 0)
+	{
+		int font = 40;
+		int textSize = MeasureText(TextFormat("Max Score : %i", highScore), font);
+		DrawText(TextFormat("Max Score : %i", highScore),GetScreenWidth() / 2 + textSize / 2, font, font, PURPLE);
+	}
 }
 int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Button button3, Button button4, Button button5, int& point)
 {
 	if (CheckCollisionPointRec(mousePosition, button1.rect))
 	{
 		point = button1.optionNumber;
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		{
 			return button1.optionNumber;
 		}
@@ -164,7 +176,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	else if (CheckCollisionPointRec(mousePosition, button2.rect))
 	{
 		point = button2.optionNumber;
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		{
 			return button2.optionNumber;
 		}
@@ -176,7 +188,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	else if (CheckCollisionPointRec(mousePosition, button3.rect))
 	{
 		point = button3.optionNumber;
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		{
 			return button3.optionNumber;
 		}
@@ -188,7 +200,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	else if (CheckCollisionPointRec(mousePosition, button4.rect))
 	{
 		point = button4.optionNumber;
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		{
 			return button4.optionNumber;
 		}
@@ -200,7 +212,7 @@ int checkMouseColition(Vector2 mousePosition, Button button1, Button button2, Bu
 	else if (CheckCollisionPointRec(mousePosition, button5.rect))
 	{
 		point = button5.optionNumber;
-		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+		if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
 		{
 			return button5.optionNumber;
 		}

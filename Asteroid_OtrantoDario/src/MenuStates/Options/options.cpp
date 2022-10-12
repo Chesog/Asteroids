@@ -17,17 +17,15 @@ int optionsLoop(bool& backToMenu, int& screenWidth, int& screenHeight)
 
 	if (resolutionSelection == (int)OptionsResolution::DefaultResolution)
 	{
-		screenWidth = 1280;
-		screenHeight = 720;
+		screenWidth = 1024;
+		screenHeight = 768;
 		SetWindowSize(screenWidth, screenHeight);
-		ToggleFullscreen();
 	}
 	else if (resolutionSelection == (int)OptionsResolution::MaxResolution)
 	{
-		screenWidth = 1920;
-		screenHeight = 1080;
+		screenWidth = 1280;
+		screenHeight = 720;
 		SetWindowSize(screenWidth, screenHeight);
-		ToggleFullscreen();
 	}
 
 	BeginDrawing();
@@ -101,8 +99,8 @@ void drawOptions(int point, Rectangle defaultResolution, Rectangle maxResolution
 	{
 		DrawRectangleRec(defaultResolution, RED);
 	}
-	int textSize1 = MeasureText("1280 X 720", fontSize);
-	int textSize2 = MeasureText("1920 X 1080", fontSize);
+	int textSize1 = MeasureText("1024 X 768", fontSize);
+	int textSize2 = MeasureText("1280 X 720", fontSize);
 	DrawText("1280 X 720", GetScreenWidth() / 2 - textSize1 / 2, GetScreenHeight() / 2 - 30, fontSize, BLACK);
 
 	if (point == (int)OptionsResolution::MaxResolution)
