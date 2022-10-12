@@ -13,9 +13,6 @@ static Button continueButton;
 static Button returnButton;
 static Button resetButton;
 
-
-int highScore;
-
 static int largeAsteroidCount;
 static int mediumAsteroidCount;
 static int smallAsteroidCount;
@@ -23,7 +20,17 @@ static int smallAsteroidCount;
 static bool pauseGameplay;
 static bool change;
 
+float animationCounter;
+float shootanimationCounter;
+//float explosionAnimationCounter;
+
+
 extern float timer;
+
+extern Texture2D spaceShipAcelerationAnim;
+extern Texture2D spaceshipShotAnim;
+
+int highScore;
 
 Music gameplayMusic;
 
@@ -32,6 +39,9 @@ Sound asteroidShotSound;
 Texture2D spaceShipTexture;
 Texture2D bulletTexture;
 Texture2D monsterTexture;
+
+
+Texture2D asteroidexplosionAnim;
 
 Texture2D largeAsteroidTexture;
 Texture2D largeAsteroidTextureEvil;
@@ -129,7 +139,7 @@ void initGameplay(bool& initGame)
 {
 	player = initSpaceShip(spaceShipTexture, bulletTexture);
 	monster = initMonster(monsterTexture);
-
+	animationCounter = 0.0f;
 	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
 		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large, largeAsteroidTexture, largeAsteroidTextureEvil);
@@ -207,21 +217,50 @@ void checkInput()
 			{
 				player.acceleration.x += player.normalizedDirection.x;
 				player.acceleration.y += player.normalizedDirection.y;
+				animationCounter += GetFrameTime() * 10;
+				if (animationCounter > 10)
+				{
+					animationCounter = 1;
+				}
+				player.isMoving = true;
 			}
+			else
+			{
+				player.isMoving = false;
+				animationCounter = 0;
+			}
+			cout << "Shoot Animation Counter : " << shootanimationCounter << endl;
 			if (!player.isHit)
 			{
+				if (player.isShooting)
+				{
+					shootanimationCounter += GetFrameTime() * 60;
+				}
 				if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 				{
-					for (int i = 0; i < playerMaxAmmo; i++)
+					if (shootanimationCounter == 0)
 					{
-						if (!player.playerAmmo[i].isActive)
+						for (int i = 0; i < playerMaxAmmo; i++)
 						{
-							shoot(player.playerAmmo[i], player);
+							if (!player.playerAmmo[i].isActive)
+							{
+								shoot(player.playerAmmo[i], player);
 #if _DEBUG
-							std::cout << " Shoot " << i << std::endl;
+								std::cout << " Shoot " << i << std::endl;
 #endif // _DEBUG
-							break;
+								break;
+							}
 						}
+						player.isShooting = true;
+
+					}
+				}
+				else
+				{
+					if (shootanimationCounter > 9)
+					{
+						shootanimationCounter = 0;
+						player.isShooting = false;
 					}
 				}
 			}
@@ -251,7 +290,10 @@ void drawGameplay(int changeCondition)
 			drawBullet(player.playerAmmo[i]);
 		}
 	}
+
 	drawPlayer(player);
+
+
 
 	if (monster.isAlive)
 	{

@@ -15,6 +15,8 @@ struct SpaceShip
 	float rotation;
 
 	bool isHit;
+	bool isShooting;
+	bool isMoving;
 
 	Vector2 piv;
 	Vector2 acceleration;

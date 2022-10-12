@@ -4,6 +4,10 @@ extern Texture2D spaceShipTexture;
 extern Texture2D bulletTexture;
 extern Texture2D monsterTexture;
 
+extern Texture2D spaceShipAcelerationAnim;
+extern Texture2D spaceshipShotAnim;
+extern Texture2D asteroidexplosionAnim;
+
 extern Texture2D largeAsteroidTexture;
 extern Texture2D largeAsteroidTextureEvil;
 
@@ -130,6 +134,8 @@ void ejecuteGame()
 void loadTextures() 
 {
     spaceShipTexture = LoadTexture("res/nave_pixelada.png");
+    spaceShipAcelerationAnim = LoadTexture("res/Aceleracion.png");
+    spaceshipShotAnim = LoadTexture("res/Fogueo.png");
     bulletTexture = LoadTexture("res/disparo-2.png");
     monsterTexture = LoadTexture("res/monster.png");
 
@@ -137,6 +143,7 @@ void loadTextures()
     mediumAsteroidTexture = LoadTexture("res/asteroide_lindo_mitad.png");
     smallAsteroidTexture = LoadTexture("res/asteroide_lindo_un_cuarto.png");
 
+    asteroidexplosionAnim = LoadTexture("res/Explosion.png");
 
     largeAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
     mediumAsteroidTextureEvil = LoadTexture("res/asteroide_malo.png");
@@ -181,7 +188,9 @@ void loadSounds()
 void unloadTextures() 
 {
     UnloadTexture(spaceShipTexture);
+    UnloadTexture(spaceShipAcelerationAnim);
     UnloadTexture(bulletTexture);
+    UnloadTexture(spaceshipShotAnim);
     UnloadTexture(monsterTexture);
 
     UnloadTexture(largeAsteroidTexture);
@@ -190,6 +199,7 @@ void unloadTextures()
     UnloadTexture(largeAsteroidTextureEvil);
     UnloadTexture(mediumAsteroidTextureEvil);
     UnloadTexture(smallAsteroidTextureEvil);
+    UnloadTexture(asteroidexplosionAnim);
 
     UnloadTexture(playTexture);
     UnloadTexture(rulesTexture);

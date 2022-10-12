@@ -4,6 +4,16 @@
 Sound shotSound;
 Sound deadSpaceshipSound;
 
+static Rectangle sourRect;
+static Rectangle destRect;
+static Vector2 texturePiv;
+
+extern float animationCounter;
+extern float shootanimationCounter;
+
+Texture2D spaceShipAcelerationAnim;
+Texture2D spaceshipShotAnim;
+
 SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 {
 	int screenWidth = GetScreenWidth();
@@ -26,7 +36,10 @@ SpaceShip initSpaceShip(Texture2D spaceshipTexture,Texture2D bulletTexture)
 	aux.acceleration.y = 0.0f;
 	aux.spaceshipTexture = spaceshipTexture;
 	aux.isHit = false;
+	aux.isShooting = false;
+	aux.isMoving = false;
 	aux.spaceshipColor = WHITE;
+	sourRect = { 0.0f,0.0f,static_cast<float>(aux.spaceshipTexture.width),static_cast<float>(aux.spaceshipTexture.height) };
 	for (int i = 0; i < playerMaxAmmo; i++)
 	{
 		initBullet(aux.playerAmmo[i],bulletTexture);
@@ -39,11 +52,10 @@ void moveSpaceShip(SpaceShip& player)
 	player.rect.x = player.rect.x + player.acceleration.x * 0.5f * GetFrameTime();
 	player.rect.y = player.rect.y + player.acceleration.y * 0.5f * GetFrameTime();
 }
-
 void drawPlayer(SpaceShip& player)
 {
 #if _DEBUG
-	DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y),player.rad,GREEN);
+	//DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y),player.rad,GREEN);
 #endif // _DEBUG
 
 	if (player.isHit)
@@ -63,13 +75,28 @@ void drawPlayer(SpaceShip& player)
 		player.spaceshipColor.a = 250;
 	}
 
-	Rectangle sourRect = {0.0f,0.0f,static_cast<float>(player.spaceshipTexture.width),static_cast<float>(player.spaceshipTexture.height)};
-	Rectangle destRect = {player.rect.x,player.rect.y,sourRect.width,sourRect.height};
-	Vector2 texturePiv = { static_cast<float>(player.spaceshipTexture.width / 2),static_cast<float>(player.spaceshipTexture.height / 2)};
+	int aux = 0;
 
-	DrawTexturePro(player.spaceshipTexture,sourRect,destRect, texturePiv,player.rotation + 90,player.spaceshipColor);
+	if (player.isShooting)
+	{
+		aux = static_cast<int>(shootanimationCounter);
+		sourRect = { 0.0f + (aux * static_cast<int>(spaceshipShotAnim.width / 10)),0.0f,static_cast<float>(spaceshipShotAnim.width / 10),static_cast<float>(spaceshipShotAnim.height)};
+		destRect = { player.rect.x,player.rect.y,sourRect.width,sourRect.height };
+		texturePiv = { static_cast<float>(spaceshipShotAnim.width / 20),static_cast<float>(spaceshipShotAnim.height / 2) };
+
+		DrawTexturePro(spaceshipShotAnim, sourRect, destRect, texturePiv, player.rotation + 90, player.spaceshipColor);
+	}
+	else
+	{
+		aux = static_cast<int>(animationCounter);
+		//std::cout << "Animation Counter : " << aux << std::endl;
+		sourRect = { 0.0f + (aux * static_cast<int>(spaceShipAcelerationAnim.width / 11)),0.0f,static_cast<float>(spaceShipAcelerationAnim.width / 11),static_cast<float>(spaceShipAcelerationAnim.height) };
+		destRect = { player.rect.x,player.rect.y,sourRect.width,sourRect.height };
+		texturePiv = { static_cast<float>(spaceShipAcelerationAnim.width / 22),static_cast<float>(spaceShipAcelerationAnim.height / 2) };
+
+		DrawTexturePro(spaceShipAcelerationAnim, sourRect, destRect, texturePiv, player.rotation + 90, player.spaceshipColor);
+	}
 }
-
 void shoot(Bullet& bullet, SpaceShip player)
 {
 	PlaySound(shotSound);
