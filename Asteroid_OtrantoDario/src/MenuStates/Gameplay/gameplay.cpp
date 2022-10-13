@@ -22,13 +22,14 @@ static bool change;
 
 float animationCounter;
 float shootanimationCounter;
-//float explosionAnimationCounter;
+float explosionAnimationCounter;
 
 
 extern float timer;
 
 extern Texture2D spaceShipAcelerationAnim;
 extern Texture2D spaceshipShotAnim;
+extern Texture2D asteroidexplosionAnim;
 
 int highScore;
 
@@ -42,8 +43,6 @@ Texture2D spaceShipTexture;
 Texture2D bulletTexture;
 Texture2D monsterTexture;
 
-
-Texture2D asteroidexplosionAnim;
 
 Texture2D largeAsteroidTexture;
 Texture2D largeAsteroidTextureEvil;
@@ -143,6 +142,8 @@ void initGameplay(bool& initGame)
 	monster = initMonster(monsterTexture);
 	animationCounter = 0.0f;
 	shootanimationCounter = 0.0f;
+	explosionAnimationCounter = 0.0f;
+
 	for (int i = 0; i < maxLargeAsteroids; i++)
 	{
 		largeAsteroids[i] = initAsteroid((int)AsteroidSize::Large, largeAsteroidTexture, largeAsteroidTextureEvil);
@@ -161,7 +162,6 @@ void initGameplay(bool& initGame)
 
 	int buttonWidth = 150;
 	int buttonHeight = 40;
-	//int pauseHeight = 400;
 	int fontSize = 40;
 
 
@@ -232,7 +232,7 @@ void checkInput()
 				player.isMoving = false;
 				animationCounter = 0;
 			}
-			cout << "Shoot Animation Counter : " << shootanimationCounter << endl;
+			//cout << "Shoot Animation Counter : " << shootanimationCounter << endl;
 			if (!player.isHit)
 			{
 				if (player.isShooting)
@@ -309,6 +309,10 @@ void drawGameplay(int changeCondition)
 		{
 			drawAsteroid(largeAsteroids[i], change);
 		}
+		if (largeAsteroids[i].isHit)
+		{
+			asteroidDeadAnimation(largeAsteroids[i]);
+		}
 	}
 	for (int i = 0; i < maxMediumndAsteroids; i++)
 	{
@@ -316,12 +320,20 @@ void drawGameplay(int changeCondition)
 		{
 			drawAsteroid(mediumAsteroids[i], change);
 		}
+		if (mediumAsteroids[i].isHit)
+		{
+			asteroidDeadAnimation(mediumAsteroids[i]);
+		}
 	}
 	for (int i = 0; i < maxSmallAsteroids; i++)
 	{
 		if (smallAsteroids[i].isActive)
 		{
 			drawAsteroid(smallAsteroids[i], change);
+		}
+		if (smallAsteroids[i].isHit)
+		{
+			asteroidDeadAnimation(smallAsteroids[i]);
 		}
 	}
 
@@ -406,6 +418,7 @@ void updateGameplay()
 			}
 		}
 	}
+
 
 	moveSpaceShip(player);
 
@@ -791,6 +804,7 @@ void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 		}
 
 		player.score++;
+		currentAsteroid.isHit = true;
 #if _DEBUG
 		std::cout << "Meteoritos Grandes" << largeAsteroidCount << std::endl;
 		std::cout << "Meteoritos Medianos" << mediumAsteroidCount << std::endl;
@@ -888,6 +902,8 @@ void spaceshipAsteroidColition(Asteroid& currentAsteroid)
 	{
 		if (!player.isHit)
 		{
+			PlaySound(asteroidShotSound);
+
 			currentAsteroid.isActive = false;
 			player.lives--;
 			player.acceleration.y = player.acceleration.y * -1.0f;
@@ -964,6 +980,7 @@ void spaceshipAsteroidColition(Asteroid& currentAsteroid)
 			}
 			player.score++;
 			player.isHit = true;
+			currentAsteroid.isHit = true;
 		}
 	}
 }

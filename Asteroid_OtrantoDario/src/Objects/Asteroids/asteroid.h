@@ -17,6 +17,7 @@ struct Asteroid
 	float radius;
 	float rotation;
 	bool isActive;
+	bool isHit;
 	Color color;
 	Texture2D asteroidTexture;
 	Texture2D asteroidTextureEvil;
@@ -25,3 +26,4 @@ struct Asteroid
 Asteroid initAsteroid(int size,Texture2D asteroidTexture, Texture2D asteroidTextureEvil);
 void moveAsteroid(Asteroid& currenAsteroid);
 void drawAsteroid(Asteroid currenAsteroid,bool changeCondition);
+void asteroidDeadAnimation(Asteroid& currenAsteroid);

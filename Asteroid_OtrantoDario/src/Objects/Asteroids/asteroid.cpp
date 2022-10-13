@@ -1,5 +1,9 @@
 #include "asteroid.h"
+#include <iostream>
 
+extern float explosionAnimationCounter;
+
+Texture2D asteroidexplosionAnim;
 
 Asteroid initAsteroid(int size, Texture2D asteroidTexture, Texture2D asteroidTextureEvil)
 {
@@ -10,7 +14,7 @@ Asteroid initAsteroid(int size, Texture2D asteroidTexture, Texture2D asteroidTex
 	aux.position.x = static_cast<float>(GetRandomValue(0, screenWidth));
 	if (aux.position.x != 0 || aux.position.x != screenWidth)
 	{
-		int rand = GetRandomValue(0,2);
+		int rand = GetRandomValue(0, 2);
 		if (rand == 0)
 		{
 			aux.position.y = 0;
@@ -31,6 +35,7 @@ Asteroid initAsteroid(int size, Texture2D asteroidTexture, Texture2D asteroidTex
 	aux.rotation = 0;
 	aux.asteroidTexture = asteroidTexture;
 	aux.asteroidTextureEvil = asteroidTextureEvil;
+	aux.isHit = false;
 
 	if (aux.size == (int)AsteroidSize::Small)
 	{
@@ -102,8 +107,8 @@ void drawAsteroid(Asteroid currenAsteroid, bool changeCondition)
 		scale = 1.0f;
 	}
 
-	Rectangle sourRect = { 0,0,static_cast<float>(currenAsteroid.asteroidTexture.width),static_cast<float>(currenAsteroid.asteroidTexture.height)};
-	Rectangle destRect = { currenAsteroid.position.x,currenAsteroid.position.y,static_cast<float>(currenAsteroid.asteroidTexture.width * scale),static_cast<float>(currenAsteroid.asteroidTexture.height * scale)};
+	Rectangle sourRect = { 0,0,static_cast<float>(currenAsteroid.asteroidTexture.width),static_cast<float>(currenAsteroid.asteroidTexture.height) };
+	Rectangle destRect = { currenAsteroid.position.x,currenAsteroid.position.y,static_cast<float>(currenAsteroid.asteroidTexture.width * scale),static_cast<float>(currenAsteroid.asteroidTexture.height * scale) };
 	Vector2 texturePiv = { static_cast<float>((currenAsteroid.asteroidTexture.width * scale) / 2),static_cast<float>((currenAsteroid.asteroidTexture.height * scale) / 2) };
 
 	if (changeCondition)
@@ -114,4 +119,28 @@ void drawAsteroid(Asteroid currenAsteroid, bool changeCondition)
 	{
 		DrawTexturePro(currenAsteroid.asteroidTexture, sourRect, destRect, texturePiv, currenAsteroid.rotation, WHITE);
 	}
+}
+void asteroidDeadAnimation(Asteroid& currenAsteroid)
+{
+	if (currenAsteroid.isHit)
+	{
+		explosionAnimationCounter += GetFrameTime() * 70;
+
+		std::cout << "Explosion Animation Counter : " << explosionAnimationCounter << std::endl;
+
+		int aux = static_cast<int>(explosionAnimationCounter);
+		Rectangle sourRect = { 0.0f + (aux * static_cast<int>(asteroidexplosionAnim.width / 16)),0.0f,static_cast<float>(asteroidexplosionAnim.width / 16),static_cast<float>(asteroidexplosionAnim.height) };
+		Rectangle destRect = { currenAsteroid.position.x,currenAsteroid.position.y,sourRect.width,sourRect.height };
+		Vector2 texturePiv = { static_cast<float>(asteroidexplosionAnim.width / 16),static_cast<float>(asteroidexplosionAnim.height / 2) };
+
+		DrawTexturePro(asteroidexplosionAnim, sourRect, destRect, texturePiv, currenAsteroid.rotation, currenAsteroid.color);
+
+		if (explosionAnimationCounter > 15)
+		{
+			explosionAnimationCounter = 0;
+			currenAsteroid.isHit = false;
+		}
+
+	}
+
 }

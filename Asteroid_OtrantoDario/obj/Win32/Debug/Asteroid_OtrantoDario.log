@@ -1,2 +1,3 @@
-﻿  button.cpp
+﻿  asteroid.cpp
+raylib.lib(rcore.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rcore.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
   Asteroid_OtrantoDario.vcxproj -> C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Debug\Asteroid_OtrantoDario.exe
