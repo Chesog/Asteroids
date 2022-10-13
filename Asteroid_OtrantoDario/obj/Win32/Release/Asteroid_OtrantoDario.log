@@ -1,13 +1,26 @@
-﻿  Generando código
-  Previous IPDB and IOBJ mismatch, fall back to full compilation.
-  All 179 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+﻿  credits.cpp
+  gameplay.cpp
+  game.cpp
+  mainMenu.cpp
+  options.cpp
+  rules.cpp
+  asteroid.cpp
+  bullet.cpp
+  button.cpp
+  monster.cpp
+  powerUp.cpp
+  spaceship.cpp
+  main.cpp
+  Generando código
+  Compiler switch has changed, fall back to full compilation.
+  All 207 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
   Generación de código finalizada
 raylib.lib(raudio.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(raudio.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 raylib.lib(rcore.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rcore.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 raylib.lib(rglfw.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rglfw.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 raylib.lib(rshapes.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rshapes.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
 raylib.lib(rtext.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtext.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
-raylib.lib(rtextures.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtextures.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rtextures.obj) : warning LNK4099: no se encontró PDB '' con 'raylib.lib(rtextures.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
 raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(utils.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
   Asteroid_OtrantoDario.vcxproj -> C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\Asteroid_OtrantoDario.exe
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\LICENSE
@@ -20,6 +33,8 @@ raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'r
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\lib\raylib.lib
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\lib\raylib-4.0.0_win32_msvc16\lib\raylibdll.lib
   9 archivo(s) copiado(s)
+  Ya existe el subdirectorio o el archivo C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\res.
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Aceleracion.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\asteroide_lindo.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\asteroide_lindo_mitad.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\asteroide_lindo_mitad_2.png
@@ -30,11 +45,19 @@ raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'r
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\click_izquierdo.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\continuar.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\credits.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\cursor_1.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\cursor_2.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\disparo-2.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\evilAsroids-2.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\evilAsteroids-1.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Explosion.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Fogueo.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\fondo_1.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\fondo_turbio.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Github_1.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Github_2.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Instagram_1.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Instagram_2.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\jugar.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\logoDeepPurple.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\menu_light.png
@@ -43,6 +66,8 @@ raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'r
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\monster.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\nave_pixelada.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\opciones.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\pagina_creditos_1.png
+  C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\pagina_creditos_2.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\reglas.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\reiniciar.png
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\salir.png
@@ -53,4 +78,4 @@ raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'r
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Music\juego_song.wav
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Music\menu_song.wav
   C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\res\Music\shot.wav
-  33 archivo(s) copiado(s)
+  44 archivo(s) copiado(s)
