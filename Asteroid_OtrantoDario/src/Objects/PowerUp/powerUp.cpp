@@ -17,7 +17,7 @@ namespace cheso_Asteroids
 
 		if (aux.powerUptipe == static_cast<int>(PowerUpType::Penetration))
 		{
-			aux.powerUpColor = YELLOW;
+			aux.powerUpColor = RED;
 		}
 		else
 		{

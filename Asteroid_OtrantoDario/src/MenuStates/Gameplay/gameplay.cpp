@@ -309,19 +309,19 @@ namespace cheso_Asteroids
 
 		if (powerUp1.powerUptipe == static_cast<int>(PowerUpType::shield) && powerUp1.isActive)
 		{
-			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, BLUE);
+			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad,powerUp1.powerUpColor);
 		}
 		if (powerUp2.powerUptipe == static_cast<int>(PowerUpType::shield) && powerUp2.isActive)
 		{
-			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, BLUE);
+			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, powerUp2.powerUpColor);
 		}
 		if (powerUp1.powerUptipe == static_cast<int>(PowerUpType::Penetration) && powerUp1.isActive)
 		{
-			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, YELLOW);
+			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, powerUp1.powerUpColor);
 		}
 		if (powerUp2.powerUptipe == static_cast<int>(PowerUpType::Penetration) && powerUp2.isActive)
 		{
-			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, YELLOW);
+			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, powerUp2.powerUpColor);
 		}
 
 		drawPlayer(player);
@@ -436,12 +436,10 @@ namespace cheso_Asteroids
 
 		if (!powerUp1.isAlive)
 		{
-
 			if (powerUp1.powerUpSpawnTimer <= 0)
 			{
 				powerUp1 = initPowerUp();
-				powerUp1.isAlive = true;
-				powerUp1.powerUpSpawnTimer = 0;
+				powerUp1.powerUpSpawnTimer = 20.0f;
 			}
 			else
 			{
@@ -454,8 +452,7 @@ namespace cheso_Asteroids
 			if (powerUp2.powerUpSpawnTimer <= 0)
 			{
 				powerUp2 = initPowerUp();
-				powerUp2.isAlive = true;
-				powerUp2.powerUpSpawnTimer = 0;
+				powerUp2.powerUpSpawnTimer = 20.0f;
 			}
 			else
 			{
@@ -468,7 +465,7 @@ namespace cheso_Asteroids
 			if (powerUp1.powerUpActiveTimer <= 0)
 			{
 				powerUp1.isActive = false;
-				powerUp1.powerUpActiveTimer = 0.0f;
+				powerUp1.powerUpActiveTimer = 5.0f;
 			}
 			else
 			{
@@ -481,7 +478,7 @@ namespace cheso_Asteroids
 			if (powerUp2.powerUpActiveTimer <= 0)
 			{
 				powerUp2.isActive = false;
-				powerUp2.powerUpActiveTimer = 0.0f;
+				powerUp2.powerUpActiveTimer = 5.0f;
 			}
 			else
 			{
