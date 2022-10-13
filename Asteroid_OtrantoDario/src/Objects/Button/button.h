@@ -3,18 +3,20 @@
 #include <string>
 
 using namespace std;
-
-struct Button
+namespace cheso_Asteroids
 {
-	int fontSize;
-	int optionNumber;
-	string text;
-	Color buttonColor;
-	Color selectionColor;
-	Rectangle rect;
-};
+	struct Button
+	{
+		int fontSize;
+		int optionNumber;
+		string text;
+		Color buttonColor;
+		Color selectionColor;
+		Rectangle rect;
+	};
 
-Button initButton(int initialPosX, int initialPosY, int fontSize, int buttonWidth, int buttonHeight, int optionNumber, string text, Color buttonColor, Color selectionColor);
-void drawButton(Button actualButton);
-void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D selectionTexture);
-void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D selectionTexture, float scale);
+	Button initButton(int initialPosX, int initialPosY, int fontSize, int buttonWidth, int buttonHeight, int optionNumber, string text, Color buttonColor, Color selectionColor);
+	void drawButton(Button actualButton);
+	void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D selectionTexture);
+	void drawButtonTexture(Button actualButton, Texture2D buttonTexture, Texture2D selectionTexture, float scale);
+}

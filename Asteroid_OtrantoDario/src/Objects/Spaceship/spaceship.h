@@ -4,36 +4,39 @@
 #include "MenuStates/GlobalEnums/genera_func.h"
 #include "Objects/Bullet/bullet.h"
 
-const int playerMaxAmmo = 100;
-
-struct SpaceShip
+namespace cheso_Asteroids
 {
-	int lives;
-	int score;
+	const int playerMaxAmmo = 100;
 
-	float rad;
-	float rotation;
+	struct SpaceShip
+	{
+		int lives;
+		int score;
 
-	bool isHit;
-	bool isShooting;
-	bool isMoving;
+		float rad;
+		float rotation;
 
-	Vector2 piv;
-	Vector2 acceleration;
-	Vector2 normalizedDirection;
+		bool isHit;
+		bool isShooting;
+		bool isMoving;
 
-	Rectangle rect;
+		Vector2 piv;
+		Vector2 acceleration;
+		Vector2 normalizedDirection;
 
-	Bullet playerAmmo[playerMaxAmmo];
+		Rectangle rect;
 
-	Color spaceshipColor;
+		Bullet playerAmmo[playerMaxAmmo];
 
-	Texture2D spaceshipTexture;
+		Color spaceshipColor;
 
-};
+		Texture2D spaceshipTexture;
 
-SpaceShip initSpaceShip(Texture2D spaceshipTexture, Texture2D bulletTexture);
-void moveSpaceShip(SpaceShip& player);
-void drawPlayer(SpaceShip& player);
-void shoot(Bullet& bullet, SpaceShip player);
-void playerDead();
+	};
+
+	SpaceShip initSpaceShip(Texture2D spaceshipTexture, Texture2D bulletTexture);
+	void moveSpaceShip(SpaceShip& player);
+	void drawPlayer(SpaceShip& player);
+	void shoot(Bullet& bullet, SpaceShip player);
+	void playerDead();
+}

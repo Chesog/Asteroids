@@ -7,4 +7,7 @@
 #include "MenuStates/Rules/rules.h"
 #include "MenuStates/Credits/credits.h"
 
-void ejecuteGame();
+namespace cheso_Asteroids
+{
+	void ejecuteGame();
+}

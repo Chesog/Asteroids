@@ -7,4 +7,7 @@
 #include "Objects/Button/button.h"
 #include "Objects/Monster/monster.h"
 
-int gameplayLoop(bool& initGame, bool& backToMenu);
+namespace cheso_Asteroids
+{
+	int gameplayLoop(bool& initGame, bool& backToMenu);
+}

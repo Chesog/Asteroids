@@ -1,8 +1,10 @@
 #include "MenuStates/Game/game.h"
 
+using namespace cheso_Asteroids;
+
 int main()
 {
-    ejecuteGame();
+	ejecuteGame();
 
-    return 0;
+	return 0;
 }

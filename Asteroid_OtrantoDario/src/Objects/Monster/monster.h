@@ -2,29 +2,32 @@
 #include "raylib.h"
 #include "MenuStates/GlobalEnums/genera_func.h"
 
-struct Monster
+namespace cheso_Asteroids
 {
-	int lives;
+	struct Monster
+	{
+		int lives;
 
-	float rad;
-	float rotation;
-	float respawnTimer;
-	float hitTimer;
-	float attakTimer;
-	float lockTimer;
+		float rad;
+		float rotation;
+		float respawnTimer;
+		float hitTimer;
+		float attakTimer;
+		float lockTimer;
 
-	bool isAlive;
-	bool isHit;
+		bool isAlive;
+		bool isHit;
 
-	Vector2 piv;
-	Vector2 speed;
-	Vector2 trayectory;
+		Vector2 piv;
+		Vector2 speed;
+		Vector2 trayectory;
 
-	Rectangle rect;
-	Color monsterColor;
-	Texture2D monsterTexture;
-};
-Monster initMonster(Texture2D monsterTexture);
-void moveMonster(Monster& currentMonster, Vector2 target);
-void reciveDamage(Monster& currentMonster);
-void drawMonster(Monster& currentMonster);
+		Rectangle rect;
+		Color monsterColor;
+		Texture2D monsterTexture;
+	};
+	Monster initMonster(Texture2D monsterTexture);
+	void moveMonster(Monster& currentMonster, Vector2 target);
+	void reciveDamage(Monster& currentMonster);
+	void drawMonster(Monster& currentMonster);
+}
