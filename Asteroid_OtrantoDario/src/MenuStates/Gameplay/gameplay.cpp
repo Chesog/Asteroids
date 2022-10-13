@@ -16,9 +16,14 @@ namespace cheso_Asteroids
 	static Button returnButton;
 	static Button resetButton;
 
+	static powerUp powerUp1;
+	static powerUp powerUp2;
+
 	static int largeAsteroidCount;
 	static int mediumAsteroidCount;
 	static int smallAsteroidCount;
+
+	static float fireRate;
 
 	static bool pauseGameplay;
 	static bool change;
@@ -26,6 +31,7 @@ namespace cheso_Asteroids
 	float animationCounter;
 	float shootanimationCounter;
 	float explosionAnimationCounter;
+
 
 
 	extern float timer;
@@ -86,6 +92,7 @@ namespace cheso_Asteroids
 	void asteroidOnAsteroidColition(Asteroid& currentAsteroid, Asteroid& currentAsteroid1);
 	void spaceshipAsteroidColition(Asteroid& currentAsteroid);
 	void spaceshipMonsterColition();
+	void spaceshipPowerUpColition();
 	void resetAsteroids();
 	void mouseButtonColition(bool& initGame, bool& backToMenu);
 
@@ -143,9 +150,12 @@ namespace cheso_Asteroids
 	{
 		player = initSpaceShip(spaceShipTexture, bulletTexture);
 		monster = initMonster(monsterTexture);
+		powerUp1 = initPowerUp();
+		powerUp2 = initPowerUp();
 		animationCounter = 0.0f;
 		shootanimationCounter = 0.0f;
 		explosionAnimationCounter = 0.0f;
+		fireRate = 60.0f;
 
 		for (int i = 0; i < maxLargeAsteroids; i++)
 		{
@@ -240,7 +250,7 @@ namespace cheso_Asteroids
 				{
 					if (player.isShooting)
 					{
-						shootanimationCounter += GetFrameTime() * 60;
+						shootanimationCounter += GetFrameTime() * fireRate;
 					}
 					if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 					{
@@ -297,6 +307,23 @@ namespace cheso_Asteroids
 			}
 		}
 
+		if (powerUp1.powerUptipe == static_cast<int>(PowerUpType::shield) && powerUp1.isActive)
+		{
+			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, BLUE);
+		}
+		if (powerUp2.powerUptipe == static_cast<int>(PowerUpType::shield) && powerUp2.isActive)
+		{
+			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, BLUE);
+		}
+		if (powerUp1.powerUptipe == static_cast<int>(PowerUpType::Penetration) && powerUp1.isActive)
+		{
+			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, YELLOW);
+		}
+		if (powerUp2.powerUptipe == static_cast<int>(PowerUpType::Penetration) && powerUp2.isActive)
+		{
+			DrawCircle(static_cast<int>(player.rect.x), static_cast<int>(player.rect.y), player.rad, YELLOW);
+		}
+
 		drawPlayer(player);
 
 
@@ -339,6 +366,10 @@ namespace cheso_Asteroids
 				asteroidDeadAnimation(smallAsteroids[i]);
 			}
 		}
+
+
+		drawPowerUp(powerUp1);
+		drawPowerUp(powerUp2);
 
 		if (pauseGameplay)
 		{
@@ -395,13 +426,69 @@ namespace cheso_Asteroids
 		DrawTextureEx(mouseTextureGameplay, GetMousePosition(), 0, 2.0f, WHITE);
 
 		EndDrawing();
-	}
+			}
 	void updateGameplay()
 	{
 		if (player.score > highScore)
 		{
 			highScore = player.score;
 		}
+
+		if (!powerUp1.isAlive)
+		{
+
+			if (powerUp1.powerUpSpawnTimer <= 0)
+			{
+				powerUp1 = initPowerUp();
+				powerUp1.isAlive = true;
+				powerUp1.powerUpSpawnTimer = 0;
+			}
+			else
+			{
+				powerUp1.powerUpSpawnTimer -= GetFrameTime();
+			}
+		}
+
+		if (!powerUp2.isAlive)
+		{
+			if (powerUp2.powerUpSpawnTimer <= 0)
+			{
+				powerUp2 = initPowerUp();
+				powerUp2.isAlive = true;
+				powerUp2.powerUpSpawnTimer = 0;
+			}
+			else
+			{
+				powerUp2.powerUpSpawnTimer -= GetFrameTime();
+			}
+		}
+
+		if (powerUp1.isActive)
+		{
+			if (powerUp1.powerUpActiveTimer <= 0)
+			{
+				powerUp1.isActive = false;
+				powerUp1.powerUpActiveTimer = 0.0f;
+			}
+			else
+			{
+				powerUp1.powerUpActiveTimer -= GetFrameTime();
+			}
+		}
+
+		if (powerUp2.isActive)
+		{
+			if (powerUp2.powerUpActiveTimer <= 0)
+			{
+				powerUp2.isActive = false;
+				powerUp2.powerUpActiveTimer = 0.0f;
+			}
+			else
+			{
+				powerUp2.powerUpActiveTimer -= GetFrameTime();
+			}
+		}
+
 
 		if (change)
 		{
@@ -631,7 +718,6 @@ namespace cheso_Asteroids
 	}
 	void checkColitions()
 	{
-
 		for (int i = 0; i < playerMaxAmmo; i++)
 		{
 			if (player.playerAmmo[i].isActive)
@@ -713,6 +799,15 @@ namespace cheso_Asteroids
 		{
 			spaceshipMonsterColition();
 		}
+
+		if (powerUp1.isAlive)
+		{
+			spaceshipPowerUpColition();
+		}
+		if (powerUp2.isAlive)
+		{
+			spaceshipPowerUpColition();
+		}
 	}
 	void bulletAsteroidColition(Bullet& currentBullet, Asteroid& currentAsteroid)
 	{
@@ -730,10 +825,25 @@ namespace cheso_Asteroids
 		{
 			PlaySound(asteroidShotSound);
 
+			currentAsteroid.isActive = false;
+
+			if (powerUp1.powerUptipe == static_cast<int>(PowerUpType::Penetration) && powerUp1.isActive)
+			{
+				currentBullet.isActive = true;
+			}
+			else if (powerUp2.powerUptipe == static_cast<int>(PowerUpType::Penetration) && powerUp2.isActive)
+			{
+				currentBullet.isActive = true;
+			}
+			else
+			{
+				currentBullet.isActive = false;
+			}
+
+
 			if (currentAsteroid.size == static_cast<int>(AsteroidSize::Large))
 			{
-				currentAsteroid.isActive = false;
-				currentBullet.isActive = false;
+
 
 				mediumAsteroids[mediumAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
 				mediumAsteroids[mediumAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
@@ -768,8 +878,6 @@ namespace cheso_Asteroids
 			}
 			if (currentAsteroid.size == static_cast<int>(AsteroidSize::Medium))
 			{
-				currentAsteroid.isActive = false;
-				currentBullet.isActive = false;
 
 				smallAsteroids[smallAsteroidCount].direction.x = static_cast<float>(GetRandomValue(0, 2));
 				smallAsteroids[smallAsteroidCount].direction.y = static_cast<float>(GetRandomValue(2, 4));
@@ -800,12 +908,6 @@ namespace cheso_Asteroids
 				smallAsteroidCount++;
 			}
 
-			if (currentAsteroid.size == static_cast<int>(AsteroidSize::Small))
-			{
-				currentAsteroid.isActive = false;
-				currentBullet.isActive = false;
-			}
-
 			player.score++;
 			currentAsteroid.isHit = true;
 #if _DEBUG
@@ -830,7 +932,19 @@ namespace cheso_Asteroids
 		{
 			if (!monster.isHit)
 			{
-				currentBullet.isActive = false;
+
+				if (powerUp1.powerUptipe == static_cast<int>(PowerUpType::Penetration) && powerUp1.isActive)
+				{
+					currentBullet.isActive = true;
+				}
+				else if (powerUp2.powerUptipe == static_cast<int>(PowerUpType::Penetration) && powerUp2.isActive)
+				{
+					currentBullet.isActive = true;
+				}
+				else
+				{
+					currentBullet.isActive = false;
+				}
 				reciveDamage(monster);
 				if (monster.lives <= 0)
 				{
@@ -908,7 +1022,22 @@ namespace cheso_Asteroids
 				PlaySound(asteroidShotSound);
 
 				currentAsteroid.isActive = false;
-				player.lives--;
+
+				if (powerUp1.powerUptipe == static_cast<int>(PowerUpType::shield) && powerUp1.isActive)
+				{
+					player.lives;
+					player.isHit = false;
+				}
+				if (powerUp2.powerUptipe == static_cast<int>(PowerUpType::shield) && powerUp2.isActive)
+				{
+					player.lives;
+					player.isHit = false;
+				}
+				else
+				{
+					player.lives--;
+					player.isHit = true;
+				}
 				player.acceleration.y = player.acceleration.y * -1.0f;
 				player.acceleration.x = player.acceleration.x * -1.0f;
 
@@ -982,7 +1111,6 @@ namespace cheso_Asteroids
 					}
 				}
 				player.score++;
-				player.isHit = true;
 				currentAsteroid.isHit = true;
 			}
 		}
@@ -1008,7 +1136,21 @@ namespace cheso_Asteroids
 				monster.trayectory.x = monster.trayectory.x * -1.0f;
 				monster.trayectory.y = monster.trayectory.y * -1.0f;
 
-				player.lives--;
+				if (powerUp1.powerUptipe == static_cast<int>(PowerUpType::shield) && powerUp1.isActive)
+				{
+					player.lives;
+					player.isHit = false;
+				}
+				if (powerUp2.powerUptipe == static_cast<int>(PowerUpType::shield) && powerUp2.isActive)
+				{
+					player.lives;
+					player.isHit = false;
+				}
+				else
+				{
+					player.lives--;
+					player.isHit = true;
+				}
 				reciveDamage(monster);
 
 				if (monster.lives <= 0)
@@ -1019,6 +1161,34 @@ namespace cheso_Asteroids
 				player.isHit = true;
 				monster.isHit = true;
 			}
+		}
+	}
+	void spaceshipPowerUpColition()
+	{
+		float distanceX = 0;
+		float distanceY = 0;
+		float distance = 0;
+
+		distanceX = player.rect.x - powerUp1.position.x;
+		distanceY = player.rect.y - powerUp1.position.y;
+
+		distance = sqrt((distanceX * distanceX) + (distanceY * distanceY));
+
+		if (distance < player.rad + powerUp1.rad)
+		{
+			powerUp1.isActive = true;
+			powerUp1.isAlive = false;
+		}
+
+		distanceX = player.rect.x - powerUp2.position.x;
+		distanceY = player.rect.y - powerUp2.position.y;
+
+		distance = sqrt((distanceX * distanceX) + (distanceY * distanceY));
+
+		if (distance < player.rad + powerUp2.rad)
+		{
+			powerUp2.isActive = true;
+			powerUp2.isAlive = false;
 		}
 	}
 	void resetAsteroids()
@@ -1104,4 +1274,4 @@ namespace cheso_Asteroids
 			}
 		}
 	}
-}
+		}

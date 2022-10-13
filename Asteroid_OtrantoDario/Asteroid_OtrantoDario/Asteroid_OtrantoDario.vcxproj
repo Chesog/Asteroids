@@ -191,6 +191,7 @@ XCOPY "$(SolutionDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)\res" /
     <ClCompile Include="..\src\Objects\Bullet\bullet.cpp" />
     <ClCompile Include="..\src\Objects\Button\button.cpp" />
     <ClCompile Include="..\src\Objects\Monster\monster.cpp" />
+    <ClCompile Include="..\src\Objects\PowerUp\powerUp.cpp" />
     <ClCompile Include="..\src\Objects\Spaceship\spaceship.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -206,6 +207,7 @@ XCOPY "$(SolutionDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)\res" /
     <ClInclude Include="..\src\Objects\Bullet\bullet.h" />
     <ClInclude Include="..\src\Objects\Button\button.h" />
     <ClInclude Include="..\src\Objects\Monster\monster.h" />
+    <ClInclude Include="..\src\Objects\PowerUp\powerUp.h" />
     <ClInclude Include="..\src\Objects\Spaceship\spaceship.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

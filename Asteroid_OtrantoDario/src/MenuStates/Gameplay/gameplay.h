@@ -6,6 +6,7 @@
 #include "MenuStates/GlobalEnums/genera_func.h"
 #include "Objects/Button/button.h"
 #include "Objects/Monster/monster.h"
+#include "Objects/PowerUp/powerUp.h"
 
 namespace cheso_Asteroids
 {

@@ -82,6 +82,7 @@
     <ClCompile Include="..\src\Objects\Monster\monster.cpp">
       <Filter>Objets\Monster</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\Objects\PowerUp\powerUp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\MenuStates\Game\game.h">
@@ -120,5 +121,6 @@
     <ClInclude Include="..\src\Objects\Monster\monster.h">
       <Filter>Objets\Monster</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\Objects\PowerUp\powerUp.h" />
   </ItemGroup>
 </Project>
