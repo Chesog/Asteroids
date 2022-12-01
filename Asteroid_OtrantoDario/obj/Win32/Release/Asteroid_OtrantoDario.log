@@ -1,0 +1,15 @@
+﻿  spaceship.cpp
+  Generando código
+  4 of 207 functions ( 1.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Generación de código finalizada
+raylib.lib(raudio.obj) : warning LNK4099: no se encontró PDB '' con 'raylib.lib(raudio.obj)' o en ''; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rcore.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rcore.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rglfw.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rglfw.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rshapes.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rshapes.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rtext.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtext.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(rtextures.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(rtextures.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+raylib.lib(utils.obj) : warning LNK4099: no se encontró PDB 'raylib.pdb' con 'raylib.lib(utils.obj)' o en 'C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\raylib.pdb'; se vinculará el objeto sin tener en cuenta información de depuración
+  Asteroid_OtrantoDario.vcxproj -> C:\Users\DARIO\Asteroids\Asteroid_OtrantoDario\bin\Win32\Release\Asteroid_OtrantoDario.exe
+  0 archivo(s) copiado(s)

@@ -15,6 +15,7 @@ namespace cheso_Asteroids
 
 		float rad;
 		float rotation;
+		float speed;
 
 		bool isHit;
 		bool isShooting;

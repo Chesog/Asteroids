@@ -42,6 +42,7 @@ namespace cheso_Asteroids
 		aux.isShooting = false;
 		aux.isMoving = false;
 		aux.spaceshipColor = WHITE;
+		aux.speed = 400.0f;
 		sourRect = { 0.0f,0.0f,static_cast<float>(aux.spaceshipTexture.width),static_cast<float>(aux.spaceshipTexture.height) };
 		for (int i = 0; i < playerMaxAmmo; i++)
 		{
@@ -52,8 +53,8 @@ namespace cheso_Asteroids
 
 	void moveSpaceShip(SpaceShip& player)
 	{
-		player.rect.x = player.rect.x + player.acceleration.x * 0.5f * GetFrameTime();
-		player.rect.y = player.rect.y + player.acceleration.y * 0.5f * GetFrameTime();
+		player.rect.x = player.rect.x + player.acceleration.x * GetFrameTime();
+		player.rect.y = player.rect.y + player.acceleration.y * GetFrameTime();
 	}
 	void drawPlayer(SpaceShip& player)
 	{

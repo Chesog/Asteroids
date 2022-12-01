@@ -231,8 +231,9 @@ namespace cheso_Asteroids
 			{
 				if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT))
 				{
-					player.acceleration.x += player.normalizedDirection.x;
-					player.acceleration.y += player.normalizedDirection.y;
+					player.acceleration.x += player.normalizedDirection.x * player.speed * GetFrameTime();
+					player.acceleration.y += player.normalizedDirection.y * player.speed * GetFrameTime();
+
 					animationCounter += GetFrameTime() * 10;
 					if (animationCounter > 10)
 					{
