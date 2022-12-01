@@ -105,8 +105,7 @@
       <AdditionalDependencies>raylib.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>call "$(SolutionDir)batch.bat" "$(SolutionDir)\res" "$(TargetDir)\res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -123,8 +122,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>call "$(SolutionDir)batch.bat" "$(SolutionDir)\res" "$(TargetDir)\res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -148,10 +146,7 @@
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(SolutionDir)lib" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
-
-MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)\res"
-XCOPY "$(SolutionDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)\res" /e /h /y /s</Command>
+      <Command>call "$(SolutionDir)batch.bat" "$(SolutionDir)\res" "$(TargetDir)\res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -173,10 +168,7 @@ XCOPY "$(SolutionDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)\res" /
       <EntryPointSymbol>mainCRTStartup</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>XCOPY "$(SolutionDir)lib" "$(SolutionDir)bin\$(Platform)\$(Configuration)" /e /h /y /s
-
-MKDIR "$(SolutionDir)bin\$(Platform)\$(configuration)\res"
-XCOPY "$(SolutionDir)res" "$(SolutionDir)bin\$(Platform)\$(Configuration)\res" /e /h /y /s</Command>
+      <Command>call "$(SolutionDir)batch.bat" "$(SolutionDir)\res" "$(TargetDir)\res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
