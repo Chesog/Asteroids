@@ -93,7 +93,6 @@ namespace cheso_Asteroids
 		else
 		{
 			aux = static_cast<int>(animationCounter);
-			//std::cout << "Animation Counter : " << aux << std::endl;
 			sourRect = { 0.0f + (aux * static_cast<int>(spaceShipAcelerationAnim.width / 11)),0.0f,static_cast<float>(spaceShipAcelerationAnim.width / 11),static_cast<float>(spaceShipAcelerationAnim.height) };
 			destRect = { player.rect.x,player.rect.y,sourRect.width,sourRect.height };
 			texturePiv = { static_cast<float>(spaceShipAcelerationAnim.width / 22),static_cast<float>(spaceShipAcelerationAnim.height / 2) };

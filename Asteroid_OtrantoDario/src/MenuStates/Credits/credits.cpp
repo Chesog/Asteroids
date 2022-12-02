@@ -40,7 +40,7 @@ namespace cheso_Asteroids
 			linkButtonDario = initButton(static_cast<int>(buttonWidth * 2.5f), static_cast<int>(buttonHeight * 5.0f), 10, buttonWidth, buttonHeight, 0, "Itch.IO", GREEN, RED);
 			linkButtonMartu = initButton(static_cast<int>(buttonWidth * 2.5f), static_cast<int>(buttonHeight * 8.5f), 10, buttonWidth, buttonHeight, 0, "Instagram", GREEN, RED);
 			linkButtonTofy = initButton(static_cast<int>(buttonWidth * 2.5f), static_cast<int>(buttonHeight * 10.5f), 10, buttonWidth, buttonHeight, 0, "Instagram", GREEN, RED);
-			linkButtonSeba = initButton(static_cast<int>(buttonWidth * 2.5f), static_cast<int>(buttonHeight * 12.0f), 10, buttonWidth, buttonHeight, 0, "Instagram", GREEN, RED);
+			//linkButtonSeba = initButton(static_cast<int>(buttonWidth * 2.5f), static_cast<int>(buttonHeight * 12.0f), 10, buttonWidth, buttonHeight, 0, "Instagram", GREEN, RED);
 			linkButtonEnzo = initButton(static_cast<int>(buttonWidth * 2.5f), static_cast<int>(buttonHeight * 15.5f), 10, buttonWidth, buttonHeight, 0, "Itch.IO", GREEN, RED);
 		}
 		else
@@ -48,7 +48,7 @@ namespace cheso_Asteroids
 			linkButtonDario = initButton(buttonWidth, static_cast<int>(buttonHeight * 5.5f), 10, buttonWidth, buttonHeight, 0, "Itch.IO", GREEN, RED);
 			linkButtonMartu = initButton(buttonWidth, static_cast<int>(buttonHeight * 9.0f), 10, buttonWidth, buttonHeight, 0, "Instagram", GREEN, RED);
 			linkButtonTofy = initButton(buttonWidth, static_cast<int>(buttonHeight * 11.0f), 10, buttonWidth, buttonHeight, 0, "Instagram", GREEN, RED);
-			linkButtonSeba = initButton(buttonWidth, static_cast<int>(buttonHeight * 12.5f), 10, buttonWidth, buttonHeight, 0, "Instagram", GREEN, RED);
+			//linkButtonSeba = initButton(buttonWidth, static_cast<int>(buttonHeight * 12.5f), 10, buttonWidth, buttonHeight, 0, "Instagram", GREEN, RED);
 			linkButtonEnzo = initButton(buttonWidth, static_cast<int>(buttonHeight * 16.0f), 10, buttonWidth, buttonHeight, 0, "Itch.IO", GREEN, RED);
 		}
 
@@ -95,7 +95,7 @@ namespace cheso_Asteroids
 		drawButtonTexture(linkButtonDario, gitTexture, gitTextureSelection, scale1);
 		drawButtonTexture(linkButtonMartu, instagramTexture, instagramTextureSelection, scale1);
 		drawButtonTexture(linkButtonTofy, instagramTexture, instagramTextureSelection, scale1);
-		drawButtonTexture(linkButtonSeba, instagramTexture, instagramTextureSelection, scale1);
+		//drawButtonTexture(linkButtonSeba, instagramTexture, instagramTextureSelection, scale1);
 		drawButtonTexture(linkButtonEnzo, gitTexture, gitTextureSelection, scale1);
 
 		DrawTextureEx(mouseTexture, GetMousePosition(), 0, 2.0f, WHITE);
@@ -136,13 +136,13 @@ namespace cheso_Asteroids
 				OpenURL("https://www.instagram.com/tofisdoodles/");
 			}
 		}
-		if (CheckCollisionPointRec(mousePosition, linkButtonSeba.rect))
-		{
-			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
-			{
-				OpenURL("https://github.com/Chesog");
-			}
-		}
+		//if (CheckCollisionPointRec(mousePosition, linkButtonSeba.rect))
+		//{
+		//	if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
+		//	{
+		//		OpenURL("https://github.com/Chesog");
+		//	}
+		//}
 		if (CheckCollisionPointRec(mousePosition, linkButtonEnzo.rect))
 		{
 			if (IsMouseButtonReleased(MOUSE_BUTTON_LEFT))
