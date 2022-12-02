@@ -3,5 +3,5 @@
 Debug
 .data
 x64
-/obj
-/bin
+obj
+bin
